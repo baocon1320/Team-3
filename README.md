@@ -7,6 +7,6 @@
 * Team Lead: **Austin Woo**
 * QA Lead: **Ian Fong**
 * UI Lead: **Bao Nguyen**
-* API/DB Lead:** Thomas Kaar**
+* API/DB Lead: **Thomas Kaar**
 * Architect: **Caleb Watts**
 
