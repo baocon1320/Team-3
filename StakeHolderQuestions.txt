@@ -1,1 +1,7 @@
 //This doc's purpose is to keep a record of questions for our stakehodlers.
+//Review the following info
+//1. Look up Vue.js documentation
+//2. Review HTTP methods
+//3. Think of questions we can ask him for next week's interview
+//The more questions we can ask the more we can get done before we have to 
+//interview him again.
