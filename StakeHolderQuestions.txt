@@ -1,8 +1,0 @@
-//This doc's purpose is to keep a record of questions for our stakehodlers
-//Please use this weekend to review the following items
-//1. Vue.js Documentation
-//2. Think of questions we can ask him during the interview on Wednesday
-//  -The more questions we can ask him the more we can do at the beginning
-//   without another interview.
-//3. Review the Agile process, look up usage of HTTP methods
-//If I forgot anything please let me know
