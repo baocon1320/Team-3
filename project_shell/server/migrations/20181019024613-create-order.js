@@ -1,4 +1,4 @@
-'use strict';
+'se strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Orders', {
