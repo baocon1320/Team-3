@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import Toolbar from './views/Toolbar.vue';
 
 Vue.use(Router);
 
@@ -24,7 +25,7 @@ export default new Router({
     {
       path: '/toolbar',
       name:'toolbar',
-      component:() =>import('./views/Toolbar.vue'),
+      component: () => import('./views/Toolbar.vue'),
     },
   ],
 });

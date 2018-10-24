@@ -1,7 +1,7 @@
 <template>
   <div class="home">
    	Toolbar Comp
-   	<ToolbarComp/>
+   	<ToolbarComp  msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
 </template>
 
@@ -14,5 +14,5 @@ import ToolbarComp from '@/components/ToolbarComp.vue'; // @ is an alias to /src
   ToolbarComp,
   },
   })
-  //export default class Toolbar extends Vue {}
+  export default class Toolbar extends Vue {}
 </script>

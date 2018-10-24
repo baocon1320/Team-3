@@ -20,14 +20,15 @@
 
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop} from 'vue-property-decorator';
 @Component
-export default class ToolbarComp extends Vue{}
+export default class ToolbarComp extends Vue{
+	@Prop() private msg!: string;
+}
 </script>
 <style lang ="scss">
 .navButton{
 	font-family: 'Roboto',san-serif;
-	background-color: #;
 }
 #home{
 	position:center;
