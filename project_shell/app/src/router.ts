@@ -34,10 +34,20 @@ export default new Router({
         component: () => import('./views/TrackingView.vue'),
     },
     {
+        path: "/store",
+        name: 'store',
+        component: () => import('./views/StoreView.vue'),
+    },
+    {
+        path: "/services",
+        name: 'services',
+        component: () => import('./views/Service.vue'),
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('./views/LoginView.vue'),
     },
-    
+
   ],
 });
