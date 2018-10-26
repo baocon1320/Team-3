@@ -21,6 +21,7 @@ export default class Tracking extends Vue{
     .trackBox{
         float:right;
         margin-top: 10%;
+        align-items: center;
         border-radius: 15px;
         border-color: black;
         background-color:#FFAB5D;
@@ -36,8 +37,8 @@ export default class Tracking extends Vue{
         left:10px;
         padding-top:15px;
         padding: 5px;
-        width:700px;
-        height: 400px; 
+        width: 700px;
+        height: 500px; 
     }
     #inputBox{
         width:150px;
