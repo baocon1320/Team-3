@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-   	Toolbar Comp
    	<ToolbarComp  msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
 </template>

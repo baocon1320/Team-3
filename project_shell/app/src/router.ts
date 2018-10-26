@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Toolbar from './views/Toolbar.vue';
+import TrackingView from './views/TrackingView.vue';
 
 Vue.use(Router);
 
@@ -27,5 +28,16 @@ export default new Router({
       name:'toolbar',
       component: () => import('./views/Toolbar.vue'),
     },
+    {
+        path: "/tracking",
+        name: 'tracking',
+        component: () => import('./views/TrackingView.vue'),
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('./views/LoginView.vue'),
+    },
+    
   ],
 });
