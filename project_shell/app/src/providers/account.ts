@@ -9,14 +9,14 @@ export class AccountProvider {
 
 	constructor(){
 	}
-	getAccountById(id){
+	getAccountById(id: number){
 		axios.get('/api/account/' + id).then((response) => {
 			return response;
 		});
 	}
 
-	createAccount(account){
-		return axois.post('/api/account/create', account);
+	createAccount(account: any){
+		return axios.post('/api/account/create', account);
 	}
 
 }
