@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 // Gets a single Account the account's id
 exports.getAccountById = async(req, res) => {
-	Account.findById(req._id).then((account) => {
+	Account.findById(req.params.id).then((account) => {
 		if(account == null){
 			res.send(404)
 		}else{

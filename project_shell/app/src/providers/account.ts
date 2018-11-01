@@ -4,11 +4,13 @@ import axios from 'axios';
 // This means we need to figure out the import, the command
 //to call the http requests and then how to it sends the data 
 //on over to the backend
+//
 
-export class AccountProvider {
+export default class AccountProvider {
 
 	constructor(){
 	}
+
 	getAccountById(id: number){
 		axios.get('/api/account/' + id).then((response) => {
 			return response;
@@ -20,3 +22,11 @@ export class AccountProvider {
 	}
 
 }
+
+export class AccountModel{
+	/**
+	TODO: define all of the fields for AccountModel via variables and constructor to create a type for the above functions
+	*/
+}
+
+//TODO: Refactor providers to create an abstract provider that can all of the backend urls
