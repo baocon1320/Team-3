@@ -6,6 +6,7 @@ const itemRoutes = express.Router();
 //Item Routes
 itemRoutes.get('/single/:id', ItemController.getItemById);
 itemRoutes.get('/all', ItemController.getAllItems);
+itemRoutes.get('/pageItems/:pageNum', ItemController.getPageItems);
 itemRoutes.get('/category', ItemController.getItemsByCategory);
 itemRoutes.get('/price', ItemController.getItemsByPrice);
 
