@@ -1,5 +1,5 @@
 'use strict';
-import { Item } from './item';
+const Item = require('./item');
 
 module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
