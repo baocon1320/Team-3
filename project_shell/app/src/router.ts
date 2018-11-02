@@ -44,6 +44,21 @@ export default new Router({
         component: () => import('./views/Service.vue'),
     },
     {
+        path: "/item",
+        name: 'item',
+        component: () => import('./views/ItemView.vue'),
+    },
+    {
+        path: "/cart",
+        name: 'carts',
+        component: () => import('./views/CartView.vue'),
+    },
+    {
+        path: "/checkout",
+        name: 'checkout',
+        component: () => import('./views/CheckoutView.vue'),
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('./views/LoginView.vue'),
