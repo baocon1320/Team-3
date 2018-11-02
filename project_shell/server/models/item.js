@@ -1,5 +1,6 @@
 'use strict';
-import { Order } from './order';
+const Order = require('./order');
+
 module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define('Item', {
     item_id: DataTypes.INTEGER,

@@ -52,7 +52,7 @@
   color: #2c3e50;
 }
 #title-section{
-    background-color: #FFAB5D;
+    background-color: #FFF;
     margin: 0%;
     padding: 0%;
 }
