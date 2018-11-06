@@ -14,15 +14,23 @@ exports.getAccountById = async(req, res) => {
 
 // Create a new Account
 exports.createAccount = async(req, res) => {
-	//Create a new instance of an Account and save it
-	Account.create(req.body).then((newAccount) => {
-		//if the creation was unsuccessful
-		if(newAccount == null){
-			res.send(404);
-		}else{
-		//if the creation was successful send 
-		//data to the front via json
-			res.json(newAccount);
-		}
-	});
+	try{
+		console.log("Trying createAccount");
+		//Create a new instance of an Account and save it
+		Account.create(req.body).then((newAccount) => {
+			console.log("Create has been run");
+			//if the creation was unsuccessful
+			if(newAccount == null){
+				res.send(404);
+			}else{
+			//if the creation was successful send 
+			//data to the front via json
+				res.json(newAccount);
+			}
+		});
+	}catch(err){
+		console.log("Create Account has failed.");
+		res.json(404);
+	}
+	
 };
