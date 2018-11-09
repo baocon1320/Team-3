@@ -6,27 +6,37 @@ import axios from 'axios';
 //on over to the backend
 //
 
-export default class AccountProvider {
+export class AccountProvider {
 
-	constructor(){
-	}
 
-	getAccountById(id: number){
-		axios.get('/api/account/' + id).then((response) => {
-			return response;
+	async getAccountById(id: number) {
+		
+		axios({
+			method: 'get',
+			url: 'http://localhost:3000/account/' + id,
+			responseType: 'stream'
+		}).then( (response) => {
+			console.log("Response is: " + response);
+		}).catch((err) => {
+			console.log("Error occured");
+			console.log(err);
 		});
+		// return axios.get('http://localhost:3000' + 'account/' + id).then( (response) => {
+		// 	console.log("Response is: " + response);
+		// }).catch((err) => {
+		// 	console.log("Error occured");
+		// 	console.log(err);
+		// });
 	}
 
-	createAccount(account: AccountModel){
-		axios.post('/api/account/create', account).then((response) => {
+	async createAccount(account: AccountModel) {
+		return axios.post('/api/account/create', account);
 			// return new AccountModel(response.username, response.password, response.permission);
-			return response;
-		});
 	}
 
 }
 
-export class AccountModel{
+export class AccountModel {
 	/**
 	TODO: define all of the fields for AccountModel via variables and constructor to create a type for the above functions
 	*/

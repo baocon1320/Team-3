@@ -1,37 +1,54 @@
 <template>
   <div class="home">
     <div id="loginBox">
-        <img id='logo' src='../assets/foxycleLogo.png'></img>
-   	    <v-form id='form' v-model="valid">
-            <v-text-field
-            v-model="UserName"
-            label="UserName"
-            required
-            ></v-text-field>
-            <v-text-field
-            v-model="Password"
-            label="Password"
-            required
-            ></v-text-field>
-        </v-form>
-      <v-btn id="loginButton" outline absolute>
+      <img id='logo' src='../assets/foxycleLogo.png'/>
+      <v-form id='form' v-model="valid">
+        <v-text-field
+        v-model="userName"
+        label="UserName"
+        required
+        ></v-text-field>
+        <v-text-field
+        v-model="password"
+        label="Password"
+        required
+        ></v-text-field>
+      </v-form>
+      <button id="loginButton" outline absolute v-on:click="loginButtonPress">
             Login
-        </v-btn>
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { AccountProvider } from '@/providers'; // imports the account provider for logins
 import Login from '@/components/Login.vue'; // @ is an alias to /src
+
 
 @Component({
   components: {
   Login,
   },
   })
-  export default class LoginView extends Vue {
-  }
+export default class LoginView extends Vue {
+    userName: string = '';
+    password: string = '';
+    accountService!:AccountProvider;
+
+    mounted() {
+      this.accountService = new AccountProvider();
+      console.log('LoginView is mounted');
+    }
+
+    async loginButtonPress() {
+      console.log('Running login ButtonPress');
+      if (this.accountService != null) {
+        await this.accountService.getAccountById(5);
+      }
+    }
+}
 </script>
 
 <style lang='scss'>
@@ -41,7 +58,6 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
         width: auto;
         border-color: black;
         text-align: center;
-        
     }
     #form{
         color: #41A4FF;
@@ -52,8 +68,6 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
         object-position: center;
         background-size: contain;
         position: relative;
-       
-        
     }
     #logo{
         width: 100px;
