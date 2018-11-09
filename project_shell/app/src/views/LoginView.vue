@@ -39,7 +39,6 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
         padding-top: 10%;
         height: auto;
         width: auto;
-        background-color: white;
         border-color: black;
         text-align: center;
         
