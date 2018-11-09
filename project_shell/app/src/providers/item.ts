@@ -12,6 +12,7 @@ export class ItemProvider {
 	getAllItems(){
 		axios.get('/api/all').then((allItems) => {
 			return allItems;
+			//returns all Items;
 		});
 	}
 
