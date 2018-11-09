@@ -14,10 +14,10 @@
             required
             ></v-text-field>
         </v-form>
-    </div>
-      <v-btn id="loginButton">
+      <v-btn id="loginButton" outline absolute>
             Login
         </v-btn>
+    </div>
   </div>
 </template>
 
@@ -49,8 +49,12 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
         display: inline-block;
     }
     #loginButton{
-        display: table-column;
+        display: inline-block;
         object-position: center;
+        background-size: contain;
+        position: relative;
+       
+        
     }
     #logo{
         width: 100px;

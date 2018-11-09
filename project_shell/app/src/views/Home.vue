@@ -71,7 +71,6 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 <style lang='scss'>
     #container{
-        background-color: grey;
         width: inherit;
         height: inherit;
         text-align: center;
@@ -79,9 +78,6 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
     #carousel{
         max: 1000;
         height: auto;
-    }
-    #background{
-        background-color: gray;
     }
     .bottomInfo{
         position: absolute;
@@ -92,26 +88,18 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
         padding-top: 2%;
         color: white;
         align-items: center;
-        text-align: center;
+        text-align: left;
         align-content: center;
     }
     .card{
         width: 100;
         height: 200;
         padding: 2%;
+        display: inline-block;
     }
     .cardTitle{
         font-weight: bold;
         font-size: 16pt;
-    }
-    #classLeft{
-        float: left;
-    }
-    #classCenter{
-        float: center;
-    }
-    #classRight{
-        float: right;
     }
 
 </style>

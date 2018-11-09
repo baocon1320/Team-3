@@ -9,10 +9,10 @@
             required
             ></v-text-field>
         </v-form>
-    </div>
       <v-btn id="loginButton">
             Track!
         </v-btn>
+    </div>
   </div>
 </template>
 
