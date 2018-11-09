@@ -74,9 +74,10 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
         width: inherit;
         height: inherit;
         text-align: center;
+        padding-top: 5%;
     }
     #carousel{
-        max: 1000;
+        max: 600;
         height: auto;
     }
     .bottomInfo{
