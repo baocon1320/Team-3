@@ -16,6 +16,11 @@ export default class AccountProvider {
 			return response;
 		});
 	}
+	getAccountByUser(username: string){
+		axios.get('/api/account/' + username).then((response) => {
+			return response;
+		});
+	}
 
 	createAccount(account: AccountModel){
 		axios.post('/api/account/create', account).then((response) => {
