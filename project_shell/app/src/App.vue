@@ -32,19 +32,22 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background: url(https://www.pixelstalk.net/wp-content/uploads/wallpapers/white-marble-hd-wallpaper.jpg);
+  background: url(https://www.fg-a.com/wallpapers/white-ebony-wood-2018.jpg);
 }
 .buttons{
     right:auto;
+    color: grey;
+    padding-top: 10%;
 }
 #title{
     position:center;
     font-style: italic;
-    color: black;
+    color: #3F4042;
     font-weight: bold;
     text-align:center;
     font-size:35pt;
     padding-top: 2%;
+    padding-bottom: 2%;
         
 }
 #logo{
