@@ -20,7 +20,6 @@
         <v-btn class="buttons">
             <router-link to="/store">Store</router-link>
         </v-btn>       
-        <hr>
     <router-view/>
   </div>
 </template>
@@ -33,6 +32,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: url(https://www.pixelstalk.net/wp-content/uploads/wallpapers/white-marble-hd-wallpaper.jpg);
 }
 .buttons{
     right:auto;
@@ -40,6 +40,7 @@
 #title{
     position:center;
     font-style: italic;
+    color: black;
     font-weight: bold;
     text-align:center;
     font-size:35pt;
