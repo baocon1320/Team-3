@@ -1,5 +1,5 @@
 const Sequelize = require('Sequelize');
-const General = require('../models/general');
+const { General } = require('../models');
 
 exports.getGeneralById = async(req,res) => {
 	General.findById(req._id).then((general) => {
