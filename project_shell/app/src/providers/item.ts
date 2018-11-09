@@ -5,9 +5,7 @@ export class ItemProvider {
 
 	getItemById(id: number){
 		axios.get('/api/item' + id).then((item) => {
-			return ItemModel(item.description, item.price, item.stock,
-							 item.image, item.manufacturer, item.item_name,
-							 item.category_id);
+			return item;
 		});
 	}
 
@@ -17,10 +15,10 @@ export class ItemProvider {
 		});
 	}
 
-	getPageItems(pageNum){
-		axios,get('/api/pageItems/' + pageNum, {
+	getPageItems(pageNum:  number){
+		axios.get('/api/pageItems/' + pageNum, {
 			params: pageNum,
-		}).then((pageItems) => {
+		}).then((pageItems: any) => {
 			return pageItems;
 		});
 	}
