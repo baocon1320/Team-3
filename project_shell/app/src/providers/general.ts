@@ -13,4 +13,6 @@ export class GeneralProvider {
 			body: general
 		});
 	}
+
+	
 }
