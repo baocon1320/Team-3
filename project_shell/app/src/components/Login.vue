@@ -1,16 +1,4 @@
 <template>
-    <div class="container">
-        <img id="image" src="../assets/bikeShop.jpg" alt="./assets/logo.png"></img>
-        <div id="logInDiv">
-            <form id="userInput">
-                <div id="userName">Username:</div>
-                <input id="userBox" type="text" name="userName"><br>
-                <div id="password">Password:</div>
-                <input id="passwordBox" type="text" name="password"><br>
-            </form>
-            <button id="trackingButton" type="button">Log In</button>
-        </div>  
-    </div>
 </template>
 
 <script lang="ts">
@@ -21,15 +9,6 @@ export default class Login extends Vue{
 }
 </script>
 <style lang ="scss">
-    #image{
-        float:left;
-        border-color: black;
-        left:10px;
-        padding-top:15px;
-        padding: 5px;
-        width: 800px;
-        height: 400px; 
-    }
     #logInDiv{
         float:right;
         border-radius: 15px;

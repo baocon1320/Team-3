@@ -1,6 +1,23 @@
 <template>
   <div class="home">
-   	<Login  msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div id="loginBox">
+        <img id='logo' src='../assets/foxycleLogo.png'></img>
+   	    <v-form id='form' v-model="valid">
+            <v-text-field
+            v-model="UserName"
+            label="UserName"
+            required
+            ></v-text-field>
+            <v-text-field
+            v-model="Password"
+            label="Password"
+            required
+            ></v-text-field>
+        </v-form>
+    </div>
+      <v-btn id="loginButton">
+            Login
+        </v-btn>
   </div>
 </template>
 
@@ -13,5 +30,32 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
   Login,
   },
   })
-  export default class LoginView extends Vue {}
+  export default class LoginView extends Vue {
+  }
 </script>
+
+<style lang='scss'>
+    #loginBox{
+        padding-top: 10%;
+        height: auto;
+        width: auto;
+        background-color: white;
+        border-color: black;
+        text-align: center;
+        
+    }
+    #form{
+        color: #41A4FF;
+        display: inline-block;
+    }
+    #loginButton{
+        display: table-column;
+        object-position: center;
+    }
+    #logo{
+        width: 100px;
+        height: 100px;
+        display: table-column;
+    }
+
+</style>
