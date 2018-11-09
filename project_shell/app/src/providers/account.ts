@@ -18,8 +18,9 @@ export default class AccountProvider {
 	}
 
 	createAccount(account: AccountModel){
-		return axios.post('/api/account/create', account).then((response) => {
-			return AccountModel(response.username, response.password, response.permission);
+		axios.post('/api/account/create', account).then((response) => {
+			// return new AccountModel(response.username, response.password, response.permission);
+			return response;
 		});
 	}
 
