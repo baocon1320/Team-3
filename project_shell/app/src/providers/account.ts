@@ -17,8 +17,10 @@ export default class AccountProvider {
 		});
 	}
 
-	createAccount(account: any){
-		return axios.post('/api/account/create', account);
+	createAccount(account: AccountModel){
+		return axios.post('/api/account/create', account).then((response) => {
+			return AccountModel(response.username, response.password, response.permission);
+		});
 	}
 
 }
@@ -27,6 +29,16 @@ export class AccountModel{
 	/**
 	TODO: define all of the fields for AccountModel via variables and constructor to create a type for the above functions
 	*/
+	username: string;
+	password: string;
+	permission: number;
+
+	constructor(username: string, password: string, permission: number){
+		this.username = username;
+		this.password = password;
+		this.permission = permission;
+	}
+
 }
 
 //TODO: Refactor providers to create an abstract provider that can all of the backend urls

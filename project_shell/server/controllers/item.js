@@ -1,6 +1,7 @@
 const Item = require('../models/item');
 const Sequelize = require('sequelize');
 
+
 //returns a single item by it's id
 exports.getItemById = async(req,res) => {
 	Item.findById(req.params.id).then((item) => {
@@ -28,6 +29,7 @@ exports.getAllItems = async(req, res) => {
 
 //returns a page's worth of items in the db, page number is given by the request
 exports.getPageItems = async(req, res) => {
+	ITEMS_PER_PAGE = 9;
 	Item.findAll({ offset: req.params.pageNum * ITEMS_PER_PAGE, limit: ITEMS_PER_PAGE}).then((pageItems) => {
 		if(pageItems ==null){
 			res.send(404);
