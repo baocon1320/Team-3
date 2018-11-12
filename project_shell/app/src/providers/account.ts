@@ -8,19 +8,35 @@ import axios from 'axios';
 
 export class AccountProvider {
 
+	
 
 	async getAccountById(id: number) {
-		
-		axios({
-			method: 'get',
-			url: 'http://localhost:3000/account/' + id,
-			responseType: 'stream'
-		}).then( (response) => {
-			console.log("Response is: " + response);
-		}).catch((err) => {
-			console.log("Error occured");
-			console.log(err);
+		const inst = axios.create({
+			proxy:{
+				host: '127.0.0.1',
+				port: 3000,
+				auth: {
+					username: 'root',
+					password: 'password'
+				}
+			}
 		});
+		
+		inst.get('/account/' + id).then((response) => {
+			console.log("Response is:" + response);
+		});
+		// axios({
+		// 	method: 'get',
+		// 	url: 'http://localhost:3000/account/' + id,
+		// 	responseType: 'stream'
+		// 	headers: { 'Content-Type': 'application/json',
+		// 			   'Access-Control-Allow-Origin': '*' }
+		// }).then( (response) => {
+		// 	console.log("Response is: " + response);
+		// }).catch((err) => {
+		// 	console.log("Error occured");
+		// 	console.log(err);
+		// });
 		// return axios.get('http://localhost:3000' + 'account/' + id).then( (response) => {
 		// 	console.log("Response is: " + response);
 		// }).catch((err) => {
