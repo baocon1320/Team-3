@@ -63,6 +63,15 @@ export default new Router({
         name: 'login',
         component: () => import('./views/LoginView.vue'),
     },
-
+    {
+        path: '/manufacturer',
+        name: 'manufacturer',
+        component: () => import('./views/ManufacturerView.vue')
+    },
+    {
+        path: '/signup',
+        name: 'signup',
+        component: () => import('./views/SignUpView.vue')
+    },
   ],
 });

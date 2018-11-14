@@ -1,5 +1,5 @@
-const Order = require('../models/order');
-const Item = require('../models/item');
+const { Order } = require('../models');
+const { Item } = require('../models');
 // const ItemOrder = require('../models/ItemOrder');
 const Sequelize = require('sequelize');
 

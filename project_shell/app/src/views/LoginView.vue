@@ -1,6 +1,9 @@
+
 <template>
   <div class="home">
+      <img id='logo' src='../assets/foxycleLogo.png'></img>
     <div id="loginBox">
+<<<<<<< HEAD
       <img id='logo' src='../assets/foxycleLogo.png'/>
       <v-form id='form' v-model="valid">
         <v-text-field
@@ -17,15 +20,44 @@
       <button id="loginButton" outline absolute v-on:click="createAccount">
             Login
       </button>
+=======
+        <!--<img id='logo' src='../assets/foxycleLogo.png'></img>-->
+   	    <v-form id='form' v-model="valid">
+            <v-text-field
+            v-model="username"
+            label="UserName"
+            required
+            ></v-text-field>
+            <v-text-field
+            v-model="password"
+            label="Password"
+            :type="'password'"
+            required
+            ></v-text-field>
+        </v-form>
+      <v-btn id="loginButton" v-on:click="submit" outline absolute>
+            Login
+        </v-btn>
+        <h1> userName is : {{ account.username }} </h1>
+        <h1> passWord is : {{ account.password}} </h1>
+        
+>>>>>>> a8d34e7477062f59ff1328c4fe85ea62eb5e1300
     </div>
   </div>
 </template>
 
 <script lang="ts">
+<<<<<<< HEAD
 import { Component, Vue } from 'vue-property-decorator';
 import { AccountProvider } from '@/providers'; // imports the account provider for logins
 import { AccountModel } from '@/models';
+=======
+import { Component, Prop, Vue } from 'vue-property-decorator';
+>>>>>>> a8d34e7477062f59ff1328c4fe85ea62eb5e1300
 import Login from '@/components/Login.vue'; // @ is an alias to /src
+import { AccountModel } from '@/providers/account';
+import { AccountProvider } from '@/providers/account';
+import axios from 'axios';
 
 
 @Component({
@@ -33,64 +65,27 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
   Login,
   },
   })
-export default class LoginView extends Vue {
-    userName: string = '';
+  export default class LoginView extends Vue {
+    account: AccountModel = new AccountModel('','',0);
+    new_account!: AccountModel;
+    accountprovider: AccountProvider = new AccountProvider();
+    username: string = '';
     password: string = '';
-    permission: number = 1;
-    accountService!:AccountProvider;
-
+    
     mounted() {
-      this.accountService = new AccountProvider();
-      console.log('LoginView is mounted');
+      this.accountprovider.getAccountById(2).then(data => {
+        this.account = data;
+      })     
+    }
+    submit() {
+      this.new_account =  new AccountModel(this.username, this.password, 5);
+      this.accountprovider.createAccount(this.new_account).then (data => {
+        this.account = data;
+      })
     }
 
-    async loginButtonPress() {
-      console.log('Running login ButtonPress');
-      if (this.accountService != null) {
-        await this.accountService.getAccountById(5);
-      }
-    }
+  }
 
-    async createAccount(){
-      this.permission = 1;
-      // check if all of the fields are filled in
-      if(this.fieldsAreValid(this.userName, this.password, this.permission)){
-        // ensure the Service provider is not null
-        if(this.accountService != null){
-          // Make the fields into the AccountModel
-          let accountModel = new AccountModel(this.userName, this.password, this.permission);
-          // API call to create an account.
-          console.log("About to make API call");
-          let success = await this.accountService.createAccount(accountModel);
-          console.log("Success is:" + success);
-          // if(success == 202){
-          //   //When nothing went wrong
-          // }else if (success == 203){
-          //   //When the userName or password was already taken
-          // }else if(success == 204){
-          //   //Another issue?
-          // }
-        }
-      }
-    }
-
-    // This function's purpose is to perform validation for createAccount, all of the fields should be full.
-    fieldsAreValid(username: string, password: string, permission: number) :  boolean{
-      if(username == ''){
-        // Make the userName field RED
-        return false;
-      } else if(password === ''){
-        // Make the password field RED
-        return false;
-      } else if (permission > 1){
-        // Make the permission field RED
-        return false;
-      } else{
-        // All the field have been filled out.
-        return true;
-      }
-    }
-}
 </script>
 
 <style lang='scss'>
@@ -108,7 +103,11 @@ export default class LoginView extends Vue {
     #loginButton{
         display: inline-block;
         object-position: center;
-        background-size: contain;
+        position: relative;
+    }
+    #signUp{
+        display: inline-block;
+        object-position: center;
         position: relative;
     }
     #logo{

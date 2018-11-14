@@ -1,8 +1,8 @@
-const Sequelize = require('Sequelize');
-const General = require('../models/general');
+const Sequelize = require('sequelize');
+const { General } = require('../models');
 
 exports.getGeneralById = async(req,res) => {
-	General.findById(req._id).then((general) => {
+	General.findById(req.params.id).then((general) => {
 		if(general ==null){
 			res.send(404);
 		}else{

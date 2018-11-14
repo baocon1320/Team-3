@@ -21,21 +21,21 @@
    <v-card class= 'text-lg-left'>
        <v-card-title class ='cardTitle'>About Us</v-card-title>
        <hr>
-       <v-card-text var='aboutUs'> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text>
+       <v-card-text var='aboutUs'> {{ general.storeDescription }}</v-card-text>
    </v-card>
        </div>
        <div id='classCenter'>
       <v-card class='text-lg-center' >
        <v-card-title class='cardTitle'>Store Hours</v-card-title>
        <hr>
-       <v-card-text var='storeHours'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text>
+       <v-card-text var='storeHours'>{{ general.storeHours }}</v-card-text>
      </v-card>
      </div>
        <div id='classRight'>
       <v-card class='text-lg-right'>
        <v-card-title class='cardTitle'>Annoucements</v-card-title>
        <hr>
-       <v-card-text var='annoucements'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text>
+       <v-card-text var='annoucements'>{{ general.storeAddress}}</v-card-text>
      </v-card>
      </div>
      </div>
@@ -45,6 +45,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { GeneralProvider } from '@/providers/general';
+import { GeneralModel } from '@/providers/general';
 @Component({
     components: {
     HelloWorld,
@@ -66,6 +68,20 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
          ],
        };
      }
+     general: GeneralModel = new GeneralModel('', '', '', '', '');
+     generalprovider: GeneralProvider = new GeneralProvider();
+      //account: AccountModel = new AccountModel('','',0);
+    //new_account!: AccountModel;
+    //accountprovider: AccountProvider = new AccountProvider();
+    //username: string = '';
+    //password: string = '';
+    
+    mounted() {
+      this.generalprovider.getGeneralById(1).then(data => {
+        this.general = data;
+      })     
+    }
+
 }
 </script>
 

@@ -5,7 +5,9 @@ let AccountController = require('../controllers/account');
 
 const accountRoutes = express.Router();
 //Account Routes
+accountRoutes.get('/username', AccountController.getAccountByUser);
 accountRoutes.get('/:id', AccountController.getAccountById);
 accountRoutes.post('/',  AccountController.createAccount);
+
 
 module.exports = accountRoutes;

@@ -8,43 +8,26 @@ import axios from 'axios';
 
 export class AccountProvider {
 
-	async getAccountById(id: number) {
-		const inst = axios.create({
-			proxy:{
-				host: '127.0.0.1',
-				port: 3000,
-				auth: {
-					username: 'root',
-					password: 'password'
-				}
-			}
-		});
-		
-		inst.get('/account/' + id).then((response) => {
-			return response; 
+	constructor(){
+	}
+
+	getAccountById(id: number){	
+			
+		return axios.get('/api/account/' + id).then((response) => {
+			return response.data;
+
 		});
 	}
 
-
-	async createAccount(account: AccountModel) {
-		const inst = axios.create({
-			proxy:{
-				host: '127.0.0.1',
-				port: 3000,
-				auth: {
-					username: 'root',
-					password: 'password'
-				}
-			},
-			data: {
-				username: account.username,
-				password: account.password,
-				permission: account.permission
-			}
+	getAccountByUser(username: string){
+		return axios.get('/api/account/' + username).then((response) => {
+			return response;
 		});
-		
-		return inst.post('account/create').then((response) => {
-			console.log("Response is:" + JSON.stringify(response));
+	}
+
+	createAccount(account: AccountModel){
+		return axios.post('/api/account/', account).then((response) => {			
+			return response.data;
 		});
 			// return new AccountModel(response.username, response.password, response.permission);
 	}
@@ -55,9 +38,10 @@ export class AccountModel {
 	/**
 	TODO: define all of the fields for AccountModel via variables and constructor to create a type for the above functions
 	*/
-	username: string;
-	password: string;
-	permission: number;
+	//id!: number;
+	username!: string;
+	password!: string;
+	permission!: number;
 
 	constructor(username: string, password: string, permission: number){
 		this.username = username;
