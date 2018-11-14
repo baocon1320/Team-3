@@ -1,11 +1,12 @@
 <template>
   <div class = "main_store">
+     
     <CategoryBar/>
     <div class = "right_display">
       <div class = "item_redirect">
         <a> Store > </a>
         <a> All Bikes  > </a>
-        <a> Mountain Bikes </a>
+        <a> {{cate_id}}</a>
       </div>
       <div class = "list_item_display">
         <ul class  = "result_list">
@@ -20,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 import ItemList from '@/components/ItemList.vue'; // @ is an alias to /src
 import CategoryBar from '@/components/CategoryBar.vue'; // @ is an alias to /src
 
@@ -30,7 +31,10 @@ import CategoryBar from '@/components/CategoryBar.vue'; // @ is an alias to /src
     CategoryBar
   },
 })
-export default class StoreView extends Vue {}
+export default class StoreView extends Vue {
+  @Prop() name!: string;
+  
+}
 </script>
 
 <style scoped lang="scss">

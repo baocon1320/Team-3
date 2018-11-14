@@ -18,7 +18,7 @@
             <router-link to="/login">Login</router-link>
         </v-btn>
         <v-btn class="buttons">
-            <router-link to="/store">Store</router-link>
+            <router-link to="/store/0">Store</router-link>
         </v-btn>       
     <router-view/>
   </div>

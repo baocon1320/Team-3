@@ -32,7 +32,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import Login from '@/components/Login.vue'; // @ is an alias to /src
 import { AccountModel } from '@/providers/account';
 import { AccountProvider } from '@/providers/account';
-import axios from 'axios';
+
 
 @Component({
   components: {

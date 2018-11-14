@@ -28,7 +28,7 @@
       <v-card class='text-lg-center' >
        <v-card-title class='cardTitle'>Store Hours</v-card-title>
        <hr>
-       <v-card-text var='storeHours'>{{ general.storeHours }}</v-card-text>
+       <v-card-text  var='storeHours'>{{ general.storeHours }}</v-card-text>
      </v-card>
      </div>
        <div id='classRight'>

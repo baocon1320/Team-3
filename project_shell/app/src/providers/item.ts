@@ -4,20 +4,20 @@ export class ItemProvider {
 	constructor(){}
 
 	getItemById(id: number){
-		axios.get('/api/item' + id).then((item) => {
+		return axios.get('/api/item' + id).then((item) => {
 			return item;
 		});
 	}
 
 	getAllItems(){
-		axios.get('/api/all').then((allItems) => {
+		return axios.get('/api/all').then((allItems) => {
 			return allItems;
 			//returns all Items;
 		});
 	}
 
 	getPageItems(pageNum:  number){
-		axios.get('/api/pageItems/' + pageNum, {
+		return axios.get('/api/pageItems/' + pageNum, {
 			params: pageNum,
 		}).then((pageItems: any) => {
 			return pageItems;
