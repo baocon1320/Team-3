@@ -1,8 +1,9 @@
 
 <template>
   <div class="home">
+      <img id='logo' src='../assets/foxycleLogo.png'></img>
     <div id="loginBox">
-        <img id='logo' src='../assets/foxycleLogo.png'></img>
+        <!--<img id='logo' src='../assets/foxycleLogo.png'></img>-->
    	    <v-form id='form' v-model="valid">
             <v-text-field
             v-model="username"
@@ -12,6 +13,7 @@
             <v-text-field
             v-model="password"
             label="Password"
+            :type="'password'"
             required
             ></v-text-field>
         </v-form>
@@ -75,10 +77,12 @@ import axios from 'axios';
     #loginButton{
         display: inline-block;
         object-position: center;
-        background-size: contain;
         position: relative;
-       
-        
+    }
+    #signUp{
+        display: inline-block;
+        object-position: center;
+        position: relative;
     }
     #logo{
         width: 100px;
