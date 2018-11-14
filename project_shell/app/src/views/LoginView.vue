@@ -1,7 +1,8 @@
 <template>
   <div class="home">
+      <img id='logo' src='../assets/foxycleLogo.png'></img>
     <div id="loginBox">
-        <img id='logo' src='../assets/foxycleLogo.png'></img>
+        <!--<img id='logo' src='../assets/foxycleLogo.png'></img>-->
    	    <v-form id='form' v-model="valid">
             <v-text-field
             v-model="UserName"
@@ -11,13 +12,17 @@
             <v-text-field
             v-model="Password"
             label="Password"
+            :type="'password'"
             required
             ></v-text-field>
         </v-form>
+      </div>
       <v-btn id="loginButton" outline absolute>
-            Login
+            <router-link to="/admin">Log In</router-link>
         </v-btn>
-    </div>
+      <v-btn id="signUp" outline absolute>
+        <router-link to="/signup">Sign Up</router-link>
+      </v-btn>
   </div>
 </template>
 
@@ -50,10 +55,12 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
     #loginButton{
         display: inline-block;
         object-position: center;
-        background-size: contain;
         position: relative;
-       
-        
+    }
+    #signUp{
+        display: inline-block;
+        object-position: center;
+        position: relative;
     }
     #logo{
         width: 100px;

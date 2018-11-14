@@ -1,10 +1,9 @@
 <template>
 </template>
-
 <script lang="ts">
 import { Component, Vue, Prop} from 'vue-property-decorator';
 @Component
-export default class Login extends Vue{
+export default class SignUp extends Vue{
 	@Prop() private msg!: string;
 }
 </script>
