@@ -79,7 +79,16 @@ import { GeneralModel } from '@/providers/general';
     mounted() {
       this.generalprovider.getGeneralById(1).then(data => {
         this.general = data;
-      })     
+      });     
+    }
+
+    submit(){
+      this.general.storeHours = '10am-11am';
+      this.general.phoneNumber = 'phoneNumber';
+      this.general.storeAddress = 'storeAddress';
+      this.general.storeDescription = 'storeDescription';
+      this.general.generalTextBody = 'generalTextBody';
+      this.generalprovider.createGeneral(this.general);
     }
 
 }

@@ -37,11 +37,10 @@ exports.getAccountByUser = async(req, res) => {
 // Create a new Account
 exports.createAccount = async(req, res) => {
 	try{
-		console.log("Trying createAccount");
-		console.log("Body is: " + JSON.stringify(req.body));
+		console.log("createAccount has been called with " + JSON.stringify(req.body));
 		//Create a new instance of an Account and save it
 		Account.create(req.body).then((newAccount) => {
-			console.log("Create has been run");
+			console.log("Account has been created");
 			//if the creation was unsuccessful
 			//if the creation was successful send 
 			//data to the front via json
@@ -49,7 +48,7 @@ exports.createAccount = async(req, res) => {
 			
 		});}
 	catch(err){
-		console.log("Create Account has failed.");
+		console.log("There has been an error with the req: " + JSON.stringify(req));
 		res.json(404);
 		console.log(err)
 	}
