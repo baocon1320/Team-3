@@ -3,24 +3,6 @@
   <div class="home">
       <img id='logo' src='../assets/foxycleLogo.png'></img>
     <div id="loginBox">
-<<<<<<< HEAD
-      <img id='logo' src='../assets/foxycleLogo.png'/>
-      <v-form id='form' v-model="valid">
-        <v-text-field
-        v-model="userName"
-        label="UserName"
-        required
-        ></v-text-field>
-        <v-text-field
-        v-model="password"
-        label="Password"
-        required
-        ></v-text-field>
-      </v-form>
-      <button id="loginButton" outline absolute v-on:click="createAccount">
-            Login
-      </button>
-=======
         <!--<img id='logo' src='../assets/foxycleLogo.png'></img>-->
    	    <v-form id='form' v-model="valid">
             <v-text-field
@@ -35,25 +17,14 @@
             required
             ></v-text-field>
         </v-form>
-      <v-btn id="loginButton" v-on:click="submit" outline absolute>
-            Login
-        </v-btn>
         <h1> userName is : {{ account.username }} </h1>
         <h1> passWord is : {{ account.password}} </h1>
-        
->>>>>>> a8d34e7477062f59ff1328c4fe85ea62eb5e1300
     </div>
   </div>
 </template>
 
 <script lang="ts">
-<<<<<<< HEAD
-import { Component, Vue } from 'vue-property-decorator';
-import { AccountProvider } from '@/providers'; // imports the account provider for logins
-import { AccountModel } from '@/models';
-=======
 import { Component, Prop, Vue } from 'vue-property-decorator';
->>>>>>> a8d34e7477062f59ff1328c4fe85ea62eb5e1300
 import Login from '@/components/Login.vue'; // @ is an alias to /src
 import { AccountModel } from '@/providers/account';
 import { AccountProvider } from '@/providers/account';
@@ -76,12 +47,6 @@ import axios from 'axios';
       this.accountprovider.getAccountById(2).then(data => {
         this.account = data;
       })     
-    }
-    submit() {
-      this.new_account =  new AccountModel(this.username, this.password, 5);
-      this.accountprovider.createAccount(this.new_account).then (data => {
-        this.account = data;
-      })
     }
 
   }

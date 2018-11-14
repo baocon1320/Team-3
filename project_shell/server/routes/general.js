@@ -5,7 +5,7 @@ GeneralController = require('../controllers/general');
 const generalRoutes = express.Router();
 
 generalRoutes.get('/:id', GeneralController.getGeneralById);
-generalRoutes.put('/update', GeneralController.updateGeneral);
+generalRoutes.put('/update/:id', GeneralController.updateGeneral);
 
 module.exports = generalRoutes;
 

@@ -27,3 +27,17 @@ exports.updateGeneral = async(req,res) => {
 	});
 };
 
+exports.createGeneral = async(req, res) => {
+	try{
+		General.create(req.body).then((response) => {
+			if(response == null){
+				res.send(404);
+			}else{
+				res.json(general);
+			}
+		});
+	}catch{
+		res.send(404);
+	}
+};
+
