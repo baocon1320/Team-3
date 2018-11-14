@@ -1,11 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const General = sequelize.define('General', {
-    storeHours: DataTypes.TEXT,
+    storeHours: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
-    storeAddress: DataTypes.STRING,
-    storeDescription: DataTypes.TEXT,
-    generalTextBody: DataTypes.TEXT
+    storeDescription: DataTypes.STRING,
+    textBody: DataTypes.STRING
   }, {});
   General.associate = function(models) {
     // associations can be defined here

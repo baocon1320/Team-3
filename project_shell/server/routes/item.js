@@ -4,11 +4,11 @@ let ItemController = require('../controllers/item');
 
 const itemRoutes = express.Router();
 
-// itemRoutes.get('/:id', ItemController.getItemById);
-// itemRoutes.get('/all', ItemController.getAllItems);
-// itemRoutes.get('/pageItems/:pageNum', ItemController.getPageItems);
-// itemRoutes.get('/category', ItemController.getItemsByCategory);
-// itemRoutes.get('/price', ItemController.getItemsByPrice);
+itemRoutes.get('/:id', ItemController.getItemById);
+itemRoutes.get('/all', ItemController.getAllItems);
+itemRoutes.get('/pageItems/:pageNum', ItemController.getPageItems);
+itemRoutes.get('/category', ItemController.getItemsByCategory);
+itemRoutes.get('/price', ItemController.getItemsByPrice);
 itemRoutes.post('/', ItemController.createItem);
 
 module.exports = itemRoutes;

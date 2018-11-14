@@ -40,7 +40,7 @@ exports.getPageItems = async(req, res) => {
 }
 
 //returns a page's worth of items in the db, filtered by category
-exports.getItemsByCateogry = async(req, res) => {
+exports.getItemsByCategory = async(req, res) => {
 	res.json(404);
 };
 
