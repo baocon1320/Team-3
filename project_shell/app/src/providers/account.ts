@@ -6,38 +6,41 @@ import axios from 'axios';
 //on over to the backend
 //
 
-export default class AccountProvider {
+export class AccountProvider {
 
 	constructor(){
 	}
 
-	getAccountById(id: number){
-		axios.get('/api/account/' + id).then((response) => {
-			return response;
+	getAccountById(id: number){	
+			
+		return axios.get('/api/account/' + id).then((response) => {
+			return response.data;
+
 		});
 	}
+
 	getAccountByUser(username: string){
-		axios.get('/api/account/' + username).then((response) => {
+		return axios.get('/api/account/' + username).then((response) => {
 			return response;
 		});
 	}
 
 	createAccount(account: AccountModel){
-		axios.post('/api/account/create', account).then((response) => {
-			// return new AccountModel(response.username, response.password, response.permission);
-			return response;
+		return axios.post('/api/account/', account).then((response) => {			
+			return response.data;
 		});
 	}
 
 }
 
-export class AccountModel{
+export class AccountModel {
 	/**
 	TODO: define all of the fields for AccountModel via variables and constructor to create a type for the above functions
 	*/
-	username: string;
-	password: string;
-	permission: number;
+	//id!: number;
+	username!: string;
+	password!: string;
+	permission!: number;
 
 	constructor(username: string, password: string, permission: number){
 		this.username = username;
