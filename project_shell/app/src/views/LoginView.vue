@@ -36,7 +36,7 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
 export default class LoginView extends Vue {
     userName: string = '';
     password: string = '';
-    permission: number;
+    permission: number = 1;
     accountService!:AccountProvider;
 
     mounted() {
@@ -53,15 +53,15 @@ export default class LoginView extends Vue {
 
     async createAccount(){
       this.permission = 1;
-      //check if all of the fields are filled in
+      // check if all of the fields are filled in
       if(this.fieldsAreValid(this.userName, this.password, this.permission)){
-        //ensure the Service provider is not null
+        // ensure the Service provider is not null
         if(this.accountService != null){
-          //Make the fields into the AccountModel
+          // Make the fields into the AccountModel
           let accountModel = new AccountModel(this.userName, this.password, this.permission);
-          //API call to create an account.
+          // API call to create an account.
           console.log("About to make API call");
-          success = await this.accountService.createAccount(accountModel);
+          let success = await this.accountService.createAccount(accountModel);
           console.log("Success is:" + success);
           // if(success == 202){
           //   //When nothing went wrong
@@ -74,19 +74,19 @@ export default class LoginView extends Vue {
       }
     }
 
-    //This function's purpose is to perform validation for createAccount, all of the fields should be full.
+    // This function's purpose is to perform validation for createAccount, all of the fields should be full.
     fieldsAreValid(username: string, password: string, permission: number) :  boolean{
       if(username == ''){
-        //Make the userName field RED
+        // Make the userName field RED
         return false;
-      }else if(password == ''){
-        //Make the password field RED
+      } else if(password === ''){
+        // Make the password field RED
         return false;
-      }else if (permission > 1){
-        //Make the permission field RED
+      } else if (permission > 1){
+        // Make the permission field RED
         return false;
-      }else{
-        //All the field have been filled out.
+      } else{
+        // All the field have been filled out.
         return true;
       }
     }
