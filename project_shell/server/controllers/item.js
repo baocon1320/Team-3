@@ -42,9 +42,19 @@ exports.getPageItems = async(req, res) => {
 //returns a page's worth of items in the db, filtered by category
 exports.getItemsByCateogry = async(req, res) => {
 	res.json(404);
-}
+};
 
 exports.getItemsByPrice = async(req, res) => {
 	res.json(404);
-}
+};
+
+
+//Creates a single Item for the store
+exports.createItem = async(req, res) => {
+	console.log("Running createItem...");
+	console.log("createItem with: " + JSON.stringify(req.body));
+	Item.create(req.body).then((response) => {
+		res.json(response);
+	});
+};
 
