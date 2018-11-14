@@ -17,12 +17,8 @@
             required
             ></v-text-field>
         </v-form>
-      <v-btn id="loginButton" v-on:click="submit" outline absolute>
-            Login
-        </v-btn>
         <h1> userName is : {{ account.username }} </h1>
         <h1> passWord is : {{ account.password}} </h1>
-        
     </div>
   </div>
 </template>
@@ -33,6 +29,7 @@ import Login from '@/components/Login.vue'; // @ is an alias to /src
 import { AccountModel } from '@/providers/account';
 import { AccountProvider } from '@/providers/account';
 import axios from 'axios';
+
 
 @Component({
   components: {
@@ -51,14 +48,9 @@ import axios from 'axios';
         this.account = data;
       })     
     }
-    submit() {
-      this.new_account =  new AccountModel(this.username, this.password, 5);
-      this.accountprovider.createAccount(this.new_account).then (data => {
-        this.account = data;
-      })
-    }
 
   }
+
 </script>
 
 <style lang='scss'>
@@ -68,7 +60,6 @@ import axios from 'axios';
         width: auto;
         border-color: black;
         text-align: center;
-        
     }
     #form{
         color: #41A4FF;
