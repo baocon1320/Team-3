@@ -3,10 +3,7 @@
     <div class = "cate_header"> Category </div>
     <div class = "hori_line_"><span class = "hori_line"></span></div>
     <div class = "cate_list">
-      <div class = "cate_item"><a> Mountain Bike </a> </div>
-      <div class = "cate_item"><a> Children Bike </a> </div>
-      <div class = "cate_item"><a> Road Bike </a> </div>
-      <div class = "cate_item"><a>  Components  </a> </div>
+      <div class = "cate_item" v-for="category in categories"><a v-bind:href="'/store/' + category.id"> {{category.name}} </a> </div>
     </div>
     <div class = "hori_line_"><span class = "hori_line"></span></div>
     <div class = "cate_header"> Filter </div>
@@ -61,10 +58,20 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { CategoryModel } from '@/models'
+import { CategoryProvider } from '@/providers'
 
 @Component
 export default class CategoryBar extends Vue {
-  @Prop() private msg!: string;
+  //@Prop() private msg!: string;
+  categories: CategoryModel[] = [];
+  categoryprovider: CategoryProvider = new CategoryProvider();
+
+  mounted() {
+    this.categoryprovider.getAllCategories().then(data => {
+      this.categories = data;
+    });
+  }
 }
 
 </script>

@@ -23,17 +23,15 @@ export class GeneralModel {
 	*/
 	storeHours: string;
     phoneNumber: string;
-    storeAddress: string;
     storeDescription: string;
-    generalTextBody: string;
+    textBody: string;
 
-	constructor(storeHours: string, phoneNumber: string, storeAddress: string, 
-		storeDescription: string, generalTextBody: string) {
+	constructor(storeHours: string, phoneNumber: string, 
+		storeDescription: string, textBody: string) {
 		this.storeHours = storeHours;
 		this.phoneNumber = phoneNumber;
-		this.storeAddress = storeAddress;
 		this.storeDescription = storeDescription;
-		this.generalTextBody = generalTextBody;
+		this.textBody = textBody;
 	}
 
 }
