@@ -9,18 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       storeHours: {
-        type: Sequelize.TEXT
-      },
-      phoneNumber: {
         type: Sequelize.STRING
       },
-      storeAddress: {
+      phoneNumber: {
         type: Sequelize.STRING
       },
       storeDescription: {
         type: Sequelize.TEXT
       },
-      generalTextBody: {
+      textBody: {
         type: Sequelize.TEXT
       },
       createdAt: {

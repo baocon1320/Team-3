@@ -1,4 +1,4 @@
-'se strict';
+'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Orders', {
@@ -8,23 +8,29 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userName: {
+      customerName: {
         type: Sequelize.STRING
       },
-      destination: {
-        type: Sequelize.STRING
-      },
-      creditCard: {
+      creditCardNum: {
         type: Sequelize.INTEGER
       },
       securityCode: {
         type: Sequelize.INTEGER
       },
-      expDate: {
-        type: Sequelize.INTEGER
-      },
       priceTotal: {
         type: Sequelize.DOUBLE
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      phoneNumber: {
+        type: Sequelize.STRING
+      },
+      date: {
+        type: Sequelize.DATE
+      },
+      status: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

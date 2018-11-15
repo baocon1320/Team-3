@@ -45,8 +45,9 @@ export default new Router({
         component: () => import('./views/Service.vue'),
     },
     {
-        path: "/item",
+        path: "/item/:item_id",
         name: 'item',
+        props:true,
         component: () => import('./views/ItemView.vue'),
     },
     {
