@@ -23,6 +23,9 @@ module.exports = {
       manufacturer_id: {
         type: Sequelize.INTEGER
       },
+      category_id: {
+        type: Sequelize.INTEGER
+      },
       item_name: {
         type: Sequelize.STRING
       },
