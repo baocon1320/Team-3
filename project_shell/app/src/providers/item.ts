@@ -1,48 +1,34 @@
 import axios from 'axios';
+import { ItemModel } from '@/models/'
 
 export class ItemProvider {
 	constructor(){}
 
-	getItemById(id: number){
-		axios.get('/api/item' + id).then((item) => {
-			return item;
+	getItemById(id: string){
+		return axios.get('/api/item/id=' + id).then((response) => {
+			return response.data;
 		});
 	}
 
 	getAllItems(){
-		axios.get('/api/all').then((allItems) => {
-			return allItems;
+		return axios.get('/api/item/all').then((response) => {
+			return response.data;
 			//returns all Items;
 		});
 	}
 
 	getPageItems(pageNum:  number){
-		axios.get('/api/pageItems/' + pageNum, {
+		return axios.get('/api/item/pageItems/' + pageNum, {
 			params: pageNum,
 		}).then((pageItems: any) => {
 			return pageItems;
 		});
 	}
-}
 
-export class ItemModel{
-	description: string;
-	price: number;
-	stock: number;
-	image: string;
-	manufacturer: string;
-	item_name: string;
-	category_id: number
-
-	constructor(description: string, price: number, stock: number,
-				image: string, manufacturer: string, item_name: string,
-				category_id: number){
-		this.description = description;
-		this.price = price;
-		this.stock = stock;
-		this.image = image;
-		this.manufacturer = manufacturer;
-		this.item_name = item_name;
-		this.category_id = category_id;
+	getItemsByCategory(id: string){
+		return axios.get('/api/item/category=' + id).then((response) => {
+			return response.data;
+		})
 	}
 }
+

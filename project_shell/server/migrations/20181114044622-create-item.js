@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       price: {
         type: Sequelize.DOUBLE
@@ -21,6 +21,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       manufacturer_id: {
+        type: Sequelize.INTEGER
+      },
+      category_id: {
         type: Sequelize.INTEGER
       },
       item_name: {

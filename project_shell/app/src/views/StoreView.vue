@@ -1,17 +1,20 @@
 <template>
   <div class = "main_store">
+     
     <CategoryBar/>
     <div class = "right_display">
       <div class = "item_redirect">
         <a> Store > </a>
-        <a> All Bikes  > </a>
-        <a> Mountain Bikes </a>
+        <a href="0"> All Bikes  > </a>
+        <a v-if="cate_id != 0"
+        > {{curCategory.name}}</a>
+      </div>
+      <div>
+        <h1> {{curCategory.name}}</h1>
       </div>
       <div class = "list_item_display">
         <ul class  = "result_list">
-          <ItemList/>
-          <ItemList/>
-          <ItemList/>
+          <ItemList v-for="item in items" v-bind:key="item.id" v-bind:item="item"></ItemList>
 
         </ul>
       </div>
@@ -20,9 +23,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 import ItemList from '@/components/ItemList.vue'; // @ is an alias to /src
 import CategoryBar from '@/components/CategoryBar.vue'; // @ is an alias to /src
+import { ItemModel } from '@/models'
+import { CategoryModel } from '@/models'
+import { ItemProvider } from '@/providers'
+import { CategoryProvider } from '@/providers'
 
 @Component({
   components: {
@@ -30,7 +37,29 @@ import CategoryBar from '@/components/CategoryBar.vue'; // @ is an alias to /src
     CategoryBar
   },
 })
-export default class StoreView extends Vue {}
+export default class StoreView extends Vue {
+  @Prop() cate_id!: string;
+  items : ItemModel[] = [];
+  itemprovider : ItemProvider = new ItemProvider();
+  curCategory: CategoryModel = new CategoryModel("");
+  categoryprovider: CategoryProvider = new CategoryProvider();
+
+  mounted() {
+      if(this.cate_id == '0') {
+        this.itemprovider.getAllItems().then(data => {
+          this.items = data;
+        })
+      } else {
+        this.categoryprovider.getCategoryById(this.cate_id).then(data => {
+          this.curCategory = data;
+        });
+        this.itemprovider.getItemsByCategory(this.cate_id).then(data => {
+          this.items = data;
+        })
+      }
+
+    }
+}
 </script>
 
 <style scoped lang="scss">

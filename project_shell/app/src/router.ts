@@ -34,8 +34,9 @@ export default new Router({
         component: () => import('./views/TrackingView.vue'),
     },
     {
-        path: "/store",
+        path: "/store/:cate_id",
         name: 'store',
+        props: true,
         component: () => import('./views/StoreView.vue'),
     },
     {
@@ -44,8 +45,9 @@ export default new Router({
         component: () => import('./views/Service.vue'),
     },
     {
-        path: "/item",
+        path: "/item/:item_id",
         name: 'item',
+        props:true,
         component: () => import('./views/ItemView.vue'),
     },
     {

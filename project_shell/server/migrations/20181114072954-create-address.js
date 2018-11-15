@@ -36,4 +36,8 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Addresses');
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 7cac0c94ed4110c33da8bd02d08692d0fc8e1564
