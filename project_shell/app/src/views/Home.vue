@@ -35,7 +35,7 @@
       <v-card class='text-lg-right'>
        <v-card-title class='cardTitle'>Annoucements</v-card-title>
        <hr>
-       <v-card-text var='annoucements'>{{ general.storeAddress}}</v-card-text>
+       <v-card-text var='annoucements'>{{ general.textBody}}</v-card-text>
      </v-card>
      </div>
      </div>
@@ -68,7 +68,7 @@ import { GeneralModel } from '@/providers/general';
          ],
        };
      }
-     general: GeneralModel = new GeneralModel('', '', '', '', '');
+     general: GeneralModel = new GeneralModel('', '', '', '');
      generalprovider: GeneralProvider = new GeneralProvider();
       //account: AccountModel = new AccountModel('','',0);
     //new_account!: AccountModel;
@@ -82,14 +82,14 @@ import { GeneralModel } from '@/providers/general';
       });     
     }
 
-    submit(){
-      this.general.storeHours = '10am-11am';
-      this.general.phoneNumber = 'phoneNumber';
-      this.general.storeAddress = 'storeAddress';
-      this.general.storeDescription = 'storeDescription';
-      this.general.generalTextBody = 'generalTextBody';
-      this.generalprovider.createGeneral(this.general);
-    }
+    // submit(){
+    //   this.general.storeHours = '10am-11am';
+    //   this.general.phoneNumber = 'phoneNumber';
+    //   this.general.storeAddress = 'storeAddress';
+    //   this.general.storeDescription = 'storeDescription';
+    //   this.general.generalTextBody = 'generalTextBody';
+    //   this.generalprovider.createGeneral(this.general);
+    // }
 
 }
 </script>

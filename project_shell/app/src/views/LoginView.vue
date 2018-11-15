@@ -17,16 +17,20 @@
             required
             ></v-text-field>
         </v-form>
+        <v-btn v-on:click="submit">
+        Enter
+    </v-btn >
         <h1> userName is : {{ account.username }} </h1>
         <h1> passWord is : {{ account.password}} </h1>
     </div>
+
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Login from '@/components/Login.vue'; // @ is an alias to /src
-import { AccountModel } from '@/providers/account';
+import { AccountModel } from '@/models/account';
 import { AccountProvider } from '@/providers/account';
 
 
@@ -44,9 +48,16 @@ import { AccountProvider } from '@/providers/account';
     password: string = '';
     
     mounted() {
-      this.accountprovider.getAccountById(2).then(data => {
+      this.accountprovider.getAccountById(1).then(data => {
         this.account = data;
       })     
+    }
+
+    submit() {
+        this.new_account = new AccountModel(this.username, this.password, 3);
+        this.accountprovider.createAccount(this.new_account).then (data => {
+            this.account = data;
+        })
     }
 
   }

@@ -43,7 +43,7 @@ exports.createGeneral = async(req, res) => {
 				res.json(general);
 			}
 		});
-	}catch{
+	}catch(err){
 		res.send(404);
 	}
 };

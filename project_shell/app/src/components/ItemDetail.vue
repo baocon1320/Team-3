@@ -3,17 +3,17 @@
     <div class = "item_display">
       <div class ="item_picture">
         <a>
-          <img src = "../assets/bicycle1.jpg"></img>
+          <img :src='require(`../assets/${item.image}`)'></img>
         </a>
       </div>
       <div class = "item_name">
-        <a >  <h2> Mountain Bicycle for Kid</h2> </a>
+        <a >  <h2> {{ item.item_name }}</h2> </a>
         <h3> Trek Bicycle</h3>
-        <h4 class = "price"> <b> Price: </b> $200 </h4>
-        <button class= "add_cart">
+        <h4 class = "price"> <b> Price: </b> ${{item.price}} </h4>
+        <v-btn class="buttons">
           <router-link to="/cart">Add to Cart</router-link>
-        </button>
-        <h5 class = "moreDetail">  3 in stock
+        </v-btn>
+        <h5 class = "moreDetail">  {{item.stock}} in stock
         </h5>
       </div>
     </div>
@@ -25,7 +25,7 @@
       <div class = "item_specs">
 
         <span>
-          When Trek built the Emonda S 4, they created an incredibly fast, fun machine. A bike that features a full carbon frame made from Trek's OCLV carbon, some of the best and lightest in the business. Light is one thing, but what really sets the Emonda apart is the ride. The specific carbon layup and the dialed geometry combine to give you that lively, yet stable feel that makes us get on our bikes in the first place. They didn't skimp on components either. A full 10-speed Shimano Tiagra gruppo and tubeless-ready Bontrager wheels grace the frame and blow the performance-to-value ratio out of the water.
+         {{item.description}}
         </span>
 
       </div>
@@ -35,10 +35,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { ItemModel } from '@/models/';
 
 @Component
 export default class ItemList extends Vue {
-  @Prop() private msg!: string;
+  @Prop({ default: null })
+  item!: ItemModel;
 }
 
 </script>
@@ -91,21 +93,23 @@ a:hover, a:active {
   color: red;
 }
 .item_name h5 {
-  line-height: 0.2;
-
+  margin-left: 10px;
 }
 .item_name h4 {
   line-height: 1.5;
   font-size: 16px;
+  margin-left: 10px;
 }
 .item_name h3 {
   font-size: 14px;
   margin-bottom: 5px;
   word-wrap: break-word;
+  margin-left: 10px;
 }
 .item_name h2 {
   font-size: 20px;
   text-transform: uppercase;
+  margin-left: 10px;
 }
 .item_name {
   display: inline-block;
@@ -114,7 +118,6 @@ a:hover, a:active {
   top: 40px;
   vertical-align: top;
   overflow: hidden;
-  line-height: 0.1;
 
 }
 .item_picture {
