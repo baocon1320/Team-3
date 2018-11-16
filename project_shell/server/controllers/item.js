@@ -34,6 +34,25 @@ exports.getAllItems = async(req, res) => {
 	}
 }
 
+
+//returns all of the item's in the database, however sending this many 
+//items over to the front would take incredibly long, please call getPageItems unless you NEED
+//all items at once.
+exports.getNumberofItem = async(req, res) => {
+	try{
+	Item.count().then((count) => {
+		if(count == null){
+			res.send(404);
+		}else{
+			res.json(count);
+		}
+	});
+	}
+	catch (err) {
+		console.log(err)
+	}
+}
+
 //returns a page's worth of items in the db, page number is given by the request
 exports.getPageItems = async(req, res) => {
 	ITEMS_PER_PAGE = 9;

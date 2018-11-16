@@ -6,12 +6,13 @@ let OrderController = require('../controllers/order');
 const orderRoutes = express.Router();
 
 //Order Routes
-orderRoutes.get('/:id', OrderController.getOrderById);
+orderRoutes.get('/id=:id', OrderController.getOrderById);
 // orderRoutes.get('/account', OrderController.getOrderByAccountId);
 orderRoutes.post('/create', OrderController.createOrder);
 orderRoutes.put('/addItem', OrderController.addItemToOrder);
 orderRoutes.put('/removeItem', OrderController.removeItemFromOrder);
 orderRoutes.delete('/deleteOrder/:id', OrderController.deleteOrder);
+orderRoutes.get('/all', OrderController.getAllOrders);
 
 module.exports = orderRoutes;
 
