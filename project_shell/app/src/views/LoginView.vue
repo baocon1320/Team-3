@@ -1,7 +1,6 @@
 
 <template>
   <div class="home">
-      <img id='logo' src='../assets/foxycleLogo.png'></img>
     <div id="loginBox">
         <!--<img id='logo' src='../assets/foxycleLogo.png'></img>-->
    	    <v-form id='form' v-model="valid">

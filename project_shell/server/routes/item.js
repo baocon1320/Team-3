@@ -11,5 +11,7 @@ itemRoutes.get('/category=:category_id', ItemController.getItemsByCategory);
 itemRoutes.get('/price', ItemController.getItemsByPrice);
 itemRoutes.post('/', ItemController.createItem);
 itemRoutes.put('/update/:id', ItemController.updateItem);
+itemRoutes.get('/countall', ItemController.getNumberofItem);
+
 
 module.exports = itemRoutes;

@@ -1,8 +1,23 @@
 <template>
   <div id="app">
-        <div id="title">Foxycle</div>
-        <img id="logo" src='./assets/foxycleLogo.png'></img>
-        <v-btn class="buttons" >
+       <!--  <div id="title">Foxycle</div>
+        <img id="logo" src='./assets/foxycleLogo.png'></img> -->
+  <v-app id="inspire" dark>
+    <v-toolbar>
+      <a href="/"><img class="logo" src='./assets/foxycleLogo.png'></img></a>
+      <v-toolbar-title>Foxycle</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat href="/store/0" >Store</v-btn>
+        <v-btn flat href="/services">Services</v-btn>
+        <v-btn flat href="/manufacturers">Manufacturers</v-btn>
+        <v-btn flat href="/tracking" >Tracking</v-btn>
+        <v-btn flat href="/login" >Login</v-btn>
+        
+      </v-toolbar-items>
+    </v-toolbar>
+  </v-app>
+       <!--  <v-btn class="buttons" >
             <router-link to="/">Home</router-link>
         </v-btn>
         <v-btn class="buttons">
@@ -19,13 +34,27 @@
         </v-btn>
         <v-btn class="buttons">
             <router-link to="/store/0">Store</router-link>
-        </v-btn>       
+        </v-btn>        -->
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
+a:link { color:#fff; }
+
+
+a {
+  text-decoration: none; 
+  color: #fff;
+}
+a:hover { 
+    color: #949494;
+}
+.logo {
+  height: 50px;
+  width: 50px;
+}
+/*#app {
   font-family: 'Roboto';
   
   -webkit-font-smoothing: antialiased;
@@ -33,7 +62,7 @@
   text-align: center;
   color: #2c3e50;
   background: url(https://www.fg-a.com/wallpapers/white-ebony-wood-2018.jpg);
-}
+}*/
 .buttons{
     right:auto;
     color: grey;

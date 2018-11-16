@@ -4,12 +4,11 @@
     <div class = "right_display">
       <div class = "item_redirect">
         <a> Store > </a>
-        <a> All Bikes  > </a>
-        <a> Mountain Bikes > </a>
+        <a href="/store/0"> All Bikes  > </a>
+        <a v-bind:href="'/store/' + curCategory.id"> {{ curCategory.name }} > </a>
         <a> Mountain Bikes for Kids </a>
       </div>
-      <span>{{ item }}</span>
-      <ItemDetail v-bind:item="item"></ItemDetail>
+      <ItemDetail v-bind:key="item.id" v-bind:item="item"></ItemDetail>
     </div>
   </div>
 </template>
@@ -36,10 +35,20 @@ export default class ItemView extends Vue {
   curCategory: CategoryModel = new CategoryModel("");
   categoryprovider: CategoryProvider = new CategoryProvider();
 
-  mounted() {   
+  created() {   
         this.itemprovider.getItemById(this.item_id).then(data => {
           this.item = data;
-        })
+        });
+
+        
+
+    }
+  updated() {   
+        if(this.item.category_id != 0){
+          this.categoryprovider.getCategoryById(this.item.category_id.toString()).then(data => {
+            this.curCategory = data;
+          })
+        }
 
     }
   
@@ -76,7 +85,7 @@ export default class ItemView extends Vue {
 }
 
 .main_store {
-
+  margin-top: 25px;
 }
 
 </style>
