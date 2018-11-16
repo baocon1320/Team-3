@@ -1,6 +1,6 @@
 export class AddressModel{
 	streetOne!: string;
-	streetTwo!;string;
+	streetTwo!:string;
 	city!:string;
 	state!:string;
 	zipcode!:string;

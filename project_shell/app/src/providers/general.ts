@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GeneralModel } form '@/models';
+import { GeneralModel } from '@/models';
 
 export class GeneralProvider {
 	constructor(){}

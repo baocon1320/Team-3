@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AcccountModel } from '@/models';
+import { AccountModel } from '@/models';
 
 //TODO: Figure out how to make Http requests in vue.js
 // This means we need to figure out the import, the command
