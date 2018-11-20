@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <div id="loginBox">
-        <img id='logo' src='../assets/foxycleLogo.png'></img>
    	    <v-form id='form' v-model="valid">
             <v-text-field
             v-model= "Tracking"
@@ -35,6 +34,8 @@ import Tracking from '@/components/Tracking.vue'; // @ is an alias to /src
         width: auto;
         border-color: black;
         text-align: center;
+        height:700px;
+        max-height: 100%;
         
     }
     #form{

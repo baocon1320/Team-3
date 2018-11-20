@@ -7,14 +7,16 @@
         </a>
       </div>
       <div class = "item_name">
-        <a >  <h2> {{ item.item_name }}</h2> </a>
-        <h3> {{ manufacture.name }}</h3>
+        <h2 class="title font-weight-light orange--text mb-2"> {{ item.item_name }}</h2> 
+        <h3 class="font-weight-light grey--text  mb-2"> {{ manufacture.name }}</h3>
         <h4 class = "price"> <b> Price: </b> ${{item.price}} </h4>
         <v-btn class="buttons">
-          <router-link to="/cart">Add to Cart</router-link>
+          Add to Cart
         </v-btn>
+        
         <h5 class = "moreDetail">  {{item.stock}} in stock
         </h5>
+
       </div>
     </div>
     <div class = "item_description">

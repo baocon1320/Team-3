@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="main_color">
        <!--  <div id="title">Foxycle</div>
         <img id="logo" src='./assets/foxycleLogo.png'></img> -->
   <v-app id="inspire" dark>
@@ -13,7 +13,9 @@
         <v-btn flat href="/manufacturers">Manufacturers</v-btn>
         <v-btn flat href="/tracking" >Tracking</v-btn>
         <v-btn flat href="/login" >Login</v-btn>
-        
+        <v-btn flat href="/cart" > 
+          <v-icon  color="orange darken-2">shopping_cart</v-icon>
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </v-app>
@@ -40,6 +42,10 @@
 </template>
 
 <style lang="scss">
+.main_color {
+  background-color: #f7f7f7;
+}
+
 a:link { color:#fff; }
 
 

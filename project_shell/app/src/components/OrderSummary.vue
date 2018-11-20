@@ -1,31 +1,27 @@
 <template>
   <div class = "oder_summary_detail">
     <div class = "product_total">
-      <div class = "name_field"> Product Total: </div>
-      <div class ="price_field"> $300 </div>
+      <div class = "name_field title"> Product Total: </div>
+      <div class ="price_field title"> $300 </div>
     </div>
     <div class = "product_total">
-      <div class = "name_field"> Estimated Shipping Fee: </div>
-      <div class ="price_field"> $20 </div>
+      <div class = "name_field title"> Estimated Tax Fee: </div>
+      <div class ="price_field title"> $30 </div>
     </div>
     <div class = "product_total">
-      <div class = "name_field"> Estimated Tax Fee: </div>
-      <div class ="price_field"> $30 </div>
-    </div>
-    <div class = "product_total">
-      <div class = "sum_name"> Total: </div>
-      <div class ="sum_price"> $350 </div>
+      <div class = "sum_name headline"> Total: </div>
+      <div class ="sum_price headline"> $350 </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { Component, Prop, Vue } from 'vue-property-decorator';
 
-@Component
-export default class OrderSummary extends Vue {
-  @Prop() private msg!: string;
-}
+  @Component
+  export default class OrderSummary extends Vue {
+    @Prop() private msg!: string;
+  }
 </script>
 
 <style scoped lang="scss">

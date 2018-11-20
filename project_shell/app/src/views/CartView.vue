@@ -3,7 +3,7 @@
 
     <div class = "cart_view">
       <div class = "cart_summary">
-        <div class = "cate_header"> Cart summary </div>
+        <div class = "cate_header display-1 " > Cart summary </div>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
         <div class = "list_item_display">
           <ul class  = "result_list">
@@ -14,13 +14,14 @@
         <div class = "hori_line_"><span class = "hori_line"></span></div>
       </div>
       <div class = "oder_summary">
-        <div class = "cate_header"> Order Summary </div>
+        <div class = "cate_header display-1"> Order Summary </div>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
         <OrderSummary/>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
-        <button class = "button_checkout" onclick="/checkout">
-          <router-link to="/checkout">CHECKOUT</router-link></button>
-
+        <v-btn color="orange" dark class="button_checkout" @click="checkout()">
+          CHECKOUT
+          <!-- <router-link to="/checkout">CHECKOUT</router-link> -->
+        </v-btn>
       </div>
 
     </div>
@@ -37,7 +38,12 @@ import OrderSummary from '@/components/OrderSummary.vue';
     OrderSummary
   },
 })
-export default class CartView extends Vue {}
+export default class CartView extends Vue {
+
+  checkout() {
+    this.$router.push('checkout');
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -45,6 +51,7 @@ export default class CartView extends Vue {}
   width: 380px;
   height: 50px;
   font-size: 25px;
+  font-family: 'Roboto', sans-serif;
 }
 .main_cart {
   margin: 0;
@@ -55,6 +62,7 @@ export default class CartView extends Vue {}
   vertical-align: baseline;
   background: transparent;
   max-height: 999999px;
+  margin-top: 70px;
 }
 .oder_summary {
   bottom: auto;
@@ -79,6 +87,7 @@ export default class CartView extends Vue {}
   font-size: 13px;
   padding-left: 30px;
   font-weight: bold;
+  margin-top: -2px;
 }
 .cate_header {
   margin-bottom: 21px;

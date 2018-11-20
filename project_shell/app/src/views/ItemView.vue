@@ -1,6 +1,6 @@
 <template>
   <div class = "main_store">
-    <CategoryBar/>
+    
     <div class = "right_display">
       <div class = "item_redirect">
         <a> Store > </a>
