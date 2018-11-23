@@ -3,13 +3,14 @@ const { Item } = require('../models');
 // const ItemOrder = require('../models/ItemOrder');
 const Sequelize = require('sequelize');
 
-//finds a single order via the order id
-exports.getOrderById = async(req, res) => {
+
+//returns a getOrderById item by it's id
+exports.getOrderById = async(req,res) => {
 	Order.findById(req.params.id).then((order) => {
-		if(order ==nul){
-			return res.json(404);
+		if(order ==null){
+			res.send(404);
 		}else{
-			return res.json(order);
+			res.json(order);
 		}
 	});
 };
@@ -76,6 +77,26 @@ exports.deleteOrder = async(req, res) => {
 		console.log("Order has been deleted");
 	});
 };
+
+//returns all of the order's in the database, however sending this many 
+//items over to the front would take incredibly long, please call getPageItems unless you NEED
+//all order at once.
+exports.getAllOrders = async(req, res) => {
+	try{
+	Order.findAll().then((allOrders) => {
+		if(allOrders == null){
+			res.send(404);
+		}else{
+			res.json(allOrders);
+		}
+	});
+	}
+	catch (err) {
+		console.log(err)
+	}
+}
+
+
 
 
 

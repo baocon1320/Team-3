@@ -30,5 +30,11 @@ export class ItemProvider {
 			return response.data;
 		})
 	}
+
+	getNumberofItem(){
+		return axios.get('/api/item/countall').then((response) => {
+			return response.data
+		})
+	}
 }
 

@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       creditCardNum: {
-        type: Sequelize.INTEGER
+        type: Sequelize.SRING
       },
       securityCode: {
         type: Sequelize.INTEGER

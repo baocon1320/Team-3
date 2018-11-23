@@ -7,8 +7,8 @@
       </a>
     </div>
     <div class = "item_name">
-      <a >  <h2> {{ item.item_name }}</h2> </a>
-      <h3> {{ item.manufacturer_id }} </h3>
+      <a v-bind:href="'../item/' + item.id">  <h2> {{ item.item_name }}</h2> </a>
+      <h3> {{ manufacture.name }} </h3>
       <h4 class = "price"> <b> Price: </b> ${{item.price}} </h4>
       <h5> {{descrip}} ...
       </h5>
@@ -21,14 +21,23 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { ItemModel } from '@/models/'
-
+import { ItemModel } from '@/models/';
+import { ManufacturerModel } from '@/models';
+import { ManufacturerProvider } from '@/providers';
 
 @Component
 export default class ItemList extends Vue {
   @Prop({ default: null })
   item!: ItemModel;
   descrip: string = this.item.description.substring(0, 70);
+  manufacture: ManufacturerModel = new ManufacturerModel('', '', '');
+  manufactureprovider: ManufacturerProvider = new ManufacturerProvider();
+
+  mounted() {
+    this.manufactureprovider.getManufacturerById(this.item.manufacturer_id).then(data => {
+      this.manufacture = data;
+    });
+  }
 
 }
 
@@ -39,17 +48,19 @@ export default class ItemList extends Vue {
   color: blue;
 }
 .item_name h5 {
-  
+      
 
 }
 .item_name h4 {
   line-height: 2.0;
-  font-size: 16px;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 .item_name h3 {
   font-size: 14px;
   margin-bottom: 5px;
   word-wrap: break-word;
+  color: #949494;
 }
 .item_name h2 {
   font-size: 20px;
@@ -59,7 +70,7 @@ export default class ItemList extends Vue {
   display: inline-block;
   text-align: initial;
   position: relative;
-  top: 40px;
+  top: 30px;
   vertical-align: top;
   overflow: hidden;
 
@@ -71,8 +82,8 @@ export default class ItemList extends Vue {
 }
 .item_picture a img {
   vertical-align: top;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
 }
 .item_display {
   display: inline-block;

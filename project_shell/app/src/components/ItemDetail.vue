@@ -8,7 +8,7 @@
       </div>
       <div class = "item_name">
         <a >  <h2> {{ item.item_name }}</h2> </a>
-        <h3> Trek Bicycle</h3>
+        <h3> {{ manufacture.name }}</h3>
         <h4 class = "price"> <b> Price: </b> ${{item.price}} </h4>
         <v-btn class="buttons">
           <router-link to="/cart">Add to Cart</router-link>
@@ -33,14 +33,27 @@
   </div>
 </template>
 
+
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { ItemModel } from '@/models/';
+import { ManufacturerModel } from '@/models';
+import { ManufacturerProvider } from '@/providers';
 
 @Component
-export default class ItemList extends Vue {
+export default class ItemDetail extends Vue {
   @Prop({ default: null })
   item!: ItemModel;
+  descrip: string = this.item.description.substring(0, 70);
+  manufacture: ManufacturerModel = new ManufacturerModel('', '', '');
+  manufactureprovider: ManufacturerProvider = new ManufacturerProvider();
+
+  mounted() {
+    this.manufactureprovider.getManufacturerById(this.item.manufacturer_id).then(data => {
+      this.manufacture = data;
+    });
+  }
+
 }
 
 </script>
