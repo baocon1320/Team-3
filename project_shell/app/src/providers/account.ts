@@ -11,15 +11,15 @@ export class AccountProvider {
 	}
 
 	getAccountById(id: number){	
-		return axios.get('/api/account/' + id).then((response) => {
+		return axios.get('/api/account/id=' + id).then((response) => {
 			return response.data;
 
 		});
 	}
 
 	getAccountByUser(username: string){
-		return axios.get('/api/account/' + username).then((response) => {
-			return response;
+		return axios.get('/api/account/username=' + username).then((response) => {
+			return response.data;
 		});
 	}
 

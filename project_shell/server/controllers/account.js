@@ -17,15 +17,35 @@ exports.getAccountById = async(req, res) => {
 		console.log(err);
 	}	
 };
+
+
+//returns all of the account
+
+exports.getAllAccounts = async(req, res) => {
+	try{
+	Account.findAll().then((allAccounts) => {
+		if(allAccounts == null){
+			res.send(404);
+		}else{
+			res.json(allAccounts);
+		}
+	});
+	}
+	catch (err) {
+		console.log(err)
+	}
+}
+
 exports.getAccountByUser = async(req, res) => {
 	try{
-		Account.findOrCreate({where: {username: req.params.username }}).then((account) => {
-			console.log(account)
+		Account.findOne({where: {username: req.params.username}}).then((account) => {
+			//console.log(account)
 			if(account == null){
-				console.log("hit null check")
-				res.send(404)
+				//console.log("hit null check")
+				res.json(null)
+				//res.send(404)
 			}else{
-				res.json(account.username)
+				res.json(account)
 			}
 		});
 	}
