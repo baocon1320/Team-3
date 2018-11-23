@@ -1,13 +1,13 @@
 <template>
   <div class="text-xs-center">
     <v-pagination
-      v-model="page"
-      :length="Math.ceil(page_num/9)"
+      v-model="current_page"
+      :length="Math.ceil(total_count/9)"
       :total-visible="7"
-      v-on:click="changePage"
+      @input="changePage(current_page)"
     ></v-pagination>
-    <h4> Page number is {{page_num}} and size is {{Math.ceil(page_num/9)}} 
-    and current page is {{page}} and check {{check}}</h4>
+    <h4> Total items is {{total_count}} and number of page is {{Math.ceil(total_count/9)}} 
+    and current page is {{current_page}} and check {{check}}</h4>
   </div>
 
 </template>
@@ -19,16 +19,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component
 export default class PageNumber extends Vue {
   @Prop({ default: null })
-  page_num!: number
+  total_count!: number
   check: number = 0
-  //size: number = this.page_num;
-  data () {
-      return {
-        page: 1
-      }
-    }
+  current_page: number = 1;
 
-  changePage() {
+  changePage(cur_page_num: number) {
+    this.$emit('changePage', cur_page_num);
     this.check = 1;
   }
 

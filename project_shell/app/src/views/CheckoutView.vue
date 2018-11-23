@@ -3,11 +3,11 @@
     <div class = "cart_view">
       <ShippingInfo/>
       <div class = "oder_summary">
-        <div class = "cate_header"> Order Summary </div>
+        <div class = "cate_header display-1"> Order Summary </div>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
         <OrderSummary/>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
-        <button class = "button_checkout"> MAKE A PAYMENT </button>
+        <v-btn color="orange" dark class="button_checkout" @click="checkout()"> MAKE A PAYMENT </v-btn>
 
       </div>
 
@@ -28,7 +28,9 @@ import ShippingInfo from '@/components/ShippingInfo.vue';
     ShippingInfo
   },
 })
-export default class CheckoutView extends Vue {}
+export default class CheckoutView extends Vue {
+  
+}
 </script>
 
 <style scoped lang="scss">
@@ -37,6 +39,7 @@ export default class CheckoutView extends Vue {}
   width: 380px;
   height: 50px;
   font-size: 25px;
+  font-family: 'Roboto', sans-serif;
 }
 .main_cart {
   margin: 0;
@@ -47,11 +50,11 @@ export default class CheckoutView extends Vue {}
   vertical-align: baseline;
   background: transparent;
   max-height: 999999px;
+  height: 900px;
 }
 .oder_summary {
   bottom: auto;
   float: right;
-  background: #fff;
   padding: 4px;
   width: 400px;
   font-size: 13px;
@@ -61,6 +64,7 @@ export default class CheckoutView extends Vue {}
 .cart_view {
   position: relative;
   max-height: 999999px;
+  margin-top: 70px;
 }
 
 .cate_header {
