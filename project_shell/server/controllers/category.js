@@ -79,6 +79,24 @@
 	
 	};
 
+	exports.deleteCategoryById = async(req, res) =>{
+		try{
+			Category.findById(req.params.id).then((category) => {
+				if(category == null){
+					res.send(404);
+				}else{
+					category.destroy();
+					res.send(202);
+				}
+			});
+		}
+		catch(err){
+			console.log(err);
+			res.send(404);
+		}
+
+	};
+
 	
 
 
