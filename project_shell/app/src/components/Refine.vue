@@ -73,10 +73,9 @@
 <script lang="ts">
 
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { CategoryModel } from '@/models'
-import { CategoryProvider } from '@/providers'
-import { ManufacturerModel } from '@/models'
-import { ManufacturerProvider } from '@/providers'
+import { CategoryModel } from '@/models';
+import { CategoryProvider, ManufacturerProvider } from '@/providers';
+import { ManufacturerModel } from '@/models';
 
 @Component
 export default class Refine extends Vue {
