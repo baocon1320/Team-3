@@ -12,10 +12,11 @@
         <v-btn flat href="/services">Services</v-btn>
         <v-btn flat href="/manufacturers">Manufacturers</v-btn>
         <v-btn flat href="/tracking" >Tracking</v-btn>
-        <v-btn flat href="/login" >Login</v-btn>
-        <v-btn flat href="/cart" > 
-          <v-icon  color="orange darken-2">shopping_cart</v-icon>
+        <v-btn flat href="/login" v-if="this.$store.getters.getUsername === ''">Login</v-btn>
+        <v-btn flat href="/cart" v-if="this.$store.getters.getUsername === ''"> 
+          <v-icon  color="orange darken-2" >shopping_cart</v-icon>
         </v-btn>
+        <v-btn flat v-if="this.$store.getters.getUsername !== ''" @click="logout">Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </v-app>
@@ -38,8 +39,51 @@
             <router-link to="/store/0">Store</router-link>
         </v-btn>        -->
     <router-view/>
+    <div><span>username is {{this.$store.getters.getUsername}}</span>
+        
+    </div>
+    <div>
+      <v-btn @click="loginn">loginn</v-btn>
+    </div>
+
   </div>
+
 </template>
+
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
+import Login from '@/components/Login.vue'; // @ is an alias to /src
+import { AccountModel } from '@/models/account';
+import { AccountProvider } from '@/providers/account';
+
+
+
+@Component({
+  components: {
+    Login,
+  },
+})
+export default class App extends Vue {
+    mounted() {
+      if(localStorage.getItem('user') != null){
+        const userJson = localStorage.getItem('user');
+        let user = userJson !== null ? JSON.parse(userJson) : null;
+       
+        this.$store.dispatch("changeUsername", user.username);
+        //this.$store.dispatch("changeUsername", 'ooo');
+        //this.$router.push('services');
+      }
+    }
+
+    logout(){
+      localStorage.removeItem('user');
+      localStorage.removeItem('jwt');
+      this.$store.dispatch("changeUsername", '');
+      
+    }
+  }
+
+</script>
 
 <style lang="scss">
 .main_color {

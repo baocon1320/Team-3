@@ -14,6 +14,9 @@ module.exports = {
       expirationTime: {
         type: Sequelize.DATE
       },
+      accountId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
