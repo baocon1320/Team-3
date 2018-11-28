@@ -30,6 +30,12 @@ export class AccountProvider {
 		// return new AccountModel(response.username, response.password, response.permission);
 	}
 
+	accountLogin(account: AccountModel){
+		return axios.post('/api/account/login', account).then((response) => {
+			return response.data;
+		});
+	}
+
 }
 
 export class AccountModel {
