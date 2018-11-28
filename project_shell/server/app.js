@@ -42,12 +42,9 @@ app.use('/item', itemRouter);
 app.use('/order', orderRouter);
 app.use('/category', categoryRouter);
 app.use('/manufacturer', manufacturerRouter);
-<<<<<<< HEAD
 app.use('/address', addressRouter);
 app.use('/itemOrderFKs', itemOrderFKsRouter);
-=======
 app.use('/auth', authRouter);
->>>>>>> 196973c121384800fb6a2f9e3644689874fdaa51
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
