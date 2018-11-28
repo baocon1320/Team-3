@@ -1,5 +1,5 @@
 export class ItemModel{
-	//id!: string;
+	id!: number;
 	description!: string;
 	price!: number;
 	stock!: number;
@@ -10,8 +10,9 @@ export class ItemModel{
 
 	constructor(description: string, price: number, stock: number,
 				image: string, manufacturer_id: number, category_id: number,
-				item_name: string
+				item_name: string, id: number
 				){
+		this.id = id;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;

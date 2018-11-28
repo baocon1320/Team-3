@@ -9,6 +9,7 @@ export class CategoryProvider {
 
 	getCategoryById(id: string){	
 		return axios.get('/api/category/id=' + id).then((response) => {
+			console.log("Category is gettin got by id");
 			return response.data;
 
 		});

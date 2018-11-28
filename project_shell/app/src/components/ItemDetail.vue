@@ -10,7 +10,7 @@
         <h2 class="title font-weight-light orange--text mb-2"> {{ item.item_name }}</h2> 
         <h3 class="font-weight-light grey--text  mb-2"> {{ manufacture.name }}</h3>
         <h4 class = "price"> <b> Price: </b> ${{item.price}} </h4>
-        <v-btn class="buttons">
+        <v-btn class="buttons" @click="">
           Add to Cart
         </v-btn>
         
@@ -35,12 +35,11 @@
   </div>
 </template>
 
-
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { ItemModel } from '@/models/';
-import { ManufacturerModel } from '@/models';
-import { ManufacturerProvider } from '@/providers';
+import { ItemModel } from '@/models';
+import { ManufacturerModel, OrderModel, ItemOrderFKModel } from '@/models';
+import { ManufacturerProvider, OrderProvider, ItemOrderProvider } from '@/providers';
 
 @Component
 export default class ItemDetail extends Vue {
@@ -49,10 +48,27 @@ export default class ItemDetail extends Vue {
   descrip: string = this.item.description.substring(0, 70);
   manufacture: ManufacturerModel = new ManufacturerModel('', '', '');
   manufactureprovider: ManufacturerProvider = new ManufacturerProvider();
+  quantity: number = 1;
+
+  orderProvider: OrderProvider = new OrderProvider();
+  itemOrderFKs: ItemOrderFKModel = new ItemOrderFKModel(0,0,0,0);
+  itemOrderProvider: ItemOrderProvider = new ItemOrderProvider();
+
+
 
   mounted() {
     this.manufactureprovider.getManufacturerById(this.item.manufacturer_id).then(data => {
       this.manufacture = data;
+    });
+  }
+
+  addItemToCart(){
+    this.itemOrderFKs.item_id = this.item.id;
+    this.itemOrderFKs.item_price = this.item.price;
+    console.log("ItemOrder is: " + JSON.stringify(this.itemOrderFKs));
+    //todo: add the order id
+    this.itemOrderProvider.createItemOrderFK(this.itemOrderFKs).then(data => {
+      console.log("Data is: " + JSON.stringify(data));
     });
   }
 

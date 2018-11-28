@@ -35,13 +35,7 @@ exports.addItemToOrder = async(req, res) => {
 				if(item == null){
 					res.json(404);
 				}else{
-					// ItemOrder.create(req.body).then((itemOrder) => {
-					// 	if(itemOrder ==null){
-					// 		res.json(404);
-					// 	}else{
-					// 		res.json(itemOrder);
-					// 	}
-					// });
+					
 				}
 			});
 		}	
