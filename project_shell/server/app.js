@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// For authorize
+var jwt = require('jsonwebtoken');
+var bodyParser = require('body-parser');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var accountRouter = require('./routes/account');
@@ -11,7 +15,8 @@ var generalRouter = require('./routes/general');
 var itemRouter = require('./routes/item');
 var orderRouter = require('./routes/order');
 var categoryRouter = require('./routes/category');
-var manufacturerRouter = require('./routes/manufacturer')
+var manufacturerRouter = require('./routes/manufacturer');
+var authRouter = require('./routes/auth');
 
 var app = express();
 // view engine setup
@@ -23,6 +28,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// for authorize
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -32,6 +40,7 @@ app.use('/item', itemRouter);
 app.use('/order', orderRouter);
 app.use('/category', categoryRouter);
 app.use('/manufacturer', manufacturerRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,5 +57,15 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// CORS middleware for authorize
+const allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    next();
+}
+
+app.use(allowCrossDomain)
 
 module.exports = app;
