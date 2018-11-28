@@ -23,7 +23,6 @@ exports.createAddress = async(req, res) => {
 		console.log("createAddress has been called with " + JSON.stringify(req.body));
 		//Create a new instance of an Account and save it
 		Address.create(req.body).then((newAddress) => {
-			console.log("Account has been created");
 			//if the creation was unsuccessful
 			//if the creation was successful send 
 			//data to the front via json
