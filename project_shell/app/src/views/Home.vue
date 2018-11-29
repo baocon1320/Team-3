@@ -10,11 +10,6 @@
              </v-carousel-item>
          </v-carousel>
    </v-layout>
-    <!--<div class='AboutBar'>
-     <div id='about'>About Us</div>
-     <div id='hours'>Store Hours</div>
-    <div id='annoucements'>Annoucements</div>
-     </div>-->
    </v-container>
    <div class='bottomInfo'>
     <div id='aboutClassLeft'>
@@ -45,8 +40,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import { GeneralProvider } from '@/providers/general';
-import { GeneralModel } from '@/models/general';
+import { GeneralProvider } from '@/providers';
+import { GeneralModel } from '@/models';
 @Component({
     components: {
     HelloWorld,
@@ -68,29 +63,15 @@ import { GeneralModel } from '@/models/general';
          ],
        };
      }
+     
      general: GeneralModel = new GeneralModel('', '', '', '');
      generalprovider: GeneralProvider = new GeneralProvider();
-      //account: AccountModel = new AccountModel('','',0);
-    //new_account!: AccountModel;
-    //accountprovider: AccountProvider = new AccountProvider();
-    //username: string = '';
-    //password: string = '';
     
     mounted() {
       this.generalprovider.getGeneralById(1).then(data => {
         this.general = data;
       });     
     }
-
-    // submit(){
-    //   this.general.storeHours = '10am-11am';
-    //   this.general.phoneNumber = 'phoneNumber';
-    //   this.general.storeAddress = 'storeAddress';
-    //   this.general.storeDescription = 'storeDescription';
-    //   this.general.generalTextBody = 'generalTextBody';
-    //   this.generalprovider.createGeneral(this.general);
-    // }
-
 }
 </script>
 
