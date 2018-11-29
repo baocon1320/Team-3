@@ -39,11 +39,8 @@
             <router-link to="/store/0">Store</router-link>
         </v-btn>        -->
     <router-view/>
-    <div><span>username is {{this.$store.getters.getUsername}}</span>
+    <!-- <div><span>username is {{this.$store.getters.getUsername}}</span> -->
         
-    </div>
-    <div>
-      <v-btn @click="loginn">loginn</v-btn>
     </div>
 
   </div>
@@ -67,11 +64,8 @@ export default class App extends Vue {
     mounted() {
       if(localStorage.getItem('user') != null){
         const userJson = localStorage.getItem('user');
-        let user = userJson !== null ? JSON.parse(userJson) : null;
-       
+        let user = userJson !== null ? JSON.parse(userJson) : null;       
         this.$store.dispatch("changeUsername", user.username);
-        //this.$store.dispatch("changeUsername", 'ooo');
-        //this.$router.push('services');
       }
     }
 

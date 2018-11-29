@@ -4,6 +4,7 @@ import Vuetify from 'vuetify';
 import router from './router';
 import store from './store';
 import '../node_modules/vuetify/dist/vuetify.min.css';
+import './css/page_custom.css';
 
 
 
