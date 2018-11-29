@@ -30,7 +30,7 @@ import { CategoryProvider } from '@/providers'
 })
 export default class ItemView extends Vue {
   @Prop() item_id!: string;
-  item: ItemModel = new ItemModel('', 0, 0, '',0,0,'');
+  item: ItemModel = new ItemModel('', 0, 0, '',0,0,'',0);
   itemprovider : ItemProvider = new ItemProvider();
   curCategory: CategoryModel = new CategoryModel("");
   categoryprovider: CategoryProvider = new CategoryProvider();

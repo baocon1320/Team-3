@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AccountModel } from '@/models';
 
 //TODO: Figure out how to make Http requests in vue.js
 // This means we need to figure out the import, the command
@@ -13,7 +14,6 @@ export class AccountProvider {
 	getAccountById(id: number){	
 		return axios.get('/api/account/id=' + id).then((response) => {
 			return response.data;
-
 		});
 	}
 
@@ -37,22 +37,3 @@ export class AccountProvider {
 	}
 
 }
-
-export class AccountModel {
-	/**
-	TODO: define all of the fields for AccountModel via variables and constructor to create a type for the above functions
-	*/
-	//id!: number;
-	username!: string;
-	password!: string;
-	permission!: number;
-
-	constructor(username: string, password: string, permission: number){
-		this.username = username;
-		this.password = password;
-		this.permission = permission;
-	}
-
-}
-
-//TODO: Refactor providers to create an abstract provider that can all of the backend urls

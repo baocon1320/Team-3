@@ -46,7 +46,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import { GeneralProvider } from '@/providers/general';
-import { GeneralModel } from '@/providers/general';
+import { GeneralModel } from '@/models/general';
 @Component({
     components: {
     HelloWorld,

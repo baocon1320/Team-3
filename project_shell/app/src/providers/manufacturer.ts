@@ -40,7 +40,3 @@ export class ManufacturerProvider {
 	}
 
 }
-
-
-
-//TODO: Refactor providers to create an abstract provider that can all of the backend urls

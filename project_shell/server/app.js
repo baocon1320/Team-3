@@ -16,6 +16,8 @@ var itemRouter = require('./routes/item');
 var orderRouter = require('./routes/order');
 var categoryRouter = require('./routes/category');
 var manufacturerRouter = require('./routes/manufacturer');
+var addressRouter = require('./routes/address');
+var itemOrderFKsRouter = require('./routes/itemorderfks');
 var authRouter = require('./routes/auth');
 
 var app = express();
@@ -40,6 +42,8 @@ app.use('/item', itemRouter);
 app.use('/order', orderRouter);
 app.use('/category', categoryRouter);
 app.use('/manufacturer', manufacturerRouter);
+app.use('/address', addressRouter);
+app.use('/itemOrderFKs', itemOrderFKsRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
