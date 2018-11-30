@@ -1,4 +1,4 @@
-const { Item } = require('../models');
+const { Item, ItemOrderFKs } = require('../models');
 const { ItemOrderFKsController } = require('./itemorderfks');
 const Sequelize = require('sequelize');
 
@@ -17,9 +17,10 @@ exports.getItemById = async(req,res) => {
 
 exports.getItemsByOrderId = async(req,res) => {
 	//Acquire all of the itemorderfks for the cart via orderid
-	console.log(typeof ItemOrderFKsController.getItemsByOrderId);
-	ItemOrderFKsController.getItemOrderByOrderId(req.params.id);
+	console.log(typeof getItemOrderById);
+	itemOrders = getItemOrderByOrderId(req.params.id);
 	var itemIds = [];
+
 	//Acquire all of the items from the itemOrders.
 	for(i = 0; i < itemOrders.length; i++){
 		itemIds.add(itemOrders[i].item_id);
@@ -134,3 +135,22 @@ exports.createItem = async(req, res) => {
 		res.json(response);
 	});
 };
+
+
+
+function getItemOrderByOrderId(id) {
+	try{
+		ItemOrderFKs.findAll({
+			where: {
+				order_id: id
+			}
+		}).then((itemOrders) => {
+			
+			return itemOrders;
+		});
+		}
+		catch (err){
+			console.log(err);
+		
+		}
+}
