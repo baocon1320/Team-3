@@ -11,6 +11,13 @@ export class AccountProvider {
 	constructor(){
 	}
 
+	getAllAccounts(){
+		return axios.get('/api/account/all').then((response) => {
+			return response.data;
+		});
+	}
+
+
 	getAccountById(id: number){	
 		return axios.get('/api/account/id=' + id).then((response) => {
 			return response.data;
@@ -36,4 +43,24 @@ export class AccountProvider {
 		});
 	}
 
+	updateAccount(account: AccountModel, id: number){
+		return axios.put('/api/account/update/id=' + id, account).then((response) => {
+			return response.data;
+		});
+	}
+
+	deleteAccount(id: number){
+		return axios.get('/api/account/delete/id=' + id).then((response) => {
+			return response.data;
+		});
+	}
+
 }
+
+
+
+
+
+
+
+

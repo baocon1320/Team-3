@@ -11,5 +11,5 @@ accountRoutes.post('/',  AccountController.createAccount);
 accountRoutes.get('/all', AccountController.getAllAccounts);
 accountRoutes.get('/delete/id=:id', AccountController.deleteAccount);
 accountRoutes.post('/login', AccountController.loginAccount);
-
+accountRoutes.put('/update/id=:id', AccountController.updateAccount);
 module.exports = accountRoutes;

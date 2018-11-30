@@ -1,8 +1,8 @@
 <template>
   <div class = "main_store">
     
-    <div class = "right_display">
-      <div class = "item_redirect">
+    <div class = "right_display_item">
+      <div class = "item_redirect_item">
         <a> Store > </a>
         <a href="/store/0"> All Bikes  > </a>
         <a v-bind:href="'/store/' + curCategory.id"> {{ curCategory.name }} > </a>
@@ -17,10 +17,8 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import ItemDetail from '@/components/ItemDetail.vue'; // @ is an alias to /src
 import CategoryBar from '@/components/CategoryBar.vue'; // @ is an alias to /src
-import { ItemModel } from '@/models'
-import { CategoryModel } from '@/models'
-import { ItemProvider } from '@/providers'
-import { CategoryProvider } from '@/providers'
+import { ItemModel, CategoryModel } from '@/models'
+import { ItemProvider, CategoryProvider } from '@/providers'
 
 @Component({
   components: {
@@ -56,36 +54,5 @@ export default class ItemView extends Vue {
 </script>
 
 <style scoped lang="scss">
-
-
-.item_redirect {
-  font-family: fantasy, sans-serif;
-  background-color: #fff;
-  line-height: 48px;
-  height: 50px;
-  display: table;
-  width: 100%;
-  padding: 0 0 0 80px;
-  box-sizing: border-box;
-  text-align: initial;
-
-}
-.right_display {
-  min-width: 482px;
-  margin-bottom: 50px;
-  margin-left: 299;
-  bottom: auto;
-  position: absolute;
-  background: #fff;
-  left: 230px;
-  padding: 0 100px 0 0;
-  z-index: 9;
-  font-size: 13px;
-  width: 1000px;
-}
-
-.main_store {
-  margin-top: 25px;
-}
 
 </style>

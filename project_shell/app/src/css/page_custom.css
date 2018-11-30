@@ -1,0 +1,80 @@
+.bgcolor {
+  background-color: #f7f7f7;
+}
+.left_display {
+  height: 100%;
+  margin-top: 120px;
+  max-height: calc(100% - 0px);
+  transform: translateX(0px);
+  width: 300px;  
+  background-color: #f7f7f7;
+
+}
+
+.result_list {
+  margin: 0 0 0 4px;
+  padding: 0;
+  word-spacing: -4px;
+  letter-spacing: -4px;
+  line-height: 1.25;
+}
+.list_item_display  {
+  margin-top: 20px;
+  padding: 0 0 0 80px;
+  text-align: initial;
+  margin-bottom: 50px;
+}
+.item_redirect {
+  font-family: fantasy, sans-serif;
+  background-color: #f7f7f7;
+  line-height: 48px;
+  height: 50px;
+  display: table;
+  width: 100%;
+  padding: 0 0 0 80px;
+  box-sizing: border-box;
+  text-align: initial;
+  margin-bottom: -28px;
+
+}
+.right_display {
+  padding: 10px 192px 0px 300px;
+  height: 1100px;
+}
+
+.main_store {
+  margin-top: 25px;
+}
+.item_redirect_item {
+  font-family: fantasy, sans-serif;
+  background-color: #fff;
+  line-height: 48px;
+  height: 50px;
+  display: table;
+  width: 100%;
+  padding: 0 0 0 80px;
+  box-sizing: border-box;
+  text-align: initial;
+
+}
+.right_display_item {
+  min-width: 482px;
+  margin-bottom: 50px;
+  margin-left: 299;
+  bottom: auto;
+  position: absolute;
+  background: #fff;
+  left: 230px;
+  padding: 0 100px 0 0;
+  z-index: 9;
+  font-size: 13px;
+  width: 1000px;
+}
+
+.login_page {
+  background-color: #f7f7f7;
+  width: 400px;
+  margin: auto;
+  padding-top: 120px;
+  height: 700px;
+}
