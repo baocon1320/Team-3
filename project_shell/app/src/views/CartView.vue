@@ -7,8 +7,11 @@
         <div class = "hori_line_"><span class = "hori_line"></span></div>
         <div class = "list_item_display">
           <ul class  = "result_list">
-            <CartItem/>
-            <CartItem/>
+           <CartItem/>
+           <CartItem/>
+           <!-- <div v-for="item in cart">
+              <CartItem/>
+            </div> -->
           </ul>
         </div>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
@@ -32,6 +35,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import CartItem from '@/components/CartItem.vue'; // @ is an alias to /src
 import OrderSummary from '@/components/OrderSummary.vue';
+import { ItemOrderFKModel } from '@/models';
+import { ItemOrderProvider, ItemProvider } from '@/providers';
 @Component({
   components: {
     CartItem,
@@ -39,6 +44,15 @@ import OrderSummary from '@/components/OrderSummary.vue';
   },
 })
 export default class CartView extends Vue {
+
+  itemOrderFKProvider: ItemOrderFKProvider =  new ItemOrderFKProvider();
+  itemProvider: ItemProvider = new ItemProvider();
+
+  cartItems: ItemOrderFKModel[] =[];
+
+  mounted(){
+    
+  }
 
   checkout() {
     this.$router.push('checkout');

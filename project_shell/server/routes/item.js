@@ -9,9 +9,15 @@ itemRoutes.get('/all', ItemController.getAllItems);
 itemRoutes.get('/pageItems/:pageNum', ItemController.getPageItems);
 itemRoutes.get('/category=:category_id', ItemController.getItemsByCategory);
 itemRoutes.get('/price', ItemController.getItemsByPrice);
-itemRoutes.post('/', ItemController.createItem);
-itemRoutes.put('/update/:id', ItemController.updateItem);
+itemRoutes.get('/order/:id', ItemController.getItemsByOrderId);
 itemRoutes.get('/countall', ItemController.getNumberofItem);
+
+itemRoutes.post('/', ItemController.createItem);
+
+itemRoutes.put('/update/:id', ItemController.updateItem);
+
+
+
 
 
 module.exports = itemRoutes;

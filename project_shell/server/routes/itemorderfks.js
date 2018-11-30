@@ -7,6 +7,7 @@ const itemOrderFKsRoutes = express.Router();
 //itemOrderFKsRoutes Routes
 itemOrderFKsRoutes.get('/:id', ItemOrderFKsController.getItemOrderById);
 itemOrderFKsRoutes.get('/all', ItemOrderFKsController.getAllItemOrders);
+itemOrderFKsRoutes.get('/order/:id', ItemOrderFKsController.getItemOrderByOrderId);
 itemOrderFKsRoutes.put('/update/:id', ItemOrderFKsController.updateItemOrder);
 itemOrderFKsRoutes.post('/', ItemOrderFKsController.createItemOrder);
 
