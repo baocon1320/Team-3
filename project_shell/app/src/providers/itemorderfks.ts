@@ -22,6 +22,12 @@ export class ItemOrderProvider {
 		});
 	}
 
+	getItemOrderFKByOrderId(id: number){
+		return axios.get('/api/itemOrderFKs/order/:id').then((response) => {
+			return response.data;
+		});
+	}
+
 	createItemOrderFK(itemOrder: ItemOrderFKModel){
 		console.log("Creating ItemOrderFk....");
 		return axios.post('/api/itemOrderFKs/', itemOrder).then((response) => {			
