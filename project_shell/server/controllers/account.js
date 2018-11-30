@@ -113,29 +113,32 @@ exports.loginAccount = async(req, res) => {
 
 // Create a new Account
 exports.createAccount = async(req, res) => {
+	console.log("Running createAccount...");
+	console.log("createAccount with: " + JSON.stringify(req.body));
+	Item.create(req.body).then((response) => {
+		res.json(response);
+	});
+	
+};
+
+//Update Account
+exports.updateAccount = async(req,res) => {
 	try{
-		console.log("createAccount has been called with " + JSON.stringify(req.body));
-		//Create a new instance of an Account and save it
-		Account.findOne({where: {username: req.body.username}}).then((account) => {
-			if(account == null){
-				Account.create(req.body).then((newAccount) => {
-					console.log("Account has been created");
-					const token = jwt.sign({ id: newAccount.id }, 'supersecret', {expiresIn: 86400});
-					//if the creation was unsuccessful
-					//if the creation was successful send 
-					//data to the front via json
-					res.json({auth: true, token: token, user: newAccount});
-			
-		});
-			} else{
-				res.json(null);
+
+		Account.update(req.body, { where: { id: req.params.id} }).then((affected) => {
+			if(affected != null){
+				if(affected[0] > 0){
+						res.send(202);
+				}else{
+					//TODO: Fix this to reflect the actual error
+					res.send(404);
+				}
+			}else{
+				res.send(404);
 			}
-		})
-		
-	}
+		});
+	} 
 	catch(err){
-		console.log("There has been an error with the req: " + JSON.stringify(req));
-		res.json(404);
 		console.log(err)
 	}
 	

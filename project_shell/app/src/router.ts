@@ -3,9 +3,9 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Toolbar from './views/Toolbar.vue';
 import TrackingView from './views/TrackingView.vue';
-import { AuthModel } from '@/models/auth';
-import { AuthProvider } from '@/providers/auth';
-import { AccountProvider } from '@/providers/account';
+import { AuthModel, AccountModel } from '@/models';
+import { AuthProvider, AccountProvider } from '@/providers';
+
 
 Vue.use(Router);
 
@@ -73,11 +73,20 @@ let router = new Router({
         }
     },
     {
-        path: '/admin',
-        name: 'admin',
-        component: () => import('./views/AdminView.vue'),
+        path: '/manage/changepassword',
+        name: 'passwordmanager',
+        component: () => import('./views/PasswordManagerView.vue'),
         meta: {
           requiresAuth: true
+        }
+    },
+    {
+        path: '/manage/account',
+        name: 'accountmanager',
+        component: () => import('./views/AccountManagerView.vue'),
+        meta: {
+          requiresAuth: true,
+          is_owner : true
         }
     },
     {
@@ -117,6 +126,7 @@ router.beforeEach((to, from, next) => {
             //this.currentUser = userJson !== null ? JSON.parse(userJson) : new User();
             
             var authprovider = new AuthProvider();
+
             let token = new AuthModel('','',0);
             console.log(user.id);
             authprovider.getTokenByAccountId(user.id).then(data => {
@@ -134,8 +144,11 @@ router.beforeEach((to, from, next) => {
                 })
             } else {
                 var accountprovider = new AccountProvider();
+                var account = new AccountModel('','',0);
                 accountprovider.getAccountById(user.id).then(data => {
-                    localStorage.setItem('user', JSON.stringify(data)); 
+                    account = data;
+                    account.password = '***';
+                    localStorage.setItem('user', JSON.stringify(account)); 
                     user = userJson !== null ? JSON.parse(userJson) : null;
                     //let user = JSON.parse(localStorage.getItem('user'))
                     if(to.matched.some(record => record.meta.is_owner)) {
@@ -143,7 +156,7 @@ router.beforeEach((to, from, next) => {
                             next()
                         }
                         else{
-                            next({ name: 'admin'})
+                            next({ name: 'passwordmanager'})
                         }
                     }else {
                         next()
