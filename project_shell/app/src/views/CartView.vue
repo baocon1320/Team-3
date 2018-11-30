@@ -45,7 +45,7 @@ import { ItemOrderProvider, ItemProvider } from '@/providers';
 })
 export default class CartView extends Vue {
 
-  itemOrderFKProvider: ItemOrderFKProvider =  new ItemOrderFKProvider();
+  itemOrderProvider: ItemOrderProvider =  new ItemOrderProvider();
   itemProvider: ItemProvider = new ItemProvider();
 
   cartItems: ItemOrderFKModel[] =[];
