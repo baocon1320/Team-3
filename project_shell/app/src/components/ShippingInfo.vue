@@ -217,20 +217,16 @@
       if(this.isValid()){
         this.invalidSubmit = false;
         this.orderModel.customerName = this.firstName + ' ' + this.lastName;
-        console.log("cartItems is: " + JSON.stringify(this.cartItems));
         this.orderModel.securityCode = parseInt(this.cvv);
         this.orderModel.priceTotal = this.cartItems.reduce(this.getSum,0);
         this.orderModel.date.month = parseInt(this.expriredDate.substring(1,2));
         this.orderModel.date.year = 2000 + parseInt(this.expriredDate.substring(2));
         this.orderModel.status = "paid";
         this.orderProvider.createOrder(this.orderModel).then((response) => {
-          console.log("response is: " + JSON.stringify(response));
           this.orderModel = response;
           this.itemOrderProvider.getItemOrderFKByOrderId(0).then((itemOrders) => {
-            console.log("We have the itemOrders");
             for(let i: number = 0 ; i < itemOrders.length; i++){
               itemOrders[i].order_id = this.orderModel.id;
-              console.log("orderModel is: " + this.orderModel.id);
               this.itemOrderProvider
                     .updateItemOrderFK(itemOrders[i].id, itemOrders[i]);
             }

@@ -52,7 +52,6 @@ export default class CartView extends Vue {
   async mounted(){
     this.item_ids = await this.itemProvider.getItemsByOrderId(0);
     this.item_ids.sort();
-    console.log("item_ids are: " + this.item_ids);
     let j:number = 0;
     for(let i:number = 0; i < this.item_ids.length; i++){
       let id = this.item_ids[i] + ""; //turns id of the item into a string;

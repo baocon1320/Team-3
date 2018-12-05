@@ -3,7 +3,6 @@ const Sequelize = require('sequelize');
 
 //returns a single item by it's id
 exports.getItemOrderById = async(req,res) => {
-	console.log("Hey howdy ho");
 	ItemOrderFKs.findById(req.params.id).then((itemOrder) => {
 		if(itemOrder == null){
 			res.sendStatus(404);
@@ -18,13 +17,10 @@ exports.getItemOrderById = async(req,res) => {
 //all items at once.
 exports.getAllItemOrders = async(req, res) => {
 	try{
-		console.log("Hey howdy hey");
 		ItemOrderFKs.findAll().then((allItemOrders) => {
 			if(allItemOrders == null){
-				console.log("They are null");
 				res.sendStatus(400);
 			}else{
-				console.log("not null");
 				res.json(allItemOrders);
 			}
 		});
@@ -36,7 +32,6 @@ exports.getAllItemOrders = async(req, res) => {
 
 exports.getItemOrderByIOIds = async(req, res) => {
 	try{
-		console.log("Hello");
 		ItemOrderFKs.findAll({
 			where:{
 				item_id: req.params.itemId,

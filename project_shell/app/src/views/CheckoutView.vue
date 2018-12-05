@@ -38,7 +38,6 @@ export default class CheckoutView extends Vue {
       for(let i:number = 0; i <  itemOrders.length; i++){
         itemOrders[i].price = itemOrders[i].item_price;
       }
-      console.log("itemOrders are: " + JSON.stringify(itemOrders));
       this.cartItems = itemOrders;
     });
   }

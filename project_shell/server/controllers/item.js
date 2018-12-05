@@ -41,14 +41,6 @@ exports.getItemsByOrderId = async(req,res) => {
 			console.log(err);
 		
 	}
-
-	// console.log("ItemOrders are: " + JSON.stringify(itemOrders));
-	// var itemIds = [];
-
-	// //Acquire all of the items from the itemOrders.
-	// for(i = 0; i < itemOrders.length; i++){
-	// 	itemIds.add(itemOrders[i].item_id);
-	// }
 }
 
 
@@ -109,8 +101,7 @@ exports.getItemsByCategory = async(req, res) => {
 		Item.findAll({where: {category_id: req.params.category_id}}).then((items) => {
 			console.log(items);
 			if(items == null){
-				console.log("hit null check")
-				res.send(404)
+				res.send(404);
 			}else{
 				res.json(items);
 			}
