@@ -18,6 +18,7 @@
             </v-list-tile>
              <v-list-tile  
               @click=""
+              href="/manage/general"
               v-if="permission === 1"
             >
               <v-list-tile-content>
@@ -35,6 +36,7 @@
             </v-list-tile>
              <v-list-tile  
               @click=""
+              href="/manage/item"
 
             >
               <v-list-tile-content>

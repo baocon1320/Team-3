@@ -50,7 +50,7 @@ export class AccountProvider {
 	}
 
 	deleteAccount(id: number){
-		return axios.get('/api/account/delete/id=' + id).then((response) => {
+		return axios.delete('/api/account/delete/id=' + id).then((response) => {
 			return response.data;
 		});
 	}

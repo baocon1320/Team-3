@@ -9,7 +9,6 @@ var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var accountRouter = require('./routes/account');
 var generalRouter = require('./routes/general');
 var itemRouter = require('./routes/item');
@@ -35,7 +34,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/account', accountRouter);
 app.use('/general', generalRouter);
 app.use('/item', itemRouter);

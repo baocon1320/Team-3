@@ -28,10 +28,11 @@ exports.createAddress = async(req, res) => {
 			//data to the front via json
 			res.json(newAddress);
 			
-		});}
+		}).catch(error => res.status(400).send(error));
+	}
 	catch(err){
 		console.log("There has been an error with the request");
-		res.json(404);
+		//res.json(404);
 		console.log(err)
 	}
 	
@@ -43,7 +44,7 @@ exports.updateAddress = async(req, res) => {
 		Address.update(req.body, { where: { id: req.params.id} }).then((affected) => {
 				if(affected != null){
 					if(affected[0] > 0){
-							res.send(202);
+							res.send(200);
 					}else{
 						//TODO: Fix this to reflect the actual error
 						res.send(404);
@@ -51,7 +52,7 @@ exports.updateAddress = async(req, res) => {
 				}else{
 					res.send(404);
 				}
-			});
+			}).catch(error => res.status(400).send(error));
 		} 
 	catch(err){
 		console.log(err)

@@ -73,7 +73,7 @@ export default class App extends Vue {
       localStorage.removeItem('user');
       localStorage.removeItem('jwt');
       this.$store.dispatch("changeUsername", '');
-      
+      this.$router.push('/login');
     }
   }
 

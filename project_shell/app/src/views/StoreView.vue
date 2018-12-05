@@ -29,7 +29,6 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import ItemList from '@/components/ItemList.vue'; // @ is an alias to /src
-import CategoryBar from '@/components/CategoryBar.vue'; // @ is an alias to /src
 import PageNumber from '@/components/PageNumber.vue';
 import Refine from '@/components/Refine.vue'
 import ItemCart from '@/components/ItemCart.vue'
@@ -39,7 +38,6 @@ import { ItemProvider, CategoryProvider } from '@/providers'
 @Component({
   components: {
     ItemList,
-    CategoryBar,
     PageNumber,
     Refine,
     ItemCart,

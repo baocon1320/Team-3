@@ -83,9 +83,6 @@ exports.getItemsByCategory = async(req, res) => {
 	}
 };
 
-exports.getItemsByPrice = async(req, res) => {
-	res.json(404);
-};
 
 //TODO add validation for update item
 exports.updateItem = async(req,res) => {
@@ -109,12 +106,38 @@ exports.updateItem = async(req,res) => {
 	}
 	
 };
+// Delete an account
+exports.deleteItem = async(req, res) => {
+	try {
+		Item.findById(req.params.id).then((item) => {
+			if(item == null){
+				res.send(404)
+			}else{
+				Item.destroy({where: {id: req.params.id}}).then((u) => {
+					res.json(item);
+				});
+			}
+			
+		});
+		
+	}
+	catch(err){
+		console.log("There has been an error in login with the req: " + JSON.stringify(req));
+		res.json(404);
+		console.log(err)
+	}
+}
 
 //Creates a single Item for the store
 exports.createItem = async(req, res) => {
+	try{
 	console.log("Running createItem...");
 	console.log("createItem with: " + JSON.stringify(req.body));
 	Item.create(req.body).then((response) => {
 		res.json(response);
 	});
+}
+catch(err){
+	console.log(err);
+}
 };

@@ -116,7 +116,7 @@
       ManagerBar
     },
   })
-  export default class AccountManagerView extends Vue {
+  export default class GeneralManagerView extends Vue {
     check: number = 0;
     valid: boolean = true;
     dialog: boolean = false;
@@ -150,7 +150,7 @@
 
   // Only change password and username can't modify and permission
   updateAccount(){
-    if (this.$refs.form.validate()) {
+    if ((this.$refs.form as any).validate()) {
       this.accountprovider.getAccountByUser(this.username).then(data => { 
         if(data == null || data.id == this.id){
           this.account.username = this.username;

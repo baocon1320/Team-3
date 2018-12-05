@@ -16,14 +16,12 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import ItemDetail from '@/components/ItemDetail.vue'; // @ is an alias to /src
-import CategoryBar from '@/components/CategoryBar.vue'; // @ is an alias to /src
 import { ItemModel, CategoryModel } from '@/models'
 import { ItemProvider, CategoryProvider } from '@/providers'
 
 @Component({
   components: {
     ItemDetail,
-    CategoryBar
   },
 })
 export default class ItemView extends Vue {
@@ -36,19 +34,20 @@ export default class ItemView extends Vue {
   created() {   
         this.itemprovider.getItemById(this.item_id).then(data => {
           this.item = data;
-        });
-
-        
-
-    }
-  updated() {   
-        if(this.item.category_id != 0){
           this.categoryprovider.getCategoryById(this.item.category_id.toString()).then(data => {
             this.curCategory = data;
           })
-        }
-
+        });
     }
+
+  // updated() {   
+  //       if(this.item.category_id != 0){
+  //         this.categoryprovider.getCategoryById(this.item.category_id.toString()).then(data => {
+  //           this.curCategory = data;
+  //         })
+  //       }
+
+  //   }
   
 }
 </script>

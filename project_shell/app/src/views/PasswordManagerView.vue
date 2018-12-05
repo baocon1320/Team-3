@@ -100,11 +100,11 @@ export default class PasswordManagerView extends Vue {
 
   }
   clear () {
-    this.$refs.form.reset();
+    (this.$refs.form as any).reset();
   }
 
   submit() {
-    if (this.$refs.form.validate()) {
+    if ((this.$refs.form as any).validate()) {
       this.accountprovider.getAccountByUser(this.username).then(data => {
         this.account = data;
         if(this.account.password != this.curPassword){

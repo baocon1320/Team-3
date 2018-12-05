@@ -80,10 +80,27 @@ let router = new Router({
           requiresAuth: true
         }
     },
+      {
+        path: '/manage/item',
+        name: 'itemmanager',
+        component: () => import('./views/ItemManagerView.vue'),
+        meta: {
+          requiresAuth: true
+        }
+    },
     {
         path: '/manage/account',
         name: 'accountmanager',
         component: () => import('./views/AccountManagerView.vue'),
+        meta: {
+          requiresAuth: true,
+          is_owner : true
+        }
+    },
+    {
+        path: '/manage/general',
+        name: 'generalmanager',
+        component: () => import('./views/GeneralManagerView.vue'),
         meta: {
           requiresAuth: true,
           is_owner : true

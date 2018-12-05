@@ -33,7 +33,25 @@ export class ItemProvider {
 
 	getNumberofItem(){
 		return axios.get('/api/item/countall').then((response) => {
-			return response.data
+			return response.data;
+		})
+	}
+
+	updateItem(item: ItemModel, id: number){
+		return axios.put('/api/item/update/id=' + id, item).then((response) => {
+			return response.data;
+		})
+	}
+
+	createItem(item: ItemModel){
+		return axios.post('/api/item/', item).then((response) => {
+			return response.data;
+		})
+	}
+
+	deleteItem(id : number){
+		return axios.delete('/api/item/delete/id=' + id).then((response) => {
+			return response.data;
 		})
 	}
 }

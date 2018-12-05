@@ -31,7 +31,8 @@
 				//data to the front via json
 				res.json(newCategory);
 				
-			});}
+			}).catch(error => res.status(400).send(error));
+		}
 		catch(err){
 			console.log("There has been an error with the req: " + JSON.stringify(req));
 			res.json(404);
@@ -71,7 +72,7 @@
 				}else{
 					res.send(404);
 				}
-			});
+			}).catch(error => res.status(400).send(error));
 		} 
 		catch(err){
 			console.log(err)
