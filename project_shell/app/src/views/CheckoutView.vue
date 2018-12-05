@@ -7,10 +7,8 @@
         <div class = "hori_line_"><span class = "hori_line"></span></div>
         <OrderSummary v-bind:cartItems="cartItems"/>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
-        <v-btn color="orange" dark class="button_checkout" @click="checkout()"> MAKE A PAYMENT </v-btn>
-
+        <!-- <v-btn color="orange" dark class="button_checkout" @click="checkout()"> MAKE A PAYMENT </v-btn> -->
       </div>
-
     </div>
   </div>
 </template>
@@ -48,13 +46,6 @@ export default class CheckoutView extends Vue {
 </script>
 
 <style scoped lang="scss">
-
-.button_checkout {
-  width: 380px;
-  height: 50px;
-  font-size: 25px;
-  font-family: 'Roboto', sans-serif;
-}
 .main_cart {
   margin: 0;
   padding: 0;

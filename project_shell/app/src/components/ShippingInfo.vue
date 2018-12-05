@@ -1,27 +1,5 @@
 <template>
   <div class = "cart_summary">
-    <!-- <div class = "shipping_info">
-      <div class = "cate_header"> Shipping Information </div>
-      <div class = "hori_line_"><span class = "hori_line"></span></div>
-      <div class = "list_item_display">
-        <div class = "info_input">
-          <input class = "first_name" placeholder="First Name">
-          <input class = "first_name" placeholder="Last Name">
-        </div>
-        <div class = "info_input">
-          <input class = "address" placeholder="Address">
-        </div>
-        <div class = "info_input">
-          <input class = "city" placeholder="City">
-          <input class = "state" placeholder="State">
-          <input class = "zipcode" placeholder="Zipcode">
-        </div>
-        <div class = "info_input">
-          <input class = "first_name" placeholder="Email">
-          <input class = "first_name" placeholder="Phone Number">
-        </div>
-      </div>
-    </div> -->
     <div class = "payment_info">
       <div class = "cate_header display-1"> Payment Information </div>
       <div class = "hori_line_"><span class = "hori_line"></span></div>
@@ -32,7 +10,9 @@
             <v-flex xs6>
               <v-text-field
               v-model="cardNumber"
-              :rules="cardRules"
+              :rules="[
+              v => !!v || 'CardNumber is required'
+              ]"
               label="Card Number"
               premade="credit-card"
               mask="#### - #### - #### - ####"
@@ -42,7 +22,10 @@
             <v-flex xs4>
               <v-text-field
               v-model="expriredDate"
-              :rules="DateRules"
+              :rules="[
+              v => !!v || 'Expired Date is required'
+              ]"
+              mask="##/##"
               label="Expired Date"
               required
               ></v-text-field>
@@ -50,7 +33,10 @@
             <v-flex xs2>
               <v-text-field
               v-model="cvv"
-              :rules="cvvRules"
+              :rules="[
+              v => !!v || 'CVV is required',
+              v => v.length == 3 || 'CVV must be 3 characters'
+              ]" 
               label="CVV"
               required
               ></v-text-field>
@@ -58,15 +44,19 @@
             <v-flex xs6>
               <v-text-field
               v-model="firstName"
-              :rules="nameRules"
               label="First Name"
+              :rules="[
+              v => !!v || 'First Name is required'
+              ]"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs6>
               <v-text-field
               v-model="lastName"
-              :rules="nameRules"
+              :rules="[
+              v => !!v || 'First Name is required'
+              ]"
               label="Last Name"
               required
               ></v-text-field>
@@ -79,57 +69,72 @@
               v => /.+@.+/.test(v) || 'E-mail must be valid'
               ]"
               label="Email Address"
-
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs6>
               <v-text-field
               v-model="phoneNumber"
-              :rules="phoneNumberRules"
+              :rules="[
+              v => !!v || 'PhoneNumber is required'
+              ]"
               label="PhoneNumber"
+              mask="(###) ### - ####"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
               <v-text-field
               v-model="address"
-              :rules="nameRules"
-              label="Adress"
+              :rules="[
+              v => !!v || 'Address is required'
+              ]"
+              label="Address"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs6>
               <v-text-field
               v-model="city"
-              :rules="nameRules"
+              :rules="[
+              v => !!v || 'City is required'
+              ]"
               label="City"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs3>
               <v-text-field
-              v-model="state"
-              :rules="nameRules"
+              v-model="this.state"
+              :rules="[
+              v => !!v || 'State is required',
+              v => v.length == 2 || 'Please uses two letters'
+              ]"
               label="State"
+              mask="AA"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs3>
               <v-text-field
-              v-model="zipcode"
-              :rules="zipcodeRules"
+              v-model="this.zipcode"
+              :rules="[
+              v => !!v || 'Zipcode is required',
+              v => v.length == 5 || 'Please use your 5 or 9 digit zipcode.'
+              ]"
               label="Zipcode"
+              mask="#####"
               required
               ></v-text-field>
             </v-flex>
-            <!-- <v-btn
+            <v-btn
             :disabled="!valid"
             @click="submit"
+            color="orange" dark class="button_checkout"
             >
-            submit
+            MAKE A PAYMENT
           </v-btn>
-          <v-btn @click="clear">clear</v-btn> -->
+         <!--  <v-btn @click="clear">clear</v-btn> -->
         </v-layout>
       </v-container>
     </v-form>
@@ -164,6 +169,22 @@
   @Component
   export default class ShippingInfo extends Vue {
     @Prop() private msg!: string;
+    cardNumber!:string;
+    cVV!:string;
+    firstName!:string;
+    lastName!:string;
+    emailAddress!:string;
+    phoneNumber!:string;
+    address!:string;
+    city!:string;
+    state!:string;
+    zipcode!:string;
+
+    cvvRules(cvv:string){
+      if(cvv.length != 3){
+        return "CVV must be three characters";
+      }
+    }
 
   }
 
@@ -212,6 +233,14 @@ input {
 input::-webkit-input-placeholder {
   font-size: 16px;
   padding-left: 10px;
+}
+.button_checkout {
+  width: 380px;
+  height: 50px;
+  font-size: 25px;
+  margin-left: 60%;
+  margin-top: 10%;
+  font-family: 'Roboto', sans-serif;
 }
 .first_name {
   height: 25px;
