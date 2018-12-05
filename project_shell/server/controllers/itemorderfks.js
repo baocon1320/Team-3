@@ -4,8 +4,8 @@ const Sequelize = require('sequelize');
 //returns a single item by it's id
 exports.getItemOrderById = async(req,res) => {
 	ItemOrderFKs.findById(req.params.id).then((itemOrder) => {
-		if(item == null){
-			res.send(404);
+		if(itemOrder == null){
+			res.sendStatus(404);
 		}else{
 			res.json(itemOrder);
 		}
@@ -18,8 +18,8 @@ exports.getItemOrderById = async(req,res) => {
 exports.getAllItemOrders = async(req, res) => {
 	try{
 		ItemOrderFKs.findAll().then((allItemOrders) => {
-			if(allItems == null){
-				res.send(404);
+			if(allItemOrders == null){
+				res.sendStatus(400);
 			}else{
 				res.json(allItemOrders);
 			}
@@ -30,7 +30,38 @@ exports.getAllItemOrders = async(req, res) => {
 	}
 };
 
+exports.getItemOrderByIOIds = async(req, res) => {
+	try{
+		ItemOrderFKs.findAll({
+			where:{
+				item_id: req.params.itemId,
+				order_id: req.params.orderId
+			}
+		}).then((itemOrders) => {
+			console.log(JSON.stringify(itemOrders));
+			res.json(itemOrders);
+		})
+	}catch(err){
+		console.log(err);
+		res.sendStatus(400);
+	}
+};
 
+exports.getItemOrderByItemId = async(req, res) => {
+	try{
+		ItemOrderFKs.findAll({
+			where: {
+				item_id: req.params.id
+			}
+		}).then((itemOrders) => {
+			res.json(itemOrders);
+		});
+	}catch(err){
+		console.log(err);
+	}
+}
+
+//This function get the itemOrders that have a specified orderId then returns them.
 exports.getItemOrderByOrderId = async(req, res) => {
 	try{
 		ItemOrderFKs.findAll({
@@ -46,32 +77,14 @@ exports.getItemOrderByOrderId = async(req, res) => {
 	}
 }
 
-// async function getItemOrderByOrderId(id){
-// 	try{
-// 		ItemOrderFKs.findAll({
-// 			where: {
-// 				order_id: req.params.id
-// 			}
-// 		}).then((itemOrders) => {
-// 			return itemOrders;
-// 		});
-// 	}
-// 	catch (err){
-// 		console.log(err);
-// 	}
-// }
-
-// export { getItemOrderById };
-
 //TODO add validation for update item
 exports.updateItemOrder = async(req,res) => {
 	try{
 		ItemOrderFKs.update(req.body, { where: { id: req.params.id} }).then((affected) => {
 			if(affected != null){
 				if(affected[0] > 0){
-						res.send(202);
+						res.send(200);
 				}else{
-					//TODO: Fix this to reflect the actual error
 					res.send(404);
 				}
 			}else{
@@ -91,26 +104,47 @@ exports.createItemOrder = async(req, res) => {
 			res.send(404);
 		}
 		res.json(response);
-		res.send(202);
 	});
 };
 
+exports.deleteByItemId = async(req, res) => {
+	try{
+		ItemOrderFKs.findAll({
+			where: {
+				item_id: req.params.id
+			}
+		}).then((itemOrder) => {
+			if(itemOrder === null){
 
+			}else{
+				ItemOrderFKs.destroy({
+					where: {
+						item_id: req.params.id
+					}
+				});
+				res.json(200);
+			}
+		});
+	}catch(err){
+		console.log(err);
+	}
+}
 
-// module.exports = {
-// 	getItemOrderById : function(id) {
-// 		try{
-// 		ItemOrderFKs.findAll({
-// 			where: {
-// 				order_id: req.params.id
-// 			}
-// 		}).then((itemOrders) => {
-// 			return itemOrders;
-// 		});
-// 		}
-// 		catch (err){
-// 			console.log(err);
-		
-// 		}
-// 	}
-// }
+exports.deleteById = async(req, res) => {
+	try{
+		ItemOrderFKs.findById(req.params.id).then((itemOrder) => {
+			if(itemOrder == null){
+
+			}else{
+				ItemOrderFKs.destroy({
+					where: {
+						id: req.params.id
+					}
+				});
+				res.json(200);
+			}
+		});
+	}catch(err){
+		console.log(err);
+	}
+}

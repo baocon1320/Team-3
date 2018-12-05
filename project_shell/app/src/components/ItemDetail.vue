@@ -63,16 +63,23 @@ export default class ItemDetail extends Vue {
   }
 
   addItemToCart(){
-    console.log("AddItemToCart() is running...");
-    this.itemOrderFKs.item_id = this.item.id;
-    this.itemOrderFKs.item_price = this.item.price;
-    console.log("ItemOrder is: " + JSON.stringify(this.itemOrderFKs));
-    //todo: add the order id
-    this.itemOrderProvider.createItemOrderFK(this.itemOrderFKs).then(data => {
-      console.log("Data is: " + JSON.stringify(data));
+    this.itemOrderProvider.getItemOrderFKByItemandOrderId(this.item.id, 0)
+      .then((itemOrders) => {
+        if(itemOrders.length == 0){
+          //there are none of this item in the cart, create a itemOrderFK
+          this.itemOrderFKs.item_id = this.item.id;
+          this.itemOrderFKs.item_price = this.item.price;
+          this.itemOrderFKs.quantity  = 1;
+          this.itemOrderProvider.createItemOrderFK(this.itemOrderFKs);
+        }else{
+          //there is an instance of this item in the cart, update the itemOrderFK
+          itemOrders[0].quantity += 1;
+          itemOrders[0].item_price = this.item.price;
+          this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
+        }
     });
+    // console.log("ItemOrder is: " + JSON.stringify(this.itemOrderFKs));
   }
-
 }
 
 </script>

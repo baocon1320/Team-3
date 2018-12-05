@@ -1,16 +1,16 @@
 <template>
-  <div class = "oder_summary_detail">
+  <div v-cloak class = "oder_summary_detail">
     <div class = "product_total">
       <div class = "name_field title"> Product Total: </div>
-      <div class ="price_field title"> $300 </div>
+      <div class ="price_field title"> ${{this.cartItems.reduce(getSum,0)}}.00</div>
     </div>
     <div class = "product_total">
       <div class = "name_field title"> Estimated Tax Fee: </div>
-      <div class ="price_field title"> $30 </div>
+      <div class ="price_field title"> ${{this.cartItems.reduce(getSum,0)*0.1}}.00</div>
     </div>
     <div class = "product_total">
       <div class = "sum_name headline"> Total: </div>
-      <div class ="sum_price headline"> $350 </div>
+      <div class ="sum_price headline">${{this.cartItems.reduce(getSum,0)*0.1 + this.cartItems.reduce(getSum,0)}}.00</div>
     </div>
   </div>
 </template>
@@ -21,6 +21,12 @@
   @Component
   export default class OrderSummary extends Vue {
     @Prop() private msg!: string;
+    @Prop() cartItems!: any[];
+
+    getSum(total: any, next: any){
+      return total + (next.price*next.quantity);
+    }
+
   }
 </script>
 
