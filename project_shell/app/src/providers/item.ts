@@ -61,5 +61,13 @@ export class ItemProvider {
 		});
 
 	}
+
+	getListItemsByOrderId(id: number){
+		return axios.get('/api/listItems/' + id).then((response) => {
+			return response.data;
+		});
+
+	}
+
 }
 

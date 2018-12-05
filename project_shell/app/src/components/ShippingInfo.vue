@@ -221,7 +221,7 @@
         this.orderModel.priceTotal = this.cartItems.reduce(this.getSum,0);
         this.orderModel.date.month = parseInt(this.expriredDate.substring(1,2));
         this.orderModel.date.year = 2000 + parseInt(this.expriredDate.substring(2));
-        this.orderModel.status = "paid";
+        this.orderModel.status = "Processing";
         this.orderProvider.createOrder(this.orderModel).then((response) => {
           this.orderModel = response;
           this.itemOrderProvider.getItemOrderFKByOrderId(0).then((itemOrders) => {

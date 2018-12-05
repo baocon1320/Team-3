@@ -14,6 +14,7 @@ itemRoutes.get('/countall', ItemController.getNumberofItem);
 itemRoutes.delete('/delete/id=:id', ItemController.deleteItem);
 itemRoutes.get('/price', ItemController.getItemsByPrice);
 itemRoutes.get('/order/:id', ItemController.getItemsByOrderId);
+itemRoutes.get('/listItems/:id', ItemController.getListItemsByListofId)
 
 //itemRoutes.put('/update/:id', ItemController.updateItem);
 

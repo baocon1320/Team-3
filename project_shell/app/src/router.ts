@@ -88,6 +88,14 @@ let router = new Router({
           requiresAuth: true
         }
     },
+      {
+        path: '/manage/order',
+        name: 'ordermanager',
+        component: () => import('./views/OrderManagerView.vue'),
+        meta: {
+          requiresAuth: true
+        }
+    },
     {
         path: '/manage/account',
         name: 'accountmanager',

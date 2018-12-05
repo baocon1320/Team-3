@@ -28,7 +28,11 @@ export class OrderProvider {
 		});
 	}
 
-
+	getAllOrder(){
+		return axios.get('/api/order/all').then((response) => {
+			return response.data;
+		});
+	}
 
 
 

@@ -13,6 +13,7 @@ orderRoutes.put('/addItem', OrderController.addItemToOrder);
 orderRoutes.put('/removeItem', OrderController.removeItemFromOrder);
 orderRoutes.delete('/deleteOrder/:id', OrderController.deleteOrder);
 orderRoutes.get('/all', OrderController.getAllOrders);
+orderRoutes.put('/update/:id', OrderController.updateOrder);
 
 module.exports = orderRoutes;
 

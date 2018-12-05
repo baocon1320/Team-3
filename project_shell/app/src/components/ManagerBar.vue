@@ -45,6 +45,7 @@
             </v-list-tile>
              <v-list-tile  
               @click=""
+              href="/manage/order"
             >
               <v-list-tile-content>
                 <v-list-tile-title>Order Manager</v-list-tile-title>

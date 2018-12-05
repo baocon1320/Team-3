@@ -38,12 +38,44 @@ exports.getItemsByOrderId = async(req,res) => {
 		});
 	}
 	catch (err){
-			console.log(err);
+		console.log(err);
 		
 	}
 }
 
-
+// Get the array of items from an orderId
+exports.getListItemsByListofId = async(req, res) => {
+	try{
+		ItemOrderFKs.findAll({
+			where: {
+				order_id: req.params.id
+			}
+		}).then((itemOrders) => {
+			if(itemOrders == null){
+				return "null"
+			}else{
+				console.log(typeof itemOrders);
+				console.log(itemOrders[0].item_id);
+				var item_ids = []
+				for(i = 0; i < itemOrders.length; i++){
+					item_ids[i] = itemOrders[i].item_id;
+				}
+				Item.findAll({
+					where: {
+						id: item_ids
+					}
+				}).then((items) => {
+					res.json(items);
+				})
+			}
+			
+		});
+	}
+	catch (err){
+		console.log(err);
+		
+	}
+}
 
 
 //returns all of the item's in the database, however sending this many 
@@ -51,13 +83,13 @@ exports.getItemsByOrderId = async(req,res) => {
 //all items at once.
 exports.getAllItems = async(req, res) => {
 	try{
-	Item.findAll().then((allItems) => {
-		if(allItems == null){
-			res.send(404);
-		}else{
-			res.json(allItems);
-		}
-	});
+		Item.findAll().then((allItems) => {
+			if(allItems == null){
+				res.send(404);
+			}else{
+				res.json(allItems);
+			}
+		});
 	}
 	catch (err) {
 		console.log(err)
@@ -70,13 +102,13 @@ exports.getAllItems = async(req, res) => {
 //all items at once.
 exports.getNumberofItem = async(req, res) => {
 	try{
-	Item.count().then((count) => {
-		if(count == null){
-			res.send(404);
-		}else{
-			res.json(count);
-		}
-	});
+		Item.count().then((count) => {
+			if(count == null){
+				res.send(404);
+			}else{
+				res.json(count);
+			}
+		});
 	}
 	catch (err) {
 		console.log(err)
@@ -122,7 +154,7 @@ exports.updateItem = async(req,res) => {
 		Item.update(req.body, { where: { id: req.params.id} }).then((affected) => {
 			if(affected != null){
 				if(affected[0] > 0){
-						res.send(202);
+					res.send(202);
 				}else{
 					//TODO: Fix this to reflect the actual error
 					res.send(404);
@@ -163,14 +195,14 @@ exports.deleteItem = async(req, res) => {
 exports.createItem = async(req, res) => {
 
 	try{
-	Item.create(req.body).then((response) => {
-		res.json(response);
-	});
+		Item.create(req.body).then((response) => {
+			res.json(response);
+		});
 
-}
-catch(err){
-	console.log(err);
-}
+	}
+	catch(err){
+		console.log(err);
+	}
 };
 
 
@@ -199,10 +231,10 @@ async function getItemOrderByOrderId(id) {
 			}
 			
 		});
-		}
-		catch (err){
-			console.log(err);
+	}
+	catch (err){
+		console.log(err);
 		
-		}
+	}
 }
 
