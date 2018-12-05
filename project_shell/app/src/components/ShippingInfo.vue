@@ -9,7 +9,7 @@
           <v-layout wrap>
             <v-flex xs6>
               <v-text-field
-              v-model="cardNumber"
+              v-model="orderModel.creditCardNum"
               :rules="[
               v => !!v || 'CardNumber is required'
               ]"
@@ -63,7 +63,7 @@
             </v-flex>
             <v-flex xs6>
               <v-text-field
-              v-model="email"
+              v-model="orderModel.email"
               :rules="[
               v => !!v || 'E-mail is required',
               v => /.+@.+/.test(v) || 'E-mail must be valid'
@@ -74,7 +74,7 @@
             </v-flex>
             <v-flex xs6>
               <v-text-field
-              v-model="phoneNumber"
+              v-model="orderModel.phoneNumber"
               :rules="[
               v => !!v || 'PhoneNumber is required'
               ]"
@@ -105,7 +105,7 @@
             </v-flex>
             <v-flex xs3>
               <v-text-field
-              v-model="this.state"
+              v-model="state"
               :rules="[
               v => !!v || 'State is required',
               v => v.length == 2 || 'Please uses two letters'
@@ -117,7 +117,7 @@
             </v-flex>
             <v-flex xs3>
               <v-text-field
-              v-model="this.zipcode"
+              v-model="zipcode"
               :rules="[
               v => !!v || 'Zipcode is required',
               v => v.length == 5 || 'Please use your 5 or 9 digit zipcode.'
@@ -127,13 +127,16 @@
               required
               ></v-text-field>
             </v-flex>
+            <div class="footer_section">
+              <h3 class="invalid_heading" v-if="invalidSubmit">Fill out all of the form fields before making payment</h3>
             <v-btn
-            :disabled="!valid"
-            @click="submit"
+            @click="submit()"
             color="orange" dark class="button_checkout"
             >
             MAKE A PAYMENT
           </v-btn>
+            </div>
+
          <!--  <v-btn @click="clear">clear</v-btn> -->
         </v-layout>
       </v-container>
@@ -165,12 +168,16 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { OrderProvider, ItemOrderProvider } from '@/providers';
+  import { OrderModel, AddressModel } from '@/models';
 
   @Component
   export default class ShippingInfo extends Vue {
     @Prop() private msg!: string;
+    @Prop() cartItems!: any [];
     cardNumber!:string;
-    cVV!:string;
+    expriredDate!:string;
+    cvv!:string;
     firstName!:string;
     lastName!:string;
     emailAddress!:string;
@@ -180,11 +187,69 @@
     state!:string;
     zipcode!:string;
 
-    cvvRules(cvv:string){
-      if(cvv.length != 3){
-        return "CVV must be three characters";
+    /**
+    customerName !: string;
+    creditCardNum!:string;
+    securityCode!:number;
+    priceTotal!:number;
+    email!:string;
+    phoneNumber!:string;
+    date!:any;
+    status!:string;
+    */
+    orderModel: OrderModel = new OrderModel(0,"","",0,0,"","",new Date(), "unprocessed");
+    /**
+    streetOne!: string;
+    streetTwo!:string;
+    city!:string;
+    state!:string;
+    zipcode!:string;
+    */
+    addressModel: AddressModel = new AddressModel("","","","","");
+
+    orderProvider: OrderProvider = new OrderProvider();
+    itemOrderProvider: ItemOrderProvider =  new ItemOrderProvider();
+
+
+    invalidSubmit: boolean = false;
+
+    submit(){
+      if(this.isValid()){
+        this.invalidSubmit = false;
+        this.orderModel.customerName = this.firstName + ' ' + this.lastName;
+        console.log("cartItems is: " + JSON.stringify(this.cartItems));
+        this.orderModel.securityCode = parseInt(this.cvv);
+        this.orderModel.priceTotal = this.cartItems.reduce(this.getSum,0);
+        this.orderModel.date.month = parseInt(this.expriredDate.substring(1,2));
+        this.orderModel.date.year = 2000 + parseInt(this.expriredDate.substring(2));
+        this.orderModel.status = "paid";
+        this.orderProvider.createOrder(this.orderModel).then((response) => {
+          console.log("response is: " + JSON.stringify(response));
+          this.orderModel = response;
+          this.itemOrderProvider.getItemOrderFKByOrderId(0).then((itemOrders) => {
+            console.log("We have the itemOrders");
+            for(let i: number = 0 ; i < itemOrders.length; i++){
+              itemOrders[i].order_id = this.orderModel.id;
+              console.log("orderModel is: " + this.orderModel.id);
+              this.itemOrderProvider
+                    .updateItemOrderFK(itemOrders[i].id, itemOrders[i]);
+            }
+          });
+        });
+      }else{
+        this.invalidSubmit = true;
       }
     }
+
+    isValid(){
+      return true;
+    }
+
+    getSum(total: any, next: any){
+      return total + (next.price*next.quantity);
+    }
+
+
 
   }
 
@@ -238,8 +303,17 @@ input::-webkit-input-placeholder {
   width: 380px;
   height: 50px;
   font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.footer_section{
   margin-left: 60%;
   margin-top: 10%;
+}
+
+.invalid_heading{
+  text-align: center;
+  color: orange;
   font-family: 'Roboto', sans-serif;
 }
 .first_name {

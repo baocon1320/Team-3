@@ -22,7 +22,6 @@
           <!-- <router-link to="/checkout" @click="updateItemOrders()">CHECKOUT</router-link> -->
         </v-btn>
       </div>
-
     </div>
   </div>
 </template>
@@ -59,9 +58,7 @@ export default class CartView extends Vue {
       let id = this.item_ids[i] + ""; //turns id of the item into a string;
       let item: any = await this.itemProvider.getItemById(id);
       item.index = i;
-      console.log("About to look into the itemOrders");
       await this.itemOrderProvider.getItemOrderFKByItemandOrderId(item.id, 0).then((itemOrders) => {
-        console.log("Hello world.")
         item.quantity = itemOrders[0].quantity;
         this.cartItems.push(item);
       });
@@ -80,7 +77,6 @@ export default class CartView extends Vue {
       await this.itemOrderProvider.getItemOrderFKByItemandOrderId(this.cartItems[i].id, 0).then((itemOrders) => {
         itemOrders[0].quantity = this.cartItems[i].quantity;
         this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
-        console.log("Done here cap");
         this.$router.push('checkout');
       });
     } 

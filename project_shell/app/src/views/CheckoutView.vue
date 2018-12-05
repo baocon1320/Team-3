@@ -1,7 +1,7 @@
 <template>
   <div class = "main_cart">
     <div class = "cart_view">
-      <ShippingInfo/>
+      <ShippingInfo v-bind:cartItems="cartItems"/>
       <div class = "oder_summary">
         <div class = "cate_header display-1"> Order Summary </div>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
