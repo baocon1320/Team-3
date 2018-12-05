@@ -73,7 +73,6 @@ export default class CartView extends Vue {
     // then update each itemOrder that has a cartItem
     // finally delete all of the itemOrders that have quantities = 0
     this.updateItemOrders();
-    this.$router.push('checkout');
   }
 
   async updateItemOrders(){
@@ -81,6 +80,8 @@ export default class CartView extends Vue {
       await this.itemOrderProvider.getItemOrderFKByItemandOrderId(this.cartItems[i].id, 0).then((itemOrders) => {
         itemOrders[0].quantity = this.cartItems[i].quantity;
         this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
+        console.log("Done here cap");
+        this.$router.push('checkout');
       });
     } 
   }
