@@ -76,46 +76,16 @@ export default class CartView extends Vue {
     this.$router.push('checkout');
   }
 
-  updateItemOrders(){
+  async updateItemOrders(){
     for(let i: number= 0 ; i < this.cartItems.length; i++){
       await this.itemOrderProvider.getItemOrderFKByItemandOrderId(this.cartItems[i].id, 0).then((itemOrders) => {
-        itemOrders[0].quantity = this.cartItems.quantity;
-        await this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
+        itemOrders[0].quantity = this.cartItems[i].quantity;
+        this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
       });
-    }
-    // let j:number = 0;
-    // for(let i:number = 0; i < this.item_ids.length; i++){
-    //   this.itemOrderProvider.getItemOrderByItemId(this.item_ids[i]).then((itemOrders) => {
-    //     if(i == 0) { 
-    //       itemOrders[0].quantity = this.cartItems[j].quantity;
-    //       itemOrders[0].item_price = this.cartItems[j].price;
-    //       //delete all of the unnecessary itemOrders
-    //       for(let itemIndex: number = 1; itemIndex < itemOrders.length; itemIndex++){
-    //         this.itemOrderProvider.deleteByItemOrderId(itemOrders[itemIndex].id);
-    //       }
-    //       this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
-    //       j++;
-    //     }else{
-    //     if(this.item_ids[i-1] != this.item_ids[i]){
-    //       itemOrders[0].quantity = this.cartItems[j].quantity;
-    //       itemOrders[0].item_price = this.cartItems[j].price;
-    //       //delete all of the unnecessary itemOrders
-    //       for(let itemIndex: number = 1; itemIndex < itemOrders.length; itemIndex++){
-    //         this.itemOrderProvider.deleteByItemOrderId(itemOrders[itemIndex].id);
-    //       }
-    //       this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
-    //       j++; 
-    //     }else{
-    //         //Do Nothing
-    //     }
-
-    //   }
-    //   });
-      
-    }
+    } 
   }
-
 }
+  
 </script>
 
 <style scoped lang="scss">
