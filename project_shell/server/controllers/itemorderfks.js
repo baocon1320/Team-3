@@ -28,7 +28,40 @@ exports.getAllItemOrders = async(req, res) => {
 	catch (err) {
 		console.log(err);
 	}
+};
+
+
+exports.getItemOrderByOrderId = async(req, res) => {
+	try{
+		ItemOrderFKs.findAll({
+			where: {
+				order_id: req.params.id
+			}
+		}).then((itemOrders) => {
+			res.json(itemOrders);
+		});
+	}
+	catch (err){
+		console.log(err);
+	}
 }
+
+// async function getItemOrderByOrderId(id){
+// 	try{
+// 		ItemOrderFKs.findAll({
+// 			where: {
+// 				order_id: req.params.id
+// 			}
+// 		}).then((itemOrders) => {
+// 			return itemOrders;
+// 		});
+// 	}
+// 	catch (err){
+// 		console.log(err);
+// 	}
+// }
+
+// export { getItemOrderById };
 
 //TODO add validation for update item
 exports.updateItemOrder = async(req,res) => {
@@ -61,3 +94,23 @@ exports.createItemOrder = async(req, res) => {
 		res.send(202);
 	});
 };
+
+
+
+// module.exports = {
+// 	getItemOrderById : function(id) {
+// 		try{
+// 		ItemOrderFKs.findAll({
+// 			where: {
+// 				order_id: req.params.id
+// 			}
+// 		}).then((itemOrders) => {
+// 			return itemOrders;
+// 		});
+// 		}
+// 		catch (err){
+// 			console.log(err);
+		
+// 		}
+// 	}
+// }

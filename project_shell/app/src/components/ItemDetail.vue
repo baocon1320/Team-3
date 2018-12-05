@@ -10,7 +10,7 @@
         <h2 class="title font-weight-light orange--text mb-2"> {{ item.item_name }}</h2> 
         <h3 class="font-weight-light grey--text  mb-2"> {{ manufacture.name }}</h3>
         <h4 class = "price"> <b> Price: </b> ${{item.price}} </h4>
-        <v-btn class="buttons" @click="">
+        <v-btn class="buttons" @click="addItemToCart()">
           Add to Cart
         </v-btn>
         
@@ -63,6 +63,7 @@ export default class ItemDetail extends Vue {
   }
 
   addItemToCart(){
+    console.log("AddItemToCart() is running...");
     this.itemOrderFKs.item_id = this.item.id;
     this.itemOrderFKs.item_price = this.item.price;
     console.log("ItemOrder is: " + JSON.stringify(this.itemOrderFKs));

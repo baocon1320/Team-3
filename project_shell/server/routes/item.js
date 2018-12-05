@@ -12,6 +12,13 @@ itemRoutes.post('/', ItemController.createItem);
 itemRoutes.put('/update/id=:id', ItemController.updateItem);
 itemRoutes.get('/countall', ItemController.getNumberofItem);
 itemRoutes.delete('/delete/id=:id', ItemController.deleteItem);
+itemRoutes.get('/price', ItemController.getItemsByPrice);
+itemRoutes.get('/order/:id', ItemController.getItemsByOrderId);
+
+//itemRoutes.put('/update/:id', ItemController.updateItem);
+
+
+
 
 
 module.exports = itemRoutes;
