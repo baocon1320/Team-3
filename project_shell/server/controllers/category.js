@@ -8,7 +8,10 @@
 				if(category == null){
 					res.send(404)
 				}else{
-					res.json(category);
+					if(req.params.id == 4){
+						return res.send(303);
+					}
+					return res.json(category);
 				}
 			});
 		}

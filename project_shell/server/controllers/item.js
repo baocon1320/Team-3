@@ -17,17 +17,38 @@ exports.getItemById = async(req,res) => {
 
 exports.getItemsByOrderId = async(req,res) => {
 	//Acquire all of the itemorderfks for the cart via orderid
-	console.log(typeof getItemOrderById);
-	itemOrders = getItemOrderByOrderId(req.params.id);
-	var itemIds = [];
-
-	//Acquire all of the items from the itemOrders.
-	for(i = 0; i < itemOrders.length; i++){
-		itemIds.add(itemOrders[i].item_id);
+	try{
+		ItemOrderFKs.findAll({
+			where: {
+				order_id: req.params.id
+			}
+		}).then((itemOrders) => {
+			if(itemOrders == null){
+				return "null"
+			}else{
+				console.log(typeof itemOrders);
+				console.log(itemOrders[0].item_id);
+				var item_ids = []
+				for(i = 0; i < itemOrders.length; i++){
+					item_ids[i] = itemOrders[i].item_id;
+				}
+				res.json(item_ids);
+			}
+			
+		});
 	}
-	console.log("ItemIds are:"  + itemIds);
-	res.json(itemIds);
+	catch (err){
+			console.log(err);
+		
+	}
 
+	// console.log("ItemOrders are: " + JSON.stringify(itemOrders));
+	// var itemIds = [];
+
+	// //Acquire all of the items from the itemOrders.
+	// for(i = 0; i < itemOrders.length; i++){
+	// 	itemIds.add(itemOrders[i].item_id);
+	// }
 }
 
 
@@ -129,24 +150,33 @@ exports.updateItem = async(req,res) => {
 
 //Creates a single Item for the store
 exports.createItem = async(req, res) => {
-	console.log("Running createItem...");
-	console.log("createItem with: " + JSON.stringify(req.body));
 	Item.create(req.body).then((response) => {
 		res.json(response);
 	});
 };
 
 
-
-function getItemOrderByOrderId(id) {
+async function getItemOrderByOrderId(id) {
 	try{
 		ItemOrderFKs.findAll({
 			where: {
 				order_id: id
 			}
 		}).then((itemOrders) => {
+			if(itemOrders == null){
+				return "null"
+			}else{
+				console.log(typeof itemOrders);
+				console.log(itemOrders[0].item_id);
+				var item_ids = []
+				for(i = 0; i < itemOrders.length; i++){
+					console.log("Adding item: " + itemOrders[i].item_id);
+					item_ids[i] = itemOrders[i].item_id;
+				}
+				console.log("item_ids are:" + item_ids);
+				return item_ids;
+			}
 			
-			return itemOrders;
 		});
 		}
 		catch (err){

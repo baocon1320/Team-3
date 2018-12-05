@@ -5,7 +5,7 @@
       <div class = "oder_summary">
         <div class = "cate_header display-1"> Order Summary </div>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
-        <OrderSummary/>
+        <OrderSummary v-bind:cartItems="cartItems"/>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
         <v-btn color="orange" dark class="button_checkout" @click="checkout()"> MAKE A PAYMENT </v-btn>
 
@@ -20,6 +20,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import CartItem from '@/components/CartItem.vue'; // @ is an alias to /src
 import OrderSummary from '@/components/OrderSummary.vue';
 import ShippingInfo from '@/components/ShippingInfo.vue';
+import { ItemOrderFKModel } from '@/models';
+import { ItemOrderProvider } from '@/providers';
 
 @Component({
   components: {
@@ -29,7 +31,19 @@ import ShippingInfo from '@/components/ShippingInfo.vue';
   },
 })
 export default class CheckoutView extends Vue {
-  
+  cartItems: any[] = [];
+  itemOrderProvider: ItemOrderProvider = new ItemOrderProvider();
+
+  mounted(){
+    this.itemOrderProvider.getItemOrderFKByOrderId(0).then((itemOrders) => {
+      console.log(JSON.stringify(itemOrders));
+      for(let i:number = 0; i <  itemOrders.length; i++){
+        itemOrders[i].price = itemOrders[i].item_price;
+      }
+      console.log("itemOrders are: " + JSON.stringify(itemOrders));
+      this.cartItems = itemOrders;
+    });
+  }
 }
 </script>
 

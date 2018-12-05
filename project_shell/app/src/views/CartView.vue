@@ -7,11 +7,7 @@
         <div class = "hori_line_"><span class = "hori_line"></span></div>
         <div class = "list_item_display">
           <ul class  = "result_list">
-           <CartItem/>
-           <CartItem/>
-           <!-- <div v-for="item in cart">
-              <CartItem/>
-            </div> -->
+           <CartItem v-for="item in cartItems" v-bind:item="item" v-bind:cartItems="cartItems" v-bind:subtotal="subtotal"/>
           </ul>
         </div>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
@@ -19,11 +15,11 @@
       <div class = "oder_summary">
         <div class = "cate_header display-1"> Order Summary </div>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
-        <OrderSummary/>
+        <OrderSummary v-bind:cartItems="cartItems"/>
         <div class = "hori_line_"><span class = "hori_line"></span></div>
         <v-btn color="orange" dark class="button_checkout" @click="checkout()">
           CHECKOUT
-          <!-- <router-link to="/checkout">CHECKOUT</router-link> -->
+          <!-- <router-link to="/checkout" @click="updateItemOrders()">CHECKOUT</router-link> -->
         </v-btn>
       </div>
 
@@ -35,7 +31,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import CartItem from '@/components/CartItem.vue'; // @ is an alias to /src
 import OrderSummary from '@/components/OrderSummary.vue';
-import { ItemOrderFKModel } from '@/models';
+import { ItemOrderFKModel, ItemModel } from '@/models';
 import { ItemOrderProvider, ItemProvider } from '@/providers';
 @Component({
   components: {
@@ -48,15 +44,77 @@ export default class CartView extends Vue {
   itemOrderProvider: ItemOrderProvider =  new ItemOrderProvider();
   itemProvider: ItemProvider = new ItemProvider();
 
-  cartItems: ItemOrderFKModel[] =[];
+  item_ids: number [] = [];
+  cartItems: any[] =[];
+  quantList: number[] = [];
+  subtotal: number = 0;
 
-  mounted(){
-    
+
+  async mounted(){
+    this.item_ids = await this.itemProvider.getItemsByOrderId(0);
+    this.item_ids.sort();
+    console.log("item_ids are: " + this.item_ids);
+    let j:number = 0;
+    for(let i:number = 0; i < this.item_ids.length; i++){
+      let id = this.item_ids[i] + ""; //turns id of the item into a string;
+      let item: any = await this.itemProvider.getItemById(id);
+      item.index = i;
+      console.log("About to look into the itemOrders");
+      await this.itemOrderProvider.getItemOrderFKByItemandOrderId(item.id, 0).then((itemOrders) => {
+        console.log("Hello world.")
+        item.quantity = itemOrders[0].quantity;
+        this.cartItems.push(item);
+      });
+    }
   }
 
   checkout() {
+    // Go through each of the item_ids and 
+    // then update each itemOrder that has a cartItem
+    // finally delete all of the itemOrders that have quantities = 0
+    this.updateItemOrders();
     this.$router.push('checkout');
   }
+
+  updateItemOrders(){
+    for(let i: number= 0 ; i < this.cartItems.length; i++){
+      await this.itemOrderProvider.getItemOrderFKByItemandOrderId(this.cartItems[i].id, 0).then((itemOrders) => {
+        itemOrders[0].quantity = this.cartItems.quantity;
+        await this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
+      });
+    }
+    // let j:number = 0;
+    // for(let i:number = 0; i < this.item_ids.length; i++){
+    //   this.itemOrderProvider.getItemOrderByItemId(this.item_ids[i]).then((itemOrders) => {
+    //     if(i == 0) { 
+    //       itemOrders[0].quantity = this.cartItems[j].quantity;
+    //       itemOrders[0].item_price = this.cartItems[j].price;
+    //       //delete all of the unnecessary itemOrders
+    //       for(let itemIndex: number = 1; itemIndex < itemOrders.length; itemIndex++){
+    //         this.itemOrderProvider.deleteByItemOrderId(itemOrders[itemIndex].id);
+    //       }
+    //       this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
+    //       j++;
+    //     }else{
+    //     if(this.item_ids[i-1] != this.item_ids[i]){
+    //       itemOrders[0].quantity = this.cartItems[j].quantity;
+    //       itemOrders[0].item_price = this.cartItems[j].price;
+    //       //delete all of the unnecessary itemOrders
+    //       for(let itemIndex: number = 1; itemIndex < itemOrders.length; itemIndex++){
+    //         this.itemOrderProvider.deleteByItemOrderId(itemOrders[itemIndex].id);
+    //       }
+    //       this.itemOrderProvider.updateItemOrderFK(itemOrders[0].id, itemOrders[0]);
+    //       j++; 
+    //     }else{
+    //         //Do Nothing
+    //     }
+
+    //   }
+    //   });
+      
+    }
+  }
+
 }
 </script>
 
