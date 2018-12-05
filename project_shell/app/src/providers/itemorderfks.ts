@@ -11,7 +11,7 @@ export class ItemOrderProvider {
 	}
 
 	getItemOrderFKById(id: number){	
-		return axios.get('/api/itemOrderFKs/id=' + id).then((response) => {
+		return axios.get('/api/itemOrderFKs/single/id=' + id).then((response) => {
 			return response.data;
 		});
 	}
@@ -22,8 +22,20 @@ export class ItemOrderProvider {
 		});
 	}
 
+	getItemOrderByItemId(id: number){
+		return axios.get('/api/itemOrderFKs/item/' + id).then((response) => {
+			return response.data;
+		});
+	}
+
 	getItemOrderFKByOrderId(id: number){
 		return axios.get('/api/itemOrderFKs/order/:id').then((response) => {
+			return response.data;
+		});
+	}
+
+	getItemOrderFKByItemandOrderId(itemId:number, orderId:number){
+		return axios.get('/api/itemOrderFKs/itemOrder/' + itemId + '/' +  orderId).then((response) => {
 			return response.data;
 		});
 	}
@@ -41,8 +53,15 @@ export class ItemOrderProvider {
 		});
 	}
 
+	deleteByItemId(id: number){
+		return axios.delete('/api/itemOrderFKs/item/' + id).then((response) => {
+			return response.data;
+		});
+	}
 
-
-
-
+	deleteByItemOrderId(id: number){
+		return axios.delete('/api/itemOrderFKs/' + id).then((response) => {
+			return response.data;
+		});
+	}
 }

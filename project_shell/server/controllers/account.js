@@ -18,7 +18,6 @@ exports.getAccountById = async(req, res) => {
 		});
 	}
 	catch(err){
-		console.log("find acc by id failed");
 		console.log(err);
 	}	
 };
@@ -78,7 +77,6 @@ exports.deleteAccount = async(req, res) => {
 		
 	}
 	catch(err){
-		console.log("There has been an error in login with the req: " + JSON.stringify(req));
 		res.json(404);
 		console.log(err)
 	}
@@ -110,7 +108,6 @@ exports.loginAccount = async(req, res) => {
 			})
 		}
 		catch(err){
-			console.log("There has been an error in login with the req: " + JSON.stringify(req));
 			res.json(404);
 			console.log(err)
 		}
@@ -119,15 +116,12 @@ exports.loginAccount = async(req, res) => {
 
 // Create a new Account
 exports.createAccount = async(req, res) => {
+
 	console.log("Running createAccount...");
 	console.log("createAccount with: " + JSON.stringify(req.body));
 	try{				
-		Account.create(req.body).then((response) => {
-			if(response == null){
-				res.send(404);
-			} else{
+		Account.create(req.body).then((response) => {			
 				res.json(response);
-			}
 		}).catch(error => res.status(400).send(error));
 	}
 	catch(err){

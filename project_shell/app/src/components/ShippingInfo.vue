@@ -1,27 +1,5 @@
 <template>
   <div class = "cart_summary">
-    <!-- <div class = "shipping_info">
-      <div class = "cate_header"> Shipping Information </div>
-      <div class = "hori_line_"><span class = "hori_line"></span></div>
-      <div class = "list_item_display">
-        <div class = "info_input">
-          <input class = "first_name" placeholder="First Name">
-          <input class = "first_name" placeholder="Last Name">
-        </div>
-        <div class = "info_input">
-          <input class = "address" placeholder="Address">
-        </div>
-        <div class = "info_input">
-          <input class = "city" placeholder="City">
-          <input class = "state" placeholder="State">
-          <input class = "zipcode" placeholder="Zipcode">
-        </div>
-        <div class = "info_input">
-          <input class = "first_name" placeholder="Email">
-          <input class = "first_name" placeholder="Phone Number">
-        </div>
-      </div>
-    </div> -->
     <div class = "payment_info">
       <div class = "cate_header display-1"> Payment Information </div>
       <div class = "hori_line_"><span class = "hori_line"></span></div>
@@ -31,8 +9,10 @@
           <v-layout wrap>
             <v-flex xs6>
               <v-text-field
-              v-model="cardNumber"
-              :rules="cardRules"
+              v-model="orderModel.creditCardNum"
+              :rules="[
+              v => !!v || 'CardNumber is required'
+              ]"
               label="Card Number"
               premade="credit-card"
               mask="#### - #### - #### - ####"
@@ -42,7 +22,10 @@
             <v-flex xs4>
               <v-text-field
               v-model="expriredDate"
-              :rules="DateRules"
+              :rules="[
+              v => !!v || 'Expired Date is required'
+              ]"
+              mask="##/##"
               label="Expired Date"
               required
               ></v-text-field>
@@ -50,7 +33,10 @@
             <v-flex xs2>
               <v-text-field
               v-model="cvv"
-              :rules="cvvRules"
+              :rules="[
+              v => !!v || 'CVV is required',
+              v => v.length == 3 || 'CVV must be 3 characters'
+              ]" 
               label="CVV"
               required
               ></v-text-field>
@@ -58,51 +44,61 @@
             <v-flex xs6>
               <v-text-field
               v-model="firstName"
-              :rules="nameRules"
               label="First Name"
+              :rules="[
+              v => !!v || 'First Name is required'
+              ]"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs6>
               <v-text-field
               v-model="lastName"
-              :rules="nameRules"
+              :rules="[
+              v => !!v || 'First Name is required'
+              ]"
               label="Last Name"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs6>
               <v-text-field
-              v-model="email"
+              v-model="orderModel.email"
               :rules="[
               v => !!v || 'E-mail is required',
               v => /.+@.+/.test(v) || 'E-mail must be valid'
               ]"
               label="Email Address"
-
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs6>
               <v-text-field
-              v-model="phoneNumber"
-              :rules="phoneNumberRules"
+              v-model="orderModel.phoneNumber"
+              :rules="[
+              v => !!v || 'PhoneNumber is required'
+              ]"
               label="PhoneNumber"
+              mask="(###) ### - ####"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
               <v-text-field
               v-model="address"
-              :rules="nameRules"
-              label="Adress"
+              :rules="[
+              v => !!v || 'Address is required'
+              ]"
+              label="Address"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs6>
               <v-text-field
               v-model="city"
-              :rules="nameRules"
+              :rules="[
+              v => !!v || 'City is required'
+              ]"
               label="City"
               required
               ></v-text-field>
@@ -110,26 +106,38 @@
             <v-flex xs3>
               <v-text-field
               v-model="state"
-              :rules="nameRules"
+              :rules="[
+              v => !!v || 'State is required',
+              v => v.length == 2 || 'Please uses two letters'
+              ]"
               label="State"
+              mask="AA"
               required
               ></v-text-field>
             </v-flex>
             <v-flex xs3>
               <v-text-field
               v-model="zipcode"
-              :rules="zipcodeRules"
+              :rules="[
+              v => !!v || 'Zipcode is required',
+              v => v.length == 5 || 'Please use your 5 or 9 digit zipcode.'
+              ]"
               label="Zipcode"
+              mask="#####"
               required
               ></v-text-field>
             </v-flex>
-            <!-- <v-btn
-            :disabled="!valid"
-            @click="submit"
+            <div class="footer_section">
+              <h3 class="invalid_heading" v-if="invalidSubmit">Fill out all of the form fields before making payment</h3>
+            <v-btn
+            @click="submit()"
+            color="orange" dark class="button_checkout"
             >
-            submit
+            MAKE A PAYMENT
           </v-btn>
-          <v-btn @click="clear">clear</v-btn> -->
+            </div>
+
+         <!--  <v-btn @click="clear">clear</v-btn> -->
         </v-layout>
       </v-container>
     </v-form>
@@ -160,10 +168,84 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { OrderProvider, ItemOrderProvider } from '@/providers';
+  import { OrderModel, AddressModel } from '@/models';
 
   @Component
   export default class ShippingInfo extends Vue {
     @Prop() private msg!: string;
+    @Prop() cartItems!: any [];
+    cardNumber!:string;
+    expriredDate!:string;
+    cvv!:string;
+    firstName!:string;
+    lastName!:string;
+    emailAddress!:string;
+    phoneNumber!:string;
+    address!:string;
+    city!:string;
+    state!:string;
+    zipcode!:string;
+
+    /**
+    customerName !: string;
+    creditCardNum!:string;
+    securityCode!:number;
+    priceTotal!:number;
+    email!:string;
+    phoneNumber!:string;
+    date!:any;
+    status!:string;
+    */
+    orderModel: OrderModel = new OrderModel(0,"","",0,0,"","",new Date(), "unprocessed");
+    /**
+    streetOne!: string;
+    streetTwo!:string;
+    city!:string;
+    state!:string;
+    zipcode!:string;
+    */
+    addressModel: AddressModel = new AddressModel("","","","","");
+
+    orderProvider: OrderProvider = new OrderProvider();
+    itemOrderProvider: ItemOrderProvider =  new ItemOrderProvider();
+
+
+    invalidSubmit: boolean = false;
+
+    submit(){
+      if(this.isValid()){
+        this.invalidSubmit = false;
+        this.orderModel.customerName = this.firstName + ' ' + this.lastName;
+        this.orderModel.securityCode = parseInt(this.cvv);
+        this.orderModel.priceTotal = this.cartItems.reduce(this.getSum,0);
+        this.orderModel.date.month = parseInt(this.expriredDate.substring(1,2));
+        this.orderModel.date.year = 2000 + parseInt(this.expriredDate.substring(2));
+        this.orderModel.status = "paid";
+        this.orderProvider.createOrder(this.orderModel).then((response) => {
+          this.orderModel = response;
+          this.itemOrderProvider.getItemOrderFKByOrderId(0).then((itemOrders) => {
+            for(let i: number = 0 ; i < itemOrders.length; i++){
+              itemOrders[i].order_id = this.orderModel.id;
+              this.itemOrderProvider
+                    .updateItemOrderFK(itemOrders[i].id, itemOrders[i]);
+            }
+          });
+        });
+      }else{
+        this.invalidSubmit = true;
+      }
+    }
+
+    isValid(){
+      return true;
+    }
+
+    getSum(total: any, next: any){
+      return total + (next.price*next.quantity);
+    }
+
+
 
   }
 
@@ -212,6 +294,23 @@ input {
 input::-webkit-input-placeholder {
   font-size: 16px;
   padding-left: 10px;
+}
+.button_checkout {
+  width: 380px;
+  height: 50px;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.footer_section{
+  margin-left: 60%;
+  margin-top: 10%;
+}
+
+.invalid_heading{
+  text-align: center;
+  color: orange;
+  font-family: 'Roboto', sans-serif;
 }
 .first_name {
   height: 25px;

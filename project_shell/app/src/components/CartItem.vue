@@ -6,9 +6,9 @@
       </a>
     </div>
     <div class = "item_name">
-      <h2  class="title font-weight-light orange--text mb-2"> Mountain Bicycle for Kid</h2>
-      <h3 class="font-weight-light grey--text  mb-2"> Trek Bicycle</h3>
-      <h4 class = "price"> <b> Price: </b> $200 </h4>
+      <h2  class="title font-weight-light orange--text mb-2">{{ item.item_name }}</h2>
+      <h3 class="font-weight-light grey--text  mb-2">{{ this.manufacturer }}</h3>
+      <h4 class = "price"> <b> Price: </b> {{item.price}} </h4>
       <div class = "cart_edit">
         <v-layout row wrap>
           <v-flex xs7>
@@ -16,10 +16,11 @@
             :items="quantityList(6)"
             label="Quantity"
             class="font-weight-light grey--text"
+            v-model="item.quantity"
             ></v-select>            
           </v-flex> 
           <v-flex xs4>
-            <v-btn color="error" fab small dark>
+            <v-btn color="error" fab small dark @click="removeFromCart">
               <v-icon>delete</v-icon>
             </v-btn>
           </v-flex> 
@@ -31,10 +32,24 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator';
+  import { ManufacturerProvider, ItemOrderProvider } from '@/providers';
+  import CartView  from '@/views/CartView.vue';
 
   @Component
   export default class CartItem extends Vue {
     @Prop() private msg!: string;
+    @Prop() subtotal!:number;
+    @Prop() item!: any;
+    @Prop() cartItems: any;
+    @Prop() priceArray!: number[];
+
+
+    manufacturer: string = "";
+    manufacturerProvider: ManufacturerProvider = new ManufacturerProvider();
+
+    itemOrderProvider: ItemOrderProvider = new ItemOrderProvider();
+
+    cartView: CartView =  new CartView();
 
   // Create a list of number of an item user want to buy (usually from 1 to 8, if there is less than 8 in stock so from 1 to maxQuantity in stock)
   quantityList(maxItems: number) {
@@ -43,6 +58,39 @@
     for(var i = 1; i <= maxItems; i++)
       result.push(i);
     return result;
+  }
+
+  mounted(){
+    this.manufacturerProvider.getManufacturerById(this.item.manufacturer_id).then((data) => {
+      this.manufacturer = data.name;
+    });
+  }
+
+  // triggerred on clicking on the trash can button
+  // removes the itemOrder from the DB
+  // then find the index in the cartItems array the item is at
+  // removes that index from the cartItems array
+  removeFromCart(){
+    this.itemOrderProvider.deleteByItemId(this.item.id);
+    let deleteIndex: number = this.findIndexOf(this.item);
+    if(deleteIndex != -1){
+      this.cartItems.splice(deleteIndex, 1);
+    }
+  }
+
+  //searches the cartItems array for a certain item that 
+  //has the same name then returns the index in the cartItems array.
+  findIndexOf(item: any){
+    for(let i:number = 0; i < this.cartItems.length; i++){
+      if(this.cartItems[i].item_name == item.item_name){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  changeQuantity(){
+    console.log("We have changed the quantity");
   }
 }
 
@@ -88,7 +136,6 @@
   position: relative;
   vertical-align: top;
   margin-top: 10px;
-  
 }
 .item_picture {
   width : 200px;

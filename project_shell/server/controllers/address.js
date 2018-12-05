@@ -13,14 +13,12 @@ exports.getAddressById = async(req, res) => {
 		});
 	}
 	catch(err){
-		console.log("find addrs by id failed");
 		console.log(err);
 	}	
 };
 // Create a new Account
 exports.createAddress = async(req, res) => {
 	try{
-		console.log("createAddress has been called with " + JSON.stringify(req.body));
 		//Create a new instance of an Account and save it
 		Address.create(req.body).then((newAddress) => {
 			//if the creation was unsuccessful
@@ -31,8 +29,7 @@ exports.createAddress = async(req, res) => {
 		}).catch(error => res.status(400).send(error));
 	}
 	catch(err){
-		console.log("There has been an error with the request");
-		//res.json(404);
+		res.json(404);
 		console.log(err)
 	}
 	

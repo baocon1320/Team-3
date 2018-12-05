@@ -8,12 +8,14 @@
 				if(category == null){
 					res.send(404)
 				}else{
-					res.json(category);
+					if(req.params.id == 4){
+						return res.send(303);
+					}
+					return res.json(category);
 				}
 			});
 		}
 		catch(err){
-			console.log("find category by id failed");
 			console.log(err);
 		}	
 	};
@@ -22,10 +24,8 @@
 	// Create a new Category
 	exports.createCategory = async(req, res) => {
 		try{
-			console.log("createAccount has been called with " + JSON.stringify(req.body));
 			//Create a new instance of an Account and save it
 			Category.create(req.body).then((newCategory) => {
-				console.log("Account has been created");
 				//if the creation was unsuccessful
 				//if the creation was successful send 
 				//data to the front via json
@@ -34,7 +34,6 @@
 			}).catch(error => res.status(400).send(error));
 		}
 		catch(err){
-			console.log("There has been an error with the req: " + JSON.stringify(req));
 			res.json(404);
 			console.log(err)
 		}	

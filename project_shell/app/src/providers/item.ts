@@ -28,7 +28,7 @@ export class ItemProvider {
 	getItemsByCategory(id: string){
 		return axios.get('/api/item/category=' + id).then((response) => {
 			return response.data;
-		})
+		});
 	}
 
 	getNumberofItem(){
@@ -53,6 +53,13 @@ export class ItemProvider {
 		return axios.delete('/api/item/delete/id=' + id).then((response) => {
 			return response.data;
 		})
+	}
+
+	getItemsByOrderId(id: number){
+		return axios.get('/api/item/order/' + id).then((response) => {
+			return response.data;
+		});
+
 	}
 }
 

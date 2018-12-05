@@ -11,7 +11,7 @@ export class ManufacturerProvider {
 	constructor(){
 	}
 
-	getManufacturerById(id: number){	
+	getManufacturerById(id: number){
 		return axios.get('/api/manufacturer/id=' + id).then((response) => {
 			return response.data;
 
