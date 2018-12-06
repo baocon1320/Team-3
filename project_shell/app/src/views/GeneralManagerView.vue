@@ -89,6 +89,8 @@
     announcement: string ='';
     generalprovider: GeneralProvider = new GeneralProvider();
     general: GeneralModel = new GeneralModel('','','','');
+
+    // Load the main page info
     mounted() {
       this.generalprovider.getGeneralById(1).then((data) => {
         this.general = data;
@@ -99,10 +101,13 @@
       })
 
     }
+
+    // Clear the forms
     clear () {
       (this.$refs.form as any).reset();
     }
 
+    // Submit to change the main page info
     submit() {
       if ((this.$refs.form as any).validate()) {
         this.general.storeDescription = this.about;

@@ -59,7 +59,7 @@
 			Manufacturer.update(req.body, { where: { id: req.params.id} }).then((affected) => {
 				if(affected != null){
 					if(affected[0] > 0){
-							res.send(202);
+							res.send(200);
 					}else{
 						//TODO: Fix this to reflect the actual error
 						res.send(404);

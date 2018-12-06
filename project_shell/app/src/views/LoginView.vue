@@ -57,11 +57,11 @@ export default class LoginView extends Vue {
   valid: boolean = true;
   check: number = 0;
   account: AccountModel = new AccountModel('','',0);
-  //new_account: AccountModel = new AccountModel('','',0);
   accountprovider: AccountProvider = new AccountProvider();
   username: string = '';
   password: string = '';
 
+  // Clear the forms
   clear () {
     (this.$refs.form as any).reset();
     this.check = 0;
@@ -69,6 +69,7 @@ export default class LoginView extends Vue {
 
     // For the permission of the account 
     // 1 mean the owner, 2 mean the employee
+    // Login
     submit() {
       if ((this.$refs.form as any).validate()) {
         this.account.username = this.username;
@@ -87,11 +88,6 @@ export default class LoginView extends Vue {
               if(this.$route.params.nextUrl != null){
                 this.$router.push(this.$route.params.nextUrl);
               } else {
-                // if(is_owner == 1){                  
-                //   this.$router.push('owner');
-                // }else{
-                //   this.$router.push('manage/changepassword');
-                // }
                 this.$router.push('manage/changepassword');
               }
             }

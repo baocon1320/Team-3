@@ -57,13 +57,16 @@
                               <v-text-field label="Order Number" disabled="true" v-model="id"></v-text-field>
                             </v-flex>
                             <v-flex xs12>
-                              <v-text-field label="Customer Name" disabled="true" v-model="customerName"></v-text-field>
+                              <v-text-field label="Customer Name"  
+                              v-model="customerName" :rules="[v => !!v || 'Customer Name is required']"></v-text-field>
                             </v-flex>
                             <v-flex xs12>
-                              <v-text-field label="Email Address" disabled="true" v-model="email"></v-text-field>
+                              <v-text-field label="Email Address"  v-model="email"
+                              :rules="[v => !!v || 'Email Address is required']"></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
-                              <v-text-field label="Phone Number" disabled="true" v-model="phoneNumber"></v-text-field>
+                              <v-text-field label="Phone Number"  v-model="phoneNumber"
+                              :rules="[v => !!v || 'Phone Number is required']"></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
                               <v-text-field label="Total Price" disabled="true" v-model="price"></v-text-field>
@@ -83,7 +86,7 @@
                         </v-container>  
                         <v-container grid-list-md>
                           <span class="headline">Order Detail</span>
-                          <v-layout wrap v-for="it in itemOrders">
+                          <v-layout wrap v-for="it in itemOrders" :key="it.id">
 
                            <v-flex xs12 sm4>
                             <v-text-field label="Item Id" v-model="it.item_id" disabled="true"></v-text-field>
@@ -170,12 +173,12 @@
     
     headers = [
     
-    { text: 'Order#', value: 'id', align: 'left', sortable: true},
+    { text: 'Order#', value: 'id', align: 'left'},
     { text: 'Customer Name', value: 'customerName'},
     { text: 'Email', value: 'email'},
     { text: 'Price', value: 'price'},
     { text: 'Status', value: 'status'},
-    { text: 'Order Date', value: 'date'},
+    { text: 'Order Date', value: 'date', sortable: true},
     { text: 'Modification', value: 'modification'}
     ];
 
@@ -230,6 +233,9 @@
         }
         this.order.status = this.status;
         this.order.priceTotal = this.price;
+        this.order.customerName = this.customerName;
+        this.order.email = this.email;
+        this.order.phoneNumber = this.phoneNumber;
         this.orderprovider.updateOrder(this.id, this.order).then((or_data) => {
 
         this.itemOrderprovider.getItemOrderFKByOrderId(this.id).then((data_its) => {

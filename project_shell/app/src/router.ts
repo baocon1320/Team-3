@@ -27,11 +27,6 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/toolbar',
-      name:'toolbar',
-      component: () => import('./views/Toolbar.vue'),
-    },
-    {
         path: "/tracking",
         name: 'tracking',
         component: () => import('./views/TrackingView.vue'),
@@ -46,7 +41,7 @@ let router = new Router({
     {
         path: "/services",
         name: 'services',
-        component: () => import('./views/Service.vue'),
+        component: () => import('./views/ServiceView.vue'),
     },
     {
         path: "/item/:item_id",

@@ -203,6 +203,7 @@
     ];
 
 
+    // Get all the Item, the name of categories, and manufactureres
     mounted(){
       this.itemprovider.getAllItems().then(data => {
         this.items = data;
@@ -217,6 +218,7 @@
       })
     }
 
+    // Get the info of specific item when click to modify
     setItemInfo(id: number){
       if(id != 0){
         const temp = this.items.find(obj => obj.id == id) || this.item;
@@ -234,6 +236,7 @@
       }
     }
 
+    // Update the info of an item
     updateItem(){
       if ((this.$refs.form as any).validate()) {
         this.item.item_name = this.itemName;
@@ -261,6 +264,7 @@
       }
     }
 
+    // Delete an item
     deleteItem(id: number){
       this.itemprovider.deleteItem(id).then(data => {
         this.itemprovider.getAllItems().then(data_new => {
@@ -268,6 +272,8 @@
         })
       });
     }
+
+    // Clear the form
     clear () {
       (this.$refs.form as any).reset();
 

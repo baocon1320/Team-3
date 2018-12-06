@@ -15,6 +15,18 @@ exports.getOrderById = async(req,res) => {
 	});
 };
 
+// Get order by orderid and email, use for tracking
+exports.getOrderByEmailAndId = async(req,res) => {
+	Order.findOne({
+		where: {id: req.params.id, email: req.params.email}
+	}).then((order) => {
+		if(order == null){
+			return res.json(null);
+		} else {
+			return res.json(order);
+		}
+	});
+};
 //creates a new order given json data from the front
 exports.createOrder = async(req, res) => {
 	Order.create(req.body).then((order) => {

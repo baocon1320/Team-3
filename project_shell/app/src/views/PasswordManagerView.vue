@@ -91,6 +91,8 @@ export default class PasswordManagerView extends Vue {
   newPassword2: string = '';
   accountprovider: AccountProvider = new AccountProvider();
   account: AccountModel = new AccountModel('','',0);
+  
+  // Load the name of current user from local storage
   mounted() {
     if(localStorage.getItem('user') != null){
         const userJson = localStorage.getItem('user');
@@ -99,10 +101,13 @@ export default class PasswordManagerView extends Vue {
       }
 
   }
+
+  // Clear the form
   clear () {
     (this.$refs.form as any).reset();
   }
 
+  // submit to change the password
   submit() {
     if ((this.$refs.form as any).validate()) {
       this.accountprovider.getAccountByUser(this.username).then(data => {

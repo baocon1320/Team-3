@@ -14,6 +14,7 @@ orderRoutes.put('/removeItem', OrderController.removeItemFromOrder);
 orderRoutes.delete('/deleteOrder/:id', OrderController.deleteOrder);
 orderRoutes.get('/all', OrderController.getAllOrders);
 orderRoutes.put('/update/:id', OrderController.updateOrder);
+orderRoutes.get('/getByEmailAndId/:id/:email', OrderController.getOrderByEmailAndId);
 
 module.exports = orderRoutes;
 

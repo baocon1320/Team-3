@@ -140,7 +140,7 @@
     { text: 'modification', value: 'modification'}
     ];
 
-
+    // Fetch all the account data
     mounted(){
       this.accountprovider.getAllAccounts().then(data => {
         this.accounts = data;
@@ -149,6 +149,7 @@
     }
 
   // Only change password and username can't modify and permission
+  // Update an account
   updateAccount(){
     if ((this.$refs.form as any).validate()) {
       this.accountprovider.getAccountByUser(this.username).then(data => { 
@@ -183,7 +184,7 @@
       }
     }
 
-
+    // Delete an account
     deleteAccount(id: number){
       this.accountprovider.deleteAccount(id).then(data => {
         this.accountprovider.getAllAccounts().then(data_new => {
@@ -192,6 +193,7 @@
       });
     }
 
+    // Show the info of specific account
     setUserInfo(id: number, username: string, password: string){
       this.username = username;
       this.password = password;

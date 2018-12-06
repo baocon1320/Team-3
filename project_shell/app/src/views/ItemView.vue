@@ -31,7 +31,8 @@ export default class ItemView extends Vue {
   curCategory: CategoryModel = new CategoryModel("");
   categoryprovider: CategoryProvider = new CategoryProvider();
 
-  created() {   
+  // load the info of item
+  mounted() {   
         this.itemprovider.getItemById(this.item_id).then(data => {
           this.item = data;
           this.categoryprovider.getCategoryById(this.item.category_id.toString()).then(data => {
@@ -39,15 +40,6 @@ export default class ItemView extends Vue {
           })
         });
     }
-
-  // updated() {   
-  //       if(this.item.category_id != 0){
-  //         this.categoryprovider.getCategoryById(this.item.category_id.toString()).then(data => {
-  //           this.curCategory = data;
-  //         })
-  //       }
-
-  //   }
   
 }
 </script>

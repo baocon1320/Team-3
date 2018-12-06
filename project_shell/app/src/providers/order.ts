@@ -34,6 +34,11 @@ export class OrderProvider {
 		});
 	}
 
+	getOrderByEmailAndId(id: number, email: string){	
+		return axios.get('/api/order/getByEmailAndId/'+ id + '/' +  email).then((response) => {
+			return response.data;
+		});
+	}
 
 
 }

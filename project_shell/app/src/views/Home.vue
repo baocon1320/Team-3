@@ -1,6 +1,6 @@
  <template>
   <div id='background'>
-  <v-container id='container'>
+  <v-container class="main_page_width" id='container'>
   <v-layout row wrap>
           <v-carousel id="carousel"
           prev-icon="mdi-arrow-left"
@@ -67,6 +67,7 @@ import { GeneralModel } from '@/models';
      general: GeneralModel = new GeneralModel('', '', '', '');
      generalprovider: GeneralProvider = new GeneralProvider();
     
+    // Get the main page info
     mounted() {
       this.generalprovider.getGeneralById(1).then(data => {
         this.general = data;
@@ -76,11 +77,13 @@ import { GeneralModel } from '@/models';
 </script>
 
 <style lang='scss'>
+
     #container{
         width: inherit;
         height: inherit;
         text-align: center;
         padding-top: 5%;
+        max-width: 1344px;
     }
     #carousel{
         max: 600;
@@ -97,6 +100,7 @@ import { GeneralModel } from '@/models';
         align-items: center;
         text-align: left;
         align-content: center;
+        background: #f7f7f7;
     }
     .card{
         width: 100;
