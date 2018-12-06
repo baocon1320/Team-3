@@ -29,7 +29,7 @@ export class ItemOrderProvider {
 	}
 
 	getItemOrderFKByOrderId(id: number){
-		return axios.get('/api/itemOrderFKs/order/:id').then((response) => {
+		return axios.get('/api/itemOrderFKs/order/' + id).then((response) => {
 			return response.data;
 		});
 	}

@@ -13,7 +13,7 @@
         <v-layout row wrap>
           <v-flex xs7>
             <v-select
-            :items="quantityList(6)"
+            :items="quantityList(item.stock)"
             label="Quantity"
             class="font-weight-light grey--text"
             v-model="item.quantity"
@@ -51,10 +51,10 @@
 
     cartView: CartView =  new CartView();
 
-  // Create a list of number of an item user want to buy (usually from 1 to 8, if there is less than 8 in stock so from 1 to maxQuantity in stock)
+  // Create a list of number of an item user want to buy (usually from 1 to 6, if there is less than 6 in stock so from 1 to maxQuantity in stock)
   quantityList(maxItems: number) {
     var result = []
-    maxItems = (maxItems < 8) ? maxItems : 8
+    maxItems = (maxItems < 6) ? maxItems : 6
     for(var i = 1; i <= maxItems; i++)
       result.push(i);
     return result;

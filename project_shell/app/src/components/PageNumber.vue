@@ -6,8 +6,8 @@
       :total-visible="7"
       @input="changePage(current_page)"
     ></v-pagination>
-    <h4> Total items is {{total_count}} and number of page is {{Math.ceil(total_count/9)}} 
-    and current page is {{current_page}} and check {{check}}</h4>
+    <!-- <h4> Total items is {{total_count}} and number of page is {{Math.ceil(total_count/9)}} 
+    and current page is {{current_page}} and check {{check}}</h4> -->
   </div>
 
 </template>

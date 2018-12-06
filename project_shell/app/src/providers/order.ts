@@ -28,8 +28,17 @@ export class OrderProvider {
 		});
 	}
 
+	getAllOrder(){
+		return axios.get('/api/order/all').then((response) => {
+			return response.data;
+		});
+	}
 
-
+	getOrderByEmailAndId(id: number, email: string){	
+		return axios.get('/api/order/getByEmailAndId/'+ id + '/' +  email).then((response) => {
+			return response.data;
+		});
+	}
 
 
 }

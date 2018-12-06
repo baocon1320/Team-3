@@ -1,37 +1,15 @@
 <template>
   <div class="container">
-   	<v-container>
+   	<v-container v-for="manufacturer in manufacturers" :key="manufacturer.id">
         <v-card>
-        <v-img src="https://pngimage.net/wp-content/uploads/2018/06/trek-logo-png-6.png"></v-img>
+        <v-img class="manu_image" :src='require(`../assets/${manufacturer.image}`)'></v-img>
         <v-card-title>
         <div>
-        <h3>Trek Bicycles</h3>
+        <h3>{{manufacturer.name}}</h3>
         </div>
         </v-card-title>
         <v-card-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </v-card-text>
-        </v-card>
-        <v-card>
-        <v-img src="https://pngimage.net/wp-content/uploads/2018/06/trek-logo-png-6.png"></v-img>
-        <v-card-title>
-        <div>
-        <h3>Trek Bicycles</h3>
-        </div>
-        </v-card-title>
-        <v-card-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </v-card-text>
-        </v-card>
-        <v-card>
-        <v-img src="https://pngimage.net/wp-content/uploads/2018/06/trek-logo-png-6.png"></v-img>
-        <v-card-title>
-        <div>
-        <h3>Trek Bicycles</h3>
-        </div>
-        </v-card-title>
-        <v-card-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        {{manufacturer.description}}
         </v-card-text>
         </v-card>
     </v-container>
@@ -41,11 +19,31 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Manufacturer from '@/components/Manufacturer.vue'; // @ is an alias to /src
-
+import { ManufacturerModel} from '@/models'
+import { ManufacturerProvider } from '@/providers'
 @Component({
   components: {
   Manufacturer,
   },
   })
-  export default class ManufacturerView extends Vue {}
+  export default class ManufacturerView extends Vue {
+    manufacturers: ManufacturerModel[] = [];
+    manufacturerprovider: ManufacturerProvider = new ManufacturerProvider();
+
+    // Load the manufactureres info
+    mounted() {
+        this.manufacturerprovider.getAllManufacturers().then((data) => {
+            this.manufacturers = data;
+        })
+    }
+  }
 </script>
+
+<style scoped lang="scss">
+    .manu_image {
+        height: 400px;
+    }
+</style>
+
+
+

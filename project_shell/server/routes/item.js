@@ -8,13 +8,15 @@ itemRoutes.get('/id=:id', ItemController.getItemById); // Fixed id=:id so it not
 itemRoutes.get('/all', ItemController.getAllItems);
 itemRoutes.get('/pageItems/:pageNum', ItemController.getPageItems);
 itemRoutes.get('/category=:category_id', ItemController.getItemsByCategory);
+itemRoutes.post('/', ItemController.createItem);
+itemRoutes.put('/update/id=:id', ItemController.updateItem);
+itemRoutes.get('/countall', ItemController.getNumberofItem);
+itemRoutes.delete('/delete/id=:id', ItemController.deleteItem);
 itemRoutes.get('/price', ItemController.getItemsByPrice);
 itemRoutes.get('/order/:id', ItemController.getItemsByOrderId);
-itemRoutes.get('/countall', ItemController.getNumberofItem);
+itemRoutes.get('/listItems/:id', ItemController.getListItemsByListofId)
 
-itemRoutes.post('/', ItemController.createItem);
-
-itemRoutes.put('/update/:id', ItemController.updateItem);
+//itemRoutes.put('/update/:id', ItemController.updateItem);
 
 
 

@@ -8,7 +8,10 @@ exports.getAccountById = async(req, res) => {
 	try{	
 		Account.findById(req.params.id).then((account) => {
 			if(account == null){
-				res.send(404)
+				//res.json(null);
+				//res.send(404);
+				res.status(404).send(null)
+				
 			}else{
 				res.json(account);
 			}
@@ -24,27 +27,30 @@ exports.getAccountById = async(req, res) => {
 
 exports.getAllAccounts = async(req, res) => {
 	try{
-	Account.findAll().then((allAccounts) => {
-		if(allAccounts == null){
-			res.send(404);
-		}else{
-			res.json(allAccounts);
-		}
-	});
+		Account.findAll().then((allAccounts) => {
+			if(allAccounts == null){
+				res.send(404);
+			}else{
+				res.json(allAccounts);
+			}
+		});
 	}
 	catch (err) {
 		console.log(err)
 	}
 }
 
+// Get an Account by username
 exports.getAccountByUser = async(req, res) => {
 	try{
 		Account.findOne({where: {username: req.params.username}}).then((account) => {
 			//console.log(account)
 			if(account == null){
-				//console.log("hit null check")
-				res.json(null)
-				//res.send(404)
+				//console.log("hit null check")			
+				res.json(null);
+
+				//res.send(404);
+				//res.status(404).send(null);
 			}else{
 				res.json(account)
 			}
@@ -63,8 +69,8 @@ exports.deleteAccount = async(req, res) => {
 				res.send(404)
 			}else{
 				Account.destroy({where: {id: req.params.id}}).then((u) => {
-				res.json(account);
-			});
+					res.json(account);
+				});
 			}
 			
 		});
@@ -93,27 +99,34 @@ exports.loginAccount = async(req, res) => {
 							Auth_Tokens.update({token: token, expirationTime: 86400}, 
 								{where: {accountId: account.id}}).then((onUpdate) => 
 								{})
-                				
-						}
-					})
+
+							}
+						})
 					res.json({auth: true, token: token, user: account});
 
 				}
 			})
+		}
+		catch(err){
+			res.json(404);
+			console.log(err)
+		}
 	}
-	catch(err){
-		res.json(404);
-		console.log(err)
-	}
-}
 
 
 // Create a new Account
 exports.createAccount = async(req, res) => {
-	Item.create(req.body).then((response) => {
-		res.json(response);
-	});
-	
+
+	console.log("Running createAccount...");
+	console.log("createAccount with: " + JSON.stringify(req.body));
+	try{				
+		Account.create(req.body).then((response) => {			
+				res.json(response);
+		}).catch(error => res.status(400).send(error));
+	}
+	catch(err){
+		console.log(err);
+	}
 };
 
 //Update Account
@@ -123,7 +136,7 @@ exports.updateAccount = async(req,res) => {
 		Account.update(req.body, { where: { id: req.params.id} }).then((affected) => {
 			if(affected != null){
 				if(affected[0] > 0){
-						res.send(202);
+					res.send(200);
 				}else{
 					//TODO: Fix this to reflect the actual error
 					res.send(404);
@@ -131,7 +144,7 @@ exports.updateAccount = async(req,res) => {
 			}else{
 				res.send(404);
 			}
-		});
+		}).catch(error => res.status(400).send(error));
 	} 
 	catch(err){
 		console.log(err)

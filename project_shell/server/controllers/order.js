@@ -15,6 +15,18 @@ exports.getOrderById = async(req,res) => {
 	});
 };
 
+// Get order by orderid and email, use for tracking
+exports.getOrderByEmailAndId = async(req,res) => {
+	Order.findOne({
+		where: {id: req.params.id, email: req.params.email}
+	}).then((order) => {
+		if(order == null){
+			return res.json(null);
+		} else {
+			return res.json(order);
+		}
+	});
+};
 //creates a new order given json data from the front
 exports.createOrder = async(req, res) => {
 	Order.create(req.body).then((order) => {
@@ -91,6 +103,28 @@ exports.getAllOrders = async(req, res) => {
 }
 
 
+//Update Order
+exports.updateOrder = async(req,res) => {
+	try{
+
+		Order.update(req.body, { where: { id: req.params.id} }).then((affected) => {
+			if(affected != null){
+				if(affected[0] > 0){
+					res.send(200);
+				}else{
+					//TODO: Fix this to reflect the actual error
+					res.send(404);
+				}
+			}else{
+				res.send(404);
+			}
+		}).catch(error => res.status(400).send(error));
+	} 
+	catch(err){
+		console.log(err)
+	}
+	
+};
 
 
 

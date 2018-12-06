@@ -31,7 +31,8 @@
 				//data to the front via json
 				res.json(newCategory);
 				
-			});}
+			}).catch(error => res.status(400).send(error));
+		}
 		catch(err){
 			res.json(404);
 			console.log(err)
@@ -70,7 +71,7 @@
 				}else{
 					res.send(404);
 				}
-			});
+			}).catch(error => res.status(400).send(error));
 		} 
 		catch(err){
 			console.log(err)

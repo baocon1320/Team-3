@@ -27,11 +27,6 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/toolbar',
-      name:'toolbar',
-      component: () => import('./views/Toolbar.vue'),
-    },
-    {
         path: "/tracking",
         name: 'tracking',
         component: () => import('./views/TrackingView.vue'),
@@ -46,7 +41,7 @@ let router = new Router({
     {
         path: "/services",
         name: 'services',
-        component: () => import('./views/Service.vue'),
+        component: () => import('./views/ServiceView.vue'),
     },
     {
         path: "/item/:item_id",
@@ -80,10 +75,35 @@ let router = new Router({
           requiresAuth: true
         }
     },
+      {
+        path: '/manage/item',
+        name: 'itemmanager',
+        component: () => import('./views/ItemManagerView.vue'),
+        meta: {
+          requiresAuth: true
+        }
+    },
+      {
+        path: '/manage/order',
+        name: 'ordermanager',
+        component: () => import('./views/OrderManagerView.vue'),
+        meta: {
+          requiresAuth: true
+        }
+    },
     {
         path: '/manage/account',
         name: 'accountmanager',
         component: () => import('./views/AccountManagerView.vue'),
+        meta: {
+          requiresAuth: true,
+          is_owner : true
+        }
+    },
+    {
+        path: '/manage/general',
+        name: 'generalmanager',
+        component: () => import('./views/GeneralManagerView.vue'),
         meta: {
           requiresAuth: true,
           is_owner : true
