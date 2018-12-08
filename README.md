@@ -8,6 +8,7 @@
 * API/DB Lead: **Thomas Kaar**
 * Architect: **N/A**
 
+
 Known Project Shortcomings:
   * No Tests
   * Image Upload functionality is not complete.
@@ -15,7 +16,9 @@ Known Project Shortcomings:
   * Admin Console setup isn't working. 
     
 
+
 ```shell
+
 # Clone the project
 git clone https://github.com/CSC307Fall2018/Team-3.git
 
@@ -44,6 +47,10 @@ npm run serve
 
 # Website is now available on http://localhost:8080
 
+# Setup the db
+cd path/to/project_shell/Team-3/server
+./node_modules/.bin/sequelize db:create
+./node_modules/.bin/sequelize db:migrate
 ```
 
 
