@@ -73,7 +73,15 @@ import { GeneralModel, AccountModel } from '@/models';
     // Get the main page info
     mounted() {
       this.generalprovider.getGeneralById(1).then(data => {
+        if(data == null)
+        {
+          this.generalprovider.createGeneral(this.general).then((newdata) => {
+            this.general = data;
+          })
+        }
+        else{
         this.general = data;
+      }
       });   
 
       this.accountProvider.getAccountByAdmin().then((data) => {
