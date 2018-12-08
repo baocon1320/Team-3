@@ -13,9 +13,6 @@ Known Project Shortcomings:
   * No Tests
   * Image Upload functionality is not complete.
     We just ran out of time on this one we were working on other functionalities and didn't prioritize it because we didn't know where to start
-  * Admin Console setup isn't working. 
-    
-
 
 ```shell
 
