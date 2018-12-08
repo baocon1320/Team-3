@@ -16,5 +16,12 @@ export class GeneralProvider {
 			return response;
 		});
 	}
+
+	createGeneral(general: GeneralModel){
+		return axios.post('/api/general/', general).then((response) => {			
+			return response.data;
+		});
+		
+	}
 }
 

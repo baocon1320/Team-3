@@ -4,7 +4,7 @@ const { General } = require('../models');
 exports.getGeneralById = async(req,res) => {
 	General.findById(req.params.id).then((general) => {
 		if(general ==null){
-			res.send(404);
+			res.json(null);
 		}else{
 			res.json(general);
 		}
