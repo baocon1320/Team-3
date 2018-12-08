@@ -1,5 +1,5 @@
 package-lock.json
 .DS_Store
 node_modules
-!node_modules/vuetify/dist/vuetify.min.css
+!project_shell/app/node_modules/vuetify/dist/vuetify.min.css
 
