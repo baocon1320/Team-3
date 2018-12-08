@@ -232,11 +232,11 @@
               this.itemOrderProvider
                     .updateItemOrderFK(itemOrders[i].id, itemOrders[i]);
               this.itemProvider.getItemById(itemOrders[i].item_id + "").then((items) => {
-                console.log("stock: " + JSON.stringify(items.stock) + ", quantity: " + itemOrders[i].quantity);
                 items.stock -= itemOrders[i].quantity;
                 this.itemProvider.updateItem(items, items.id);
               });
             }
+            this.$router.push({ name: 'confirmation', params: { order_id: this.orderModel.id }});
           });
         });
       }else{

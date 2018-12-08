@@ -24,6 +24,13 @@ export class AccountProvider {
 		});
 	}
 
+	getAccountByAdmin(){
+		return axios.get('/api/account/admin').then((response) => {
+			console.log(JSON.stringify(response.data));
+			return response.data;
+		});
+	}
+
 	getAccountByUser(username: string){
 		return axios.get('/api/account/username=' + username).then((response) => {
 			return response.data;

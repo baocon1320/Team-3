@@ -7,6 +7,7 @@ const accountRoutes = express.Router();
 //Account Routes
 accountRoutes.get('/username=:username', AccountController.getAccountByUser);
 accountRoutes.get('/id=:id', AccountController.getAccountById);
+accountRoutes.get('/admin', AccountController.getAccountByAdmin);
 accountRoutes.post('/',  AccountController.createAccount);
 accountRoutes.get('/all', AccountController.getAllAccounts);
 accountRoutes.delete('/delete/id=:id', AccountController.deleteAccount);
