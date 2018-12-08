@@ -1,6 +1,5 @@
 package-lock.json
 .DS_Store
 node_modules
-!.gitignore
-!vuetify.min.css
+!node_modules/vuetify/dist/vuetify.min.css
 
