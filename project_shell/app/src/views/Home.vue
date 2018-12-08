@@ -40,14 +40,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import { GeneralProvider } from '@/providers';
-import { GeneralModel } from '@/models';
+import { GeneralProvider, AccountProvider } from '@/providers';
+import { GeneralModel, AccountModel } from '@/models';
 @Component({
     components: {
     HelloWorld,
   },
  })
- export default class Home extends Vue{
+ export default class Home extends Vue{ 
+
     data () {
        return {
         items: [
@@ -66,12 +67,21 @@ import { GeneralModel } from '@/models';
      
      general: GeneralModel = new GeneralModel('', '', '', '');
      generalprovider: GeneralProvider = new GeneralProvider();
+
+     accountProvider: AccountProvider = new AccountProvider();
     
     // Get the main page info
     mounted() {
       this.generalprovider.getGeneralById(1).then(data => {
         this.general = data;
-      });     
+      });   
+
+      this.accountProvider.getAccountByAdmin().then((data) => {
+        if(data.length == 0 ){
+          let adminAccount = new AccountModel("admin", "password", 1);
+          this.accountProvider.createAccount(adminAccount);
+        }
+      });  
     }
 }
 </script>

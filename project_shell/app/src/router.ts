@@ -60,6 +60,11 @@ let router = new Router({
         component: () => import('./views/CheckoutView.vue'),
     },
     {
+        path: "/confirmation/:order_id",
+        name: 'confirmation',
+        component: () => import('./views/ConfirmationView.vue'),
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('./views/LoginView.vue'),

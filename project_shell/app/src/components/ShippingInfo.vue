@@ -168,7 +168,7 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator';
-  import { OrderProvider, ItemOrderProvider } from '@/providers';
+  import { OrderProvider, ItemOrderProvider, ItemProvider } from '@/providers';
   import { OrderModel, AddressModel } from '@/models';
 
   @Component
@@ -209,6 +209,7 @@
 
     orderProvider: OrderProvider = new OrderProvider();
     itemOrderProvider: ItemOrderProvider =  new ItemOrderProvider();
+    itemProvider: ItemProvider = new ItemProvider();
 
 
     invalidSubmit: boolean = false;
@@ -226,10 +227,16 @@
           this.orderModel = response;
           this.itemOrderProvider.getItemOrderFKByOrderId(0).then((itemOrders) => {
             for(let i: number = 0 ; i < itemOrders.length; i++){
+
               itemOrders[i].order_id = this.orderModel.id;
               this.itemOrderProvider
                     .updateItemOrderFK(itemOrders[i].id, itemOrders[i]);
+              this.itemProvider.getItemById(itemOrders[i].item_id + "").then((items) => {
+                items.stock -= itemOrders[i].quantity;
+                this.itemProvider.updateItem(items, items.id);
+              });
             }
+            this.$router.push({ name: 'confirmation', params: { order_id: this.orderModel.id }});
           });
         });
       }else{

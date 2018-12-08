@@ -22,6 +22,23 @@ exports.getAccountById = async(req, res) => {
 	}	
 };
 
+exports.getAccountByAdmin = async(req, res) => {
+	try{
+		Account.findAll({
+			where: {
+				permission:  1
+			}
+		}).then((account) => {
+			if(account == null){
+				res.json({data: "HELLO WORLD"});
+			}else{
+				res.json(account);
+			}
+		});
+	} catch(err){
+		console.log(err);
+	}
+}
 
 //returns all of the account
 
