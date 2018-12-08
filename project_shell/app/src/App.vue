@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="main_color">
-    <v-app id="inspire" dark>
+    <v-app id="inspire" class="max-nav" dark>
       <v-toolbar>
         <a href="/"><img class="logo" src='./assets/foxycleLogo.png'></img></a>
         <v-toolbar-title>Foxycle</v-toolbar-title>
@@ -88,6 +88,9 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+.max-nav {
+  max-height: 50px
+}
 .main_color {
   background-color: #f7f7f7;
 }
