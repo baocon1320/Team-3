@@ -23,7 +23,7 @@ Known Project Shortcomings:
 git clone https://github.com/CSC307Fall2018/Team-3.git
 
 # Change directory to 'server'
-cd project_shell/Team-3/server
+cd Team-3/project_shell/server
 
 # Install server dependencies
 npm install 
@@ -37,7 +37,7 @@ npm start server
 ### Open a new Terminal session or tab ###
 
 # Change directory to 'app'
-cd path/to/project_shell/Team-3/app
+cd path/to/Team-3/project_shell/app
 
 # Install app dependencies
 npm install
@@ -48,7 +48,7 @@ npm run serve
 # Website is now available on http://localhost:8080
 
 # Setup the db
-cd path/to/project_shell/Team-3/server
+cd path/to/Team-3/project_shell/server
 ./node_modules/.bin/sequelize db:create
 ./node_modules/.bin/sequelize db:migrate
 ```
