@@ -48,6 +48,14 @@ npm run serve
 cd path/to/Team-3/project_shell/server
 ./node_modules/.bin/sequelize db:create
 ./node_modules/.bin/sequelize db:migrate
+
+# Login with owner account  
+username: admin
+password: password
+
+# To add a picture when creating an item:
+input the name of the picture ( bicycle1.jpg, bicycle2.png, bicycle3.jpg, bicycle4.jpg (what we have in local filesystem)
+to the image field.
 ```
 
 
